@@ -1,15 +1,21 @@
-use std::cell::RefCell;
-use std::rc::Rc;
-use bevy::{prelude::*, input::{keyboard::KeyboardInput, ButtonState}};
+use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
+use bevy::prelude::*;
+use bevy::render::render_resource::{Extent3d, TextureDimension, TextureFormat};
 use log;
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System, VRAM_HEIGHT, VRAM_WIDTH};
+use std::cell::RefCell;
+use std::rc::Rc;
 
 const SCALE: f32 = 2.0;
 const CYCLES_PER_FRAME: usize = 70224;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
+        .add_plugins((
+            DefaultPlugins,
+            LogDiagnosticsPlugin::default(),
+            FrameTimeDiagnosticsPlugin::default(),
+        ))
         .add_systems(Startup, (setup_screen, setup_gameboy))
         .add_systems(Update, (update_gameboy, update_screen))
         .run();
@@ -23,7 +29,6 @@ fn setup_gameboy(world: &mut World) {
 
 fn setup_screen(mut commands: Commands) {
     commands.spawn(Camera2dBundle::default());
-
     // spawn all the pixels
     for x in 0..VRAM_WIDTH {
         for y in 0..VRAM_HEIGHT {
@@ -47,10 +52,7 @@ fn setup_screen(mut commands: Commands) {
     }
 }
 
-fn update_gameboy(
-    mut gb: NonSendMut<Gameboy>,
-    keys: Res<Input<KeyCode>>,
-) {
+fn update_gameboy(mut gb: NonSendMut<Gameboy>, keys: Res<Input<KeyCode>>) {
     if keys.pressed(KeyCode::Up) {
         gb.kbd.0.borrow_mut().up = true;
     } else {
@@ -99,8 +101,9 @@ fn update_gameboy(
         gb.kbd.0.borrow_mut().select = false;
     }
 
-    for _ in 0..CYCLES_PER_FRAME {
-        gb.as_mut().sys.poll();
+    let gb = gb.as_mut();
+    for _ in 0..CYCLES_PER_FRAME/3 {
+        gb.sys.poll();
     }
 }
 
@@ -211,10 +214,11 @@ impl rgy::Hardware for Hardware {
     fn sound_play(&mut self, _stream: Box<dyn Stream>) {}
 
     fn clock(&mut self) -> u64 {
-        let epoch = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .expect("Couldn't get epoch");
-        epoch.as_micros() as u64
+        0 // This was nerfing the performance!!
+        // let epoch = std::time::SystemTime::now()
+        //     .duration_since(std::time::UNIX_EPOCH)
+        //     .expect("Couldn't get epoch");
+        // epoch.as_micros() as u64
     }
 
     fn send_byte(&mut self, _b: u8) {}
