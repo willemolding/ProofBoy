@@ -53,56 +53,17 @@ fn setup_screen(mut commands: Commands) {
 }
 
 fn update_gameboy(mut gb: NonSendMut<Gameboy>, keys: Res<Input<KeyCode>>) {
-    if keys.pressed(KeyCode::Up) {
-        gb.kbd.0.borrow_mut().up = true;
-    } else {
-        gb.kbd.0.borrow_mut().up = false;
-    }
-
-    if keys.pressed(KeyCode::Return) {
-        gb.kbd.0.borrow_mut().start = true;
-    } else {
-        gb.kbd.0.borrow_mut().start = false;
-    }
-
-    if keys.pressed(KeyCode::Down) {
-        gb.kbd.0.borrow_mut().down = true;
-    } else {
-        gb.kbd.0.borrow_mut().down = false;
-    }
-
-    if keys.pressed(KeyCode::Left) {
-        gb.kbd.0.borrow_mut().left = true;
-    } else {
-        gb.kbd.0.borrow_mut().left = false;
-    }
-
-    if keys.pressed(KeyCode::Right) {
-        gb.kbd.0.borrow_mut().right = true;
-    } else {
-        gb.kbd.0.borrow_mut().right = false;
-    }
-
-    if keys.pressed(KeyCode::Z) {
-        gb.kbd.0.borrow_mut().a = true;
-    } else {
-        gb.kbd.0.borrow_mut().a = false;
-    }
-
-    if keys.pressed(KeyCode::X) {
-        gb.kbd.0.borrow_mut().b = true;
-    } else {
-        gb.kbd.0.borrow_mut().b = false;
-    }
-
-    if keys.pressed(KeyCode::Space) {
-        gb.kbd.0.borrow_mut().select = true;
-    } else {
-        gb.kbd.0.borrow_mut().select = false;
-    }
+    gb.kbd.0.borrow_mut().up = keys.pressed(KeyCode::Up);
+    gb.kbd.0.borrow_mut().down = keys.pressed(KeyCode::Down);
+    gb.kbd.0.borrow_mut().left = keys.pressed(KeyCode::Left);
+    gb.kbd.0.borrow_mut().right = keys.pressed(KeyCode::Right);
+    gb.kbd.0.borrow_mut().a = keys.pressed(KeyCode::X);
+    gb.kbd.0.borrow_mut().b = keys.pressed(KeyCode::Z);
+    gb.kbd.0.borrow_mut().start = keys.pressed(KeyCode::Return);
+    gb.kbd.0.borrow_mut().select = keys.pressed(KeyCode::ShiftRight);
 
     let gb = gb.as_mut();
-    for _ in 0..CYCLES_PER_FRAME/3 {
+    for _ in 0..CYCLES_PER_FRAME {
         gb.sys.poll();
     }
 }
@@ -134,7 +95,7 @@ impl Default for Gameboy {
     fn default() -> Self {
         let kbd = Keyboard::new();
         let display = Display::new();
-        let cfg = Config::new();
+        let cfg = Config::new().native_speed(true);
         let hw = Hardware::new(display.clone(), kbd.clone());
 
         let rom = include_bytes!("../../roms/pokemon-blue.gb");
