@@ -1,5 +1,6 @@
 [package]
 name = "proofboy-recorder"
+authors = [ "Willem Olding <willemolding@gmail.com>" ]
 version = "0.1.0"
 edition = "2021"
 
@@ -7,3 +8,5 @@ edition = "2021"
 bevy = "0.11.0"
 log = "0.4.19"
 rgy = { git = "https://github.com/YushiOMOTE/rgy" }
+metamask-sdk = { workspace = true }
+futures = "0.3.28"

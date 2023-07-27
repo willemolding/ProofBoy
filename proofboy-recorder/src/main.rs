@@ -62,6 +62,7 @@ fn setup_screen(mut commands: Commands) {
             ));
         }
     }
+    metamask_sdk::request_accounts();
 }
 
 fn update_gameboy(mut gb: NonSendMut<Gameboy>, keys: Res<Input<KeyCode>>) {
