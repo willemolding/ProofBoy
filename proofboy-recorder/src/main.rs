@@ -4,6 +4,7 @@ use bevy::{
     prelude::*,
     window::*,
 };
+use wasm_bindgen::prelude::*;
 use extractor::{extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor};
 use journal::{Journal, KeyState};
 use log;
@@ -103,6 +104,7 @@ fn update_gameboy(
 fn check_for_dump(gb: NonSend<Gameboy>, keys: Res<Input<KeyCode>>) {
     if keys.pressed(KeyCode::Space) {
         log::info!("{:?}", PartyLeaderExtractor::extract(&gb.sys));
+        send_output(format!("{:?}", PartyLeaderExtractor::extract(&gb.sys)).as_str());
     }
 }
 
@@ -229,4 +231,10 @@ impl rgy::Hardware for Hardware {
     }
 
     fn save_ram(&mut self, _ram: &[u8]) {}
+}
+
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_name = onOutput)]
+    fn send_output(data: &str);
 }

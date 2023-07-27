@@ -5,6 +5,14 @@
         const MMSDK = new MetaMaskSDK.MetaMaskSDK() // sets the window.ethereum object
         // const ethereum = MMSDK.getProvider() // You can also access via window.ethereum
         // ethereum.request({method: 'eth_requestAccounts'})
+
     </script>
   </head>
+  <body>
+    <script>
+        function onOutput(data) {
+            console.log("on output called with", data)
+        }
+    </script>
+  </body>
 </html>

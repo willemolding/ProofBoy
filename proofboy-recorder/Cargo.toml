@@ -10,3 +10,4 @@ log = { workspace = true }
 rgy = { workspace = true }
 extractor = { workspace = true }
 journal = { workspace = true }
+wasm-bindgen = "0.2.87"
