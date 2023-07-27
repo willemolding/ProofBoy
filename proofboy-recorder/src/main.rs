@@ -1,7 +1,7 @@
 use bevy::{
+    diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
     prelude::*,
     window::*,
-    diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
 };
 use log;
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System, VRAM_HEIGHT, VRAM_WIDTH};
@@ -163,7 +163,12 @@ struct Hardware {
 
 impl Hardware {
     fn new(display: Display, kbd: Keyboard) -> Self {
-        Self { display, kbd, cycle_accumulator: 0, current_joypad: Inner::default() }
+        Self {
+            display,
+            kbd,
+            cycle_accumulator: 0,
+            current_joypad: Inner::default(),
+        }
     }
 }
 
@@ -193,10 +198,10 @@ impl rgy::Hardware for Hardware {
 
     fn clock(&mut self) -> u64 {
         0 // This was nerfing the performance!!
-        // let epoch = std::time::SystemTime::now()
-        //     .duration_since(std::time::UNIX_EPOCH)
-        //     .expect("Couldn't get epoch");
-        // epoch.as_micros() as u64
+          // let epoch = std::time::SystemTime::now()
+          //     .duration_since(std::time::UNIX_EPOCH)
+          //     .expect("Couldn't get epoch");
+          // epoch.as_micros() as u64
     }
 
     fn send_byte(&mut self, _b: u8) {}
@@ -206,7 +211,7 @@ impl rgy::Hardware for Hardware {
     }
 
     fn sched(&mut self) -> bool {
-        self.cycle_accumulator+=1;
+        self.cycle_accumulator += 1;
         true
     }
 

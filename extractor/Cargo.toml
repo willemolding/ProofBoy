@@ -1,12 +1,8 @@
 [package]
-name = "proofboy-recorder"
+name = "extractor"
 authors = [ "Willem Olding <willemolding@gmail.com>" ]
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bevy = "0.11.0"
-log = "0.4.19"
 rgy = { workspace = true }
-metamask-sdk = { workspace = true }
-futures = "0.3.28"

@@ -1,4 +1,3 @@
-
 pub struct Journal(Vec<JournalEntry>);
 
 pub struct JournalEntry {
@@ -12,7 +11,10 @@ impl Journal {
     }
 
     pub fn push(&mut self, joypad_diff: u8, cycles_delta: usize) {
-        self.0.push(JournalEntry { joypad_diff, cycles_delta });
+        self.0.push(JournalEntry {
+            joypad_diff,
+            cycles_delta,
+        });
     }
 
     pub fn iter(&self) -> impl Iterator<Item = &JournalEntry> {
