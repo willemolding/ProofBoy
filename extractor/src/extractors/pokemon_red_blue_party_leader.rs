@@ -35,9 +35,10 @@
 //! D195-D196 - Special
 //!
 
-struct PartyLeaderExtractor;
+pub struct PartyLeaderExtractor;
 
-struct Pokemon {
+#[derive(Debug)]
+pub struct Pokemon {
     id: u8,
     level: u8,
 }

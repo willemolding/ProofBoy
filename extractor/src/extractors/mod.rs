@@ -1,1 +1,1 @@
-mod pokemon_red_blue_party_leader;
+pub mod pokemon_red_blue_party_leader;

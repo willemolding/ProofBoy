@@ -4,13 +4,13 @@ resolver = "2"
 
 members = [
     "proofboy-recorder",
-    "metamask-sdk",
+    # "metamask-sdk",
     "extractor",
 ]
 
 [workspace.dependencies]
 rgy = { git = "https://github.com/willemolding/rgy", ref = "900beb3" } # my fork of YushiOMOTE/rgy to allow direct memory access
-metamask-sdk = { path = "./metamask-sdk" }
+extractor = { path = "./extractor" }
 
 # Enable max optimizations for dependencies, but not for our code:
 [profile.dev.package."*"]

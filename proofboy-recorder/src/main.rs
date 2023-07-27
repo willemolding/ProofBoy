@@ -2,11 +2,13 @@ use bevy::{
     diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
     prelude::*,
     window::*,
+    log::LogPlugin,
 };
 use log;
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System, VRAM_HEIGHT, VRAM_WIDTH};
 use std::cell::RefCell;
 use std::rc::Rc;
+use extractor::{Extractor, MemoryReader, extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor};
 
 mod journal;
 
@@ -25,13 +27,16 @@ fn main() {
                 ..default()
             }),
             ..default()
+        }).set(LogPlugin {
+            filter: "rgy=error".into(),
+            level: bevy::log::Level::INFO,
         }))
-        .add_plugins((
-            LogDiagnosticsPlugin::default(),
-            FrameTimeDiagnosticsPlugin::default(),
-        ))
+        // .add_plugins((
+        //     LogDiagnosticsPlugin::default(),
+        //     FrameTimeDiagnosticsPlugin::default(),
+        // ))
         .add_systems(Startup, (setup_screen, setup_gameboy))
-        .add_systems(Update, (update_gameboy, update_screen))
+        .add_systems(Update, (update_gameboy, update_screen, check_for_dump))
         .run();
 }
 
@@ -79,6 +84,12 @@ fn update_gameboy(mut gb: NonSendMut<Gameboy>, keys: Res<Input<KeyCode>>) {
     let gb = gb.as_mut();
     for _ in 0..CYCLES_PER_FRAME {
         gb.sys.poll();
+    }
+}
+
+fn check_for_dump(gb: NonSend<Gameboy>, keys: Res<Input<KeyCode>>) {
+    if keys.pressed(KeyCode::Space) {
+        log::info!("{:?}", PartyLeaderExtractor::extract(&gb.sys));
     }
 }
 

@@ -1,4 +1,4 @@
-mod extractors;
+pub mod extractors;
 mod memory_reader;
 
 pub use memory_reader::MemoryReader;
