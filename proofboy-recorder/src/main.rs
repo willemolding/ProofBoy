@@ -1,4 +1,5 @@
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
+use bevy::window::*;
 use bevy::prelude::*;
 use log;
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System, VRAM_HEIGHT, VRAM_WIDTH};
@@ -12,8 +13,18 @@ const CYCLES_PER_FRAME: usize = 70224;
 
 fn main() {
     App::new()
+        .add_plugins(DefaultPlugins.set(WindowPlugin {
+            primary_window: Some(Window {
+                title: "I am a window!".to_string(),
+                resolution: WindowResolution::new(
+                    VRAM_WIDTH as f32 * SCALE,
+                    VRAM_HEIGHT as f32 * SCALE,
+                ),
+                ..default()
+            }),
+            ..default()
+        }))
         .add_plugins((
-            DefaultPlugins,
             LogDiagnosticsPlugin::default(),
             FrameTimeDiagnosticsPlugin::default(),
         ))
@@ -41,8 +52,8 @@ fn setup_screen(mut commands: Commands) {
                         ..default()
                     },
                     transform: Transform::from_translation(Vec3::new(
-                        SCALE * (x as f32),
-                        -SCALE * (y as f32),
+                        SCALE * ((x as f32) - (VRAM_WIDTH as f32) / 2.),
+                        -SCALE * ((y as f32) - (VRAM_HEIGHT as f32) / 2.),
                         0.,
                     )),
                     ..default()
