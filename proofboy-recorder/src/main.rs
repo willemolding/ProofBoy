@@ -1,10 +1,11 @@
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::prelude::*;
-use bevy::render::render_resource::{Extent3d, TextureDimension, TextureFormat};
 use log;
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System, VRAM_HEIGHT, VRAM_WIDTH};
 use std::cell::RefCell;
 use std::rc::Rc;
+
+mod journal;
 
 const SCALE: f32 = 2.0;
 const CYCLES_PER_FRAME: usize = 70224;
@@ -142,11 +143,14 @@ impl Display {
 struct Hardware {
     display: Display,
     kbd: Keyboard,
+
+    cycle_accumulator: usize,
+    current_joypad: Inner,
 }
 
 impl Hardware {
     fn new(display: Display, kbd: Keyboard) -> Self {
-        Self { display, kbd }
+        Self { display, kbd, cycle_accumulator: 0, current_joypad: Inner::default() }
     }
 }
 
@@ -189,6 +193,7 @@ impl rgy::Hardware for Hardware {
     }
 
     fn sched(&mut self) -> bool {
+        self.cycle_accumulator+=1;
         true
     }
 
