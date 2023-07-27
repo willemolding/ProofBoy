@@ -1,6 +1,8 @@
-use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
-use bevy::window::*;
-use bevy::prelude::*;
+use bevy::{
+    prelude::*,
+    window::*,
+    diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
+};
 use log;
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System, VRAM_HEIGHT, VRAM_WIDTH};
 use std::cell::RefCell;
@@ -62,7 +64,6 @@ fn setup_screen(mut commands: Commands) {
             ));
         }
     }
-    metamask_sdk::request_accounts();
 }
 
 fn update_gameboy(mut gb: NonSendMut<Gameboy>, keys: Res<Input<KeyCode>>) {

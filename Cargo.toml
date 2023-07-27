@@ -1,8 +1,14 @@
 [workspace]
 
+resolver = "2"
+
 members = [
     "proofboy-recorder",
+    "metamask-sdk",
 ]
+
+[workspace.dependencies]
+metamask-sdk = { path = "./metamask-sdk" }
 
 # Enable max optimizations for dependencies, but not for our code:
 [profile.dev.package."*"]
