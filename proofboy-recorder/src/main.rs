@@ -1,40 +1,47 @@
 use bevy::{
-    diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
+    // diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
+    log::LogPlugin,
     prelude::*,
     window::*,
-    log::LogPlugin,
 };
+use extractor::{extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor};
+use journal::{Journal, KeyState};
 use log;
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System, VRAM_HEIGHT, VRAM_WIDTH};
 use std::cell::RefCell;
 use std::rc::Rc;
-use extractor::{Extractor, MemoryReader, extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor};
-
-mod journal;
 
 const SCALE: f32 = 2.0;
 const CYCLES_PER_FRAME: usize = 70224;
 
+#[derive(Resource, Default)]
+struct KeyJournal(pub Journal);
+
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins.set(WindowPlugin {
-            primary_window: Some(Window {
-                title: "I am a window!".to_string(),
-                resolution: WindowResolution::new(
-                    VRAM_WIDTH as f32 * SCALE,
-                    VRAM_HEIGHT as f32 * SCALE,
-                ),
-                ..default()
-            }),
-            ..default()
-        }).set(LogPlugin {
-            filter: "rgy=error".into(),
-            level: bevy::log::Level::INFO,
-        }))
+        .add_plugins(
+            DefaultPlugins
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        title: "I am a window!".to_string(),
+                        resolution: WindowResolution::new(
+                            VRAM_WIDTH as f32 * SCALE,
+                            VRAM_HEIGHT as f32 * SCALE,
+                        ),
+                        ..default()
+                    }),
+                    ..default()
+                })
+                .set(LogPlugin {
+                    filter: "rgy=error".into(),
+                    level: bevy::log::Level::INFO,
+                }),
+        )
         // .add_plugins((
         //     LogDiagnosticsPlugin::default(),
         //     FrameTimeDiagnosticsPlugin::default(),
         // ))
+        .init_resource::<KeyJournal>()
         .add_systems(Startup, (setup_screen, setup_gameboy))
         .add_systems(Update, (update_gameboy, update_screen, check_for_dump))
         .run();
@@ -71,7 +78,11 @@ fn setup_screen(mut commands: Commands) {
     }
 }
 
-fn update_gameboy(mut gb: NonSendMut<Gameboy>, keys: Res<Input<KeyCode>>) {
+fn update_gameboy(
+    mut gb: NonSendMut<Gameboy>,
+    keys: Res<Input<KeyCode>>,
+    mut journal: ResMut<KeyJournal>,
+) {
     gb.kbd.0.borrow_mut().up = keys.pressed(KeyCode::Up);
     gb.kbd.0.borrow_mut().down = keys.pressed(KeyCode::Down);
     gb.kbd.0.borrow_mut().left = keys.pressed(KeyCode::Left);
@@ -83,7 +94,9 @@ fn update_gameboy(mut gb: NonSendMut<Gameboy>, keys: Res<Input<KeyCode>>) {
 
     let gb = gb.as_mut();
     for _ in 0..CYCLES_PER_FRAME {
+        journal.0.tick(gb.cycle_count, gb.kbd.0.borrow().as_byte());
         gb.sys.poll();
+        gb.cycle_count += 1;
     }
 }
 
@@ -114,6 +127,7 @@ struct Gameboy {
     sys: System<NullDebugger>,
     display: Display,
     kbd: Keyboard,
+    cycle_count: u64,
 }
 
 impl Default for Gameboy {
@@ -127,7 +141,12 @@ impl Default for Gameboy {
 
         let sys = System::new(cfg, rom, hw, NullDebugger);
 
-        Self { sys, display, kbd }
+        Self {
+            sys,
+            display,
+            kbd,
+            cycle_count: 0,
+        }
     }
 }
 
@@ -135,23 +154,11 @@ impl Default for Gameboy {
 struct Display(Rc<RefCell<Vec<Vec<u32>>>>);
 
 #[derive(Clone, Debug)]
-struct Keyboard(Rc<RefCell<Inner>>);
-
-#[derive(Default, Debug)]
-struct Inner {
-    up: bool,
-    down: bool,
-    left: bool,
-    right: bool,
-    a: bool,
-    b: bool,
-    start: bool,
-    select: bool,
-}
+struct Keyboard(Rc<RefCell<KeyState>>);
 
 impl Keyboard {
     fn new() -> Self {
-        Self(Rc::new(RefCell::new(Inner::default())))
+        Self(Rc::new(RefCell::new(KeyState::default())))
     }
 }
 
@@ -167,19 +174,11 @@ impl Display {
 struct Hardware {
     display: Display,
     kbd: Keyboard,
-
-    cycle_accumulator: usize,
-    current_joypad: Inner,
 }
 
 impl Hardware {
     fn new(display: Display, kbd: Keyboard) -> Self {
-        Self {
-            display,
-            kbd,
-            cycle_accumulator: 0,
-            current_joypad: Inner::default(),
-        }
+        Self { display, kbd }
     }
 }
 
@@ -222,7 +221,6 @@ impl rgy::Hardware for Hardware {
     }
 
     fn sched(&mut self) -> bool {
-        self.cycle_accumulator += 1;
         true
     }
 

@@ -1,12 +1,8 @@
 [package]
-name = "proofboy-recorder"
+name = "journal"
 authors = [ "Willem Olding <willemolding@gmail.com>" ]
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bevy = "0.11.0"
 log = { workspace = true }
-rgy = { workspace = true }
-extractor = { workspace = true }
-journal = { workspace = true }
