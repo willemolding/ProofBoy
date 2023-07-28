@@ -36,20 +36,38 @@
 //!
 
 pub struct PartyLeaderExtractor;
+use alloc::string::ToString;
+use alloc::vec;
+use crate::metadata::{Metadata, Attribute};
 
-#[derive(Debug)]
-pub struct Pokemon {
-    id: u8,
-    level: u8,
-}
+use super::id_to_pokedex::ID_TO_POKEDEX;
 
 impl crate::Extractor for PartyLeaderExtractor {
-    type Output = Pokemon;
+    type Output = Metadata;
 
     fn extract<R: crate::MemoryReader>(reader: &R) -> Self::Output {
-        Pokemon {
-            id: reader.get8(0xD16B),
-            level: reader.get8(0xD18C),
+        let id = reader.get8(0xD16B);
+        let level = reader.get8(0xD18C);
+        let max_hp: u16 = reader.get16(0xD18D);
+        let attack: u16 = reader.get16(0xD18F);
+        let defense: u16 = reader.get16(0xD191);
+        let speed: u16 = reader.get16(0xD193);
+        let special: u16 = reader.get16(0xD195);
+
+        let (pokedex_num, name) = ID_TO_POKEDEX[id as usize];
+
+        Metadata {
+            name: name.to_string(),
+            description: "A Pokemon NFT produced by ProofBoy".to_string(),
+            image: alloc::format!("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{}.png", pokedex_num).to_string(),
+            attributes: vec![
+                Attribute::new_numeric("Level", level as u32),
+                Attribute::new_numeric("Max HP", max_hp as u32),
+                Attribute::new_numeric("Attack", attack as u32),
+                Attribute::new_numeric("Defense", defense as u32),
+                Attribute::new_numeric("Speed", speed as u32),
+                Attribute::new_numeric("Special", special as u32),
+            ]
         }
     }
 }

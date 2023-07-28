@@ -45,17 +45,15 @@ pub fn run(canvas_selector: &str, output_callback: js_sys::Function) {
         //     FrameTimeDiagnosticsPlugin::default(),
         // ))
         .init_resource::<KeyJournal>()
+        .insert_non_send_resource(Gameboy::default())
         .insert_non_send_resource(output_callback)
-        .add_systems(Startup, (setup_screen, setup_gameboy))
+        .add_systems(Startup, setup_screen)
         .add_systems(Update, (update_gameboy, update_screen, check_for_dump))
         .run();
+
+
 }
 
-// need to do it this way rather than using a resource because it is non-send
-fn setup_gameboy(world: &mut World) {
-    let gb = Gameboy::default();
-    world.insert_non_send_resource(gb);
-}
 
 fn setup_screen(mut commands: Commands) {
     commands.spawn(Camera2dBundle::default());
@@ -112,9 +110,10 @@ fn check_for_dump(
 ) {
     if keys.pressed(KeyCode::Space) {
         log::info!("{:?}", PartyLeaderExtractor::extract(&gb.sys));
-        callback.call1(
+        callback.call2(
             &JsValue::null(),
             &JsValue::from(serde_json::to_string(&PartyLeaderExtractor::extract(&gb.sys)).unwrap()),
+            &JsValue::from(serde_json::to_string(&journal.0.clone().to_bytes()).unwrap())
         ).unwrap();
     }
 }

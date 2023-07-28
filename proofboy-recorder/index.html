@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
+    <script>
+        const MMSDK = new MetaMaskSDK.MetaMaskSDK() // sets the window.ethereum object
+        // const ethereum = MMSDK.getProvider() // You can also access via window.ethereum
+        // ethereum.request({method: 'eth_requestAccounts'})
+
+    </script>
+  </head>
+  <body>
+    <script>
+    function onReceiveJournal(data) {
+        console.log("on receive journal called with", data);
+    }
+
+    function onReceiveData(data) {
+        console.log("on receive data called with", data);
+    }
+    </script>
+  </body>
+</html>
