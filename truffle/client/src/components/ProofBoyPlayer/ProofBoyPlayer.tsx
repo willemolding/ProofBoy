@@ -1,7 +1,7 @@
 import styles from './ProofBoyPlayer.module.css'
 import { useEffect } from 'react'
 
-import init, { run } from '../../../../proofboy-recorder/pkg'
+import init, { run } from '../../../../../proofboy-recorder/pkg/proofboy_recorder'
 
 export const ProofBoyPlayer = ({ onNewData }: {onNewData: (data: string, journal: string) => void}) => {
   useEffect(() => {
