@@ -1,7 +1,7 @@
 //! A mapping from the pokemon red/blue specific ID to the globally known pokedex number and name
 
 pub(crate) const ID_TO_POKEDEX: [(u8, &str); 191] = [
-(000,"M (glitch)"),
+(000,"No Pokemon"),
 (112,"Rhydon"),
 (115,"Kangaskhan"),
 (032,"Nidoran♂"),

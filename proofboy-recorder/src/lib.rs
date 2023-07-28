@@ -84,6 +84,7 @@ fn update_gameboy(
     mut gb: NonSendMut<Gameboy>,
     keys: Res<Input<KeyCode>>,
     mut journal: ResMut<KeyJournal>,
+    mut focus_changed: EventReader<WindowFocused>,
 ) {
     gb.kbd.0.borrow_mut().up = keys.pressed(KeyCode::Up);
     gb.kbd.0.borrow_mut().down = keys.pressed(KeyCode::Down);
@@ -95,11 +96,20 @@ fn update_gameboy(
     gb.kbd.0.borrow_mut().select = keys.pressed(KeyCode::ShiftRight);
 
     let gb = gb.as_mut();
-    for _ in 0..CYCLES_PER_FRAME {
-        journal.0.tick(gb.cycle_count, gb.kbd.0.borrow().as_byte());
-        gb.sys.poll();
-        gb.cycle_count += 1;
+    
+    for event in focus_changed.iter() {
+        log::info!("Focus changed: {:?}", event);
+        gb.active = event.focused;
     }
+
+    if gb.active {
+        for _ in 0..CYCLES_PER_FRAME {
+            journal.0.tick(gb.cycle_count, gb.kbd.0.borrow().as_byte());
+            gb.sys.poll();
+            gb.cycle_count += 1;
+        }
+    }
+
 }
 
 fn check_for_dump(
@@ -140,6 +150,7 @@ struct Gameboy {
     display: Display,
     kbd: Keyboard,
     cycle_count: u64,
+    active: bool,
 }
 
 impl Default for Gameboy {
@@ -158,6 +169,7 @@ impl Default for Gameboy {
             display,
             kbd,
             cycle_count: 0,
+            active: false,
         }
     }
 }
