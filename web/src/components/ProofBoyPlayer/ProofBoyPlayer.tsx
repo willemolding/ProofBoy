@@ -8,7 +8,9 @@ export const ProofBoyPlayer = () => {
 useEffect(() => {
     const runBevyApp = async () => {
         await init()
-        run("#proof-boy-canvas")
+        run("#proof-boy-canvas", (data: string) => {
+            console.log("callback called with: ", data)
+        })
     };
     runBevyApp()
     }, [])
