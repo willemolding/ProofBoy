@@ -4,13 +4,13 @@ use bevy::{
     prelude::*,
     window::*,
 };
-use wasm_bindgen::prelude::*;
 use extractor::{extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor};
 use journal::{Journal, KeyState};
 use log;
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System, VRAM_HEIGHT, VRAM_WIDTH};
 use std::cell::RefCell;
 use std::rc::Rc;
+use wasm_bindgen::prelude::*;
 
 const SCALE: f32 = 2.0;
 const CYCLES_PER_FRAME: usize = 70224;
@@ -19,7 +19,7 @@ const CYCLES_PER_FRAME: usize = 70224;
 struct KeyJournal(pub Journal);
 
 #[wasm_bindgen]
-pub fn run(canvas_selector: &str) {
+pub fn run(canvas_selector: &str, output_callback: js_sys::Function) {
     App::new()
         .add_plugins(
             DefaultPlugins
@@ -45,6 +45,7 @@ pub fn run(canvas_selector: &str) {
         //     FrameTimeDiagnosticsPlugin::default(),
         // ))
         .init_resource::<KeyJournal>()
+        .insert_non_send_resource(output_callback)
         .add_systems(Startup, (setup_screen, setup_gameboy))
         .add_systems(Update, (update_gameboy, update_screen, check_for_dump))
         .run();
@@ -103,10 +104,18 @@ fn update_gameboy(
     }
 }
 
-fn check_for_dump(gb: NonSend<Gameboy>, keys: Res<Input<KeyCode>>, journal: Res<KeyJournal>) {
+fn check_for_dump(
+    gb: NonSend<Gameboy>,
+    keys: Res<Input<KeyCode>>,
+    journal: Res<KeyJournal>,
+    callback: NonSend<js_sys::Function>,
+) {
     if keys.pressed(KeyCode::Space) {
         log::info!("{:?}", PartyLeaderExtractor::extract(&gb.sys));
-        send_extracted_data(format!("{:?}", PartyLeaderExtractor::extract(&gb.sys)));
+        callback.call1(
+            &JsValue::null(),
+            &JsValue::from(serde_json::to_string(&PartyLeaderExtractor::extract(&gb.sys)).unwrap()),
+        ).unwrap();
     }
 }
 
