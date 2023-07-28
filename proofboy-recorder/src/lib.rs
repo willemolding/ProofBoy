@@ -18,7 +18,8 @@ const CYCLES_PER_FRAME: usize = 70224;
 #[derive(Resource, Default)]
 struct KeyJournal(pub Journal);
 
-fn main() {
+#[wasm_bindgen]
+pub fn run(canvas_selector: &str) {
     App::new()
         .add_plugins(
             DefaultPlugins
@@ -29,6 +30,7 @@ fn main() {
                             VRAM_WIDTH as f32 * SCALE,
                             VRAM_HEIGHT as f32 * SCALE,
                         ),
+                        canvas: Some(canvas_selector.to_string()),
                         ..default()
                     }),
                     ..default()
