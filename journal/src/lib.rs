@@ -3,7 +3,7 @@ mod key_state;
 pub use key_state::KeyState;
 use std::collections::VecDeque;
 
-#[derive(Default, Debug)]
+#[derive(Default, Debug, Clone)]
 pub struct Journal {
     counter: u64,
     entries: Vec<JournalEntry>,

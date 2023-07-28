@@ -10,9 +10,13 @@
   </head>
   <body>
     <script>
-        function onOutput(data) {
-            console.log("on output called with", data)
-        }
+    function onReceiveJournal(data) {
+        console.log("on receive journal called with", data);
+    }
+
+    function onReceiveData(data) {
+        console.log("on receive data called with", data);
+    }
     </script>
   </body>
 </html>

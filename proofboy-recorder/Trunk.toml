@@ -1,4 +1,4 @@
 # For examples of config fields see https://github.com/thedodd/trunk/blob/master/Trunk.toml
 
 [build]
-release = false # remember to change this or the game is slow AF!
+release = true # remember to change this or the game is slow AF!

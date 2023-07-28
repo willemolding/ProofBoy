@@ -101,10 +101,10 @@ fn update_gameboy(
     }
 }
 
-fn check_for_dump(gb: NonSend<Gameboy>, keys: Res<Input<KeyCode>>) {
+fn check_for_dump(gb: NonSend<Gameboy>, keys: Res<Input<KeyCode>>, journal: Res<KeyJournal>) {
     if keys.pressed(KeyCode::Space) {
         log::info!("{:?}", PartyLeaderExtractor::extract(&gb.sys));
-        send_output(format!("{:?}", PartyLeaderExtractor::extract(&gb.sys)).as_str());
+        send_extracted_data(format!("{:?}", PartyLeaderExtractor::extract(&gb.sys)));
     }
 }
 
@@ -235,6 +235,9 @@ impl rgy::Hardware for Hardware {
 
 #[wasm_bindgen]
 extern "C" {
-    #[wasm_bindgen(js_name = onOutput)]
-    fn send_output(data: &str);
+    #[wasm_bindgen(js_name = onReceiveJournal)]
+    fn send_journal_output(data: Vec<u8>);
+
+    #[wasm_bindgen(js_name = onReceiveData)]
+    fn send_extracted_data(data: String);
 }
