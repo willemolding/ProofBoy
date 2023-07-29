@@ -32,7 +32,7 @@ export const App = () => {
         <Navigation />
         <ProofBoyPlayer onNewData={onProofBoyData}/>
         <NftPreview metadata={proofBoyData.data}/>
-        <Display metadata={proofBoyData.data}/>
+        <Display proofBoyData={proofBoyData}/>
         <MetaMaskError />
       </div>
     </MetaMaskContextProvider>
