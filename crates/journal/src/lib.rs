@@ -1,32 +1,35 @@
 mod key_state;
 
 pub use key_state::KeyState;
-use std::collections::VecDeque;
 
 #[derive(Default, Debug, Clone)]
 pub struct Journal {
-    counter: u64,
-    entries: Vec<JournalEntry>,
+    pub cycle: u64,
+    pub pending: u8, // button press to be added. We just don't know how long it was pressed for yet
+    pub last_add: u64, // value of cycle when an entry
+    pub entries: Vec<JournalEntry>,
 }
 
 #[derive(Clone, Default, Debug)]
 pub struct JournalEntry {
-    joypad: u8, // the joypad state is equal to the previous state XORed with this. The state remains so until the next entry.
-    delta: u32, // number of CPU cycles since the previous entry
+    pub joypad: u8, // the joypad state
+    pub delta: u32, // number of CPU cycles this joypad state should be active for
 }
 
 impl Journal {
-    /// To be called every clock cycle. This struct will determine if it should be stored
-    pub fn tick(&mut self, cycles: u64, joypad: u8) {
-        let last_entry = self.entries.last().cloned().unwrap_or_default();
-        if joypad != last_entry.joypad {
-            log::info!("Journal added: {}: {}", cycles - self.counter, joypad);
-            self.entries.push(JournalEntry {
-                joypad,
-                delta: (cycles - self.counter) as u32,
-            });
-            self.counter = cycles;
+    /// To be called every clock cycle with the joypad as it was when that cycle was executed. This struct will determine if it should be stored
+    pub fn tick(&mut self, joypad: u8) {
+        if joypad != self.pending {
+            let new_entry = JournalEntry {
+                joypad: self.pending,
+                delta: (self.cycle - self.last_add) as u32,
+            };
+            log::info!("Journal added: {:?}", new_entry);
+            self.entries.push(new_entry);
+            self.pending = joypad;
+            self.last_add = self.cycle;
         }
+        self.cycle+=1;
     }
 
     pub fn to_bytes(self) -> Vec<u8> {
@@ -43,7 +46,7 @@ impl Journal {
 
     pub fn from_bytes(bytes: &[u8]) -> Self {
         let mut entries = Vec::new();
-        bytes.windows(5).for_each(|w| {
+        bytes.chunks_exact(5).for_each(|w| {
             let mut delta = [0u8; 4];
             delta.copy_from_slice(&w[0..4]);
             entries.push(JournalEntry {
@@ -53,45 +56,70 @@ impl Journal {
         });
         Self {
             entries,
-            counter: 0,
+            ..Default::default()
         }
+    }
+
+    pub fn into_iter(self) -> impl Iterator<Item = u8> {
+        self.entries.into_iter()
+            .flat_map(|entry| {
+                std::iter::repeat(entry.joypad).take(entry.delta as usize)
+            })
     }
 }
 
-impl IntoIterator for Journal {
-    type Item = u8;
-    type IntoIter = JournalIterator;
 
-    fn into_iter(self) -> Self::IntoIter {
-        JournalIterator {
-            entries: self.entries.into(),
-            last_joypad: 0,
-            last_cycles: 0,
-            cycles: 0,
-        }
+#[cfg(test)]
+mod test {
+    use super::*;
+    use std::vec;
+
+    #[test]
+    fn test_iterator_on_empty() {
+        let journal = Journal::default();
+        let mut iter = journal.into_iter();
+        assert_eq!(iter.next(), None);
     }
-}
 
-/// An iterator over every CPU cycle that efficiently (ish) returns what the joypad state should be at each cycle
-pub struct JournalIterator {
-    entries: VecDeque<JournalEntry>,
-    last_joypad: u8,
-    last_cycles: u64,
-    cycles: u64,
-}
-
-impl Iterator for JournalIterator {
-    type Item = u8;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        if self.cycles
-            >= self.last_cycles + self.entries.front().map(|e| e.delta as u64).unwrap_or(0)
-        {
-            let last = self.entries.pop_front().unwrap();
-            self.last_joypad = last.joypad;
-            self.last_cycles += last.delta as u64;
-        }
-        self.cycles += 1;
-        Some(self.last_joypad)
+    #[test]
+    fn test_iterator_single_entry() {
+        let journal = Journal {
+            entries: vec![JournalEntry {
+                joypad: 0x1,
+                delta: 1,
+            }],
+            ..Journal::default()
+        };
+        let mut iter = journal.into_iter();
+        assert_eq!(iter.next(), Some(0x1));
+        assert_eq!(iter.next(), None);
     }
+
+    #[test]
+    fn test_iterator_single_held() {
+        let journal = Journal {
+            entries: vec![
+            JournalEntry {
+                joypad: 0x1,
+                delta: 3,
+            },
+            JournalEntry {
+                joypad: 0x2,
+                delta: 2,
+            }
+            ],
+            ..Journal::default()
+        };
+        assert_eq!(journal.clone().into_iter().collect::<Vec<u8>>().len(), 5);
+
+        let mut iter = journal.into_iter();
+        for _ in 0..3 {
+            assert_eq!(iter.next(), Some(0x1));
+        }
+        for _ in 0..2 {
+            assert_eq!(iter.next(), Some(0x2));
+        }
+        assert_eq!(iter.next(), None);
+    }
+
 }

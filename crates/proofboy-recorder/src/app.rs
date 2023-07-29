@@ -13,15 +13,33 @@ use std::rc::Rc;
 pub const SCALE: f32 = 2.0;
 const CYCLES_PER_FRAME: usize = 70224;
 
-#[derive(Resource, Default)]
+#[derive(Resource, Default, Debug)]
 pub struct KeyJournal(pub Journal);
 
-pub struct ProofBoyPlugin;
+pub struct ProofBoyPlugin{
+    /// ROM to load into the gameboy
+    pub rom: Vec<u8>,
+    /// This journal is used to fast-forward the game to the given state
+    pub startup_journal: Option<Journal>,
+}
 
 impl Plugin for ProofBoyPlugin {
     fn build(&self, app: &mut App) {
+
+        let mut gb = Gameboy::new(&self.rom);
+
+        if let Some(startup_journal) = self.startup_journal.clone() {
+            log::info!("Input journal detected {:?}. Applying key presses...", startup_journal);
+
+            startup_journal.into_iter().for_each(|keys| {
+                gb.kbd.0.replace(KeyState::from_byte(keys));
+                gb.step();
+            });
+            log::info!("CPU now at cycle count: {}", gb.cycle_count);
+        }
+
         app.init_resource::<KeyJournal>()
-            .insert_non_send_resource(Gameboy::default())
+            .insert_non_send_resource(gb)
             .add_systems(Startup, setup_screen)
             .add_systems(Update, (update_gameboy, update_screen));
     }
@@ -76,7 +94,7 @@ fn update_gameboy(
 
     if gb.active {
         for _ in 0..CYCLES_PER_FRAME {
-            journal.0.tick(gb.cycle_count, gb.kbd.0.borrow().as_byte());
+            journal.0.tick(gb.kbd.0.borrow().as_byte());
             gb.step();
         }
     }
@@ -112,19 +130,13 @@ impl Gameboy {
         self.sys.poll();
         self.cycle_count += 1;
     }
-}
 
-impl Default for Gameboy {
-    fn default() -> Self {
+    pub fn new(rom: &[u8]) -> Self {
         let kbd = Keyboard::new();
         let display = Display::new();
         let cfg = Config::new().native_speed(true);
         let hw = Hardware::new(display.clone(), kbd.clone());
-
-        let rom = include_bytes!("../../../roms/pokemon-blue.gb");
-
         let sys = System::new(cfg, rom, hw, NullDebugger);
-
         Self {
             sys,
             display,

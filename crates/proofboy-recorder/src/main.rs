@@ -1,4 +1,5 @@
 use clap::Parser;
+use journal::Journal;
 use std::path::PathBuf;
 
 use bevy::{
@@ -8,10 +9,12 @@ use bevy::{
     window::*,
 };
 
+use extractor::{extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor};
+
 mod app;
 
 /// Simple program to greet a person
-#[derive(Parser, Debug)]
+#[derive(Parser, Debug, Resource, Clone)]
 #[command(author, version, about)]
 struct Args {
     /// Name of the person to greet
@@ -24,7 +27,15 @@ struct Args {
 }
 
 fn main() {
-    let _args = Args::parse();
+    let args = Args::parse();
+
+    // load journal from file if provided
+    let journal = if let Some(journal) = args.journal.clone() {
+        let journal_bytes = std::fs::read(journal).expect("failed to read journal from file");
+        Some(Journal::from_bytes(&journal_bytes))
+    } else {
+        None
+    };
 
     App::new()
         .add_plugins(
@@ -49,6 +60,28 @@ fn main() {
         //     LogDiagnosticsPlugin::default(),
         //     FrameTimeDiagnosticsPlugin::default(),
         // ))
-        .add_plugins(app::ProofBoyPlugin)
+        .add_plugins(app::ProofBoyPlugin {
+            rom: include_bytes!("../../../roms/pokemon-blue.gb").to_vec(),
+            startup_journal: journal,
+        })
+        .insert_resource(args)
+        .add_systems(Update, check_for_dump)
         .run();
+}
+
+
+fn check_for_dump(
+    gb: NonSend<app::Gameboy>,
+    keys: Res<Input<KeyCode>>,
+    journal: Res<app::KeyJournal>,
+    args: Res<Args>,
+) {
+    if keys.pressed(KeyCode::Space) {
+        log::info!("{:?}", PartyLeaderExtractor::extract(&gb.sys));
+        log::info!("{:?}", journal);
+        let journal_bytes = journal.0.clone().to_bytes();
+        if let Some(journal_out) = args.journal_out.clone() {
+            std::fs::write(journal_out, journal_bytes).expect("failed to write journal to file");
+        }
+    }
 }
