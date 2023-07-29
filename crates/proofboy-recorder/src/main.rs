@@ -24,7 +24,7 @@ struct Args {
 }
 
 fn main() {
-    let args = Args::parse();
+    let _args = Args::parse();
 
     App::new()
         .add_plugins(

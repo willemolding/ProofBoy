@@ -1,11 +1,10 @@
 use bevy::{
     // diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
-    log::LogPlugin,
     prelude::*,
     window::*,
 };
 use journal::{Journal, KeyState};
-use log;
+
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System};
 pub use rgy::{VRAM_HEIGHT, VRAM_WIDTH};
 use std::cell::RefCell;
