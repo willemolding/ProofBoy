@@ -17,3 +17,4 @@ wasm-bindgen = "0.2.87"
 js-sys = "0.3.64"
 serde = { workspace = true }
 serde_json = { workspace = true }
+clap = { version = "4.3.19", features = ["derive"] }
