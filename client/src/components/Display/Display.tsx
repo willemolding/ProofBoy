@@ -4,13 +4,13 @@ import styles from './Display.module.css'
 
 import NFTCollection from '../../contracts/NFTCollection.json';
 
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { ProofBoyData } from '~/types';
 import { registerNft } from '~/utils';
 
 import { ethers } from "ethers";
 
-export const Display = ({ proofBoyData }: { proofBoyData: ProofBoyData }) => {
+export const Display = ({ proofBoyData, onJournalUpload }: { proofBoyData: ProofBoyData, onJournalUpload?: (j: Uint8Array) => void }) => {
 
   const { wallet } = useMetaMask()
 
@@ -47,6 +47,20 @@ export const Display = ({ proofBoyData }: { proofBoyData: ProofBoyData }) => {
     }
   }
 
+  const loadJournal = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // @ts-ignore
+    const file = e.target?.files[0]
+    const reader = new FileReader()
+    reader.onload = function(event: ProgressEvent<FileReader>) {
+      // got a new file
+      if (event.target?.result != null && onJournalUpload != null) {
+        onJournalUpload(event.target?.result as Uint8Array)
+      }
+    }
+  
+    reader.readAsArrayBuffer(file)
+  }
+
   return (
     <div className={styles.display}>
       {wallet.accounts.length > 0 &&
@@ -59,6 +73,10 @@ export const Display = ({ proofBoyData }: { proofBoyData: ProofBoyData }) => {
       }
       <Button onClick={submitNft}>Submit</Button>
       <Button onClick={() => saveJournal(proofBoyData.journal)}>Save Journal</Button>
+      <Form.Group controlId="formFileLg" className="mb-3">
+        <Form.Label>Large file input example</Form.Label>
+        <Form.Control type="file" accept=".proofboy" size="lg" onChange={loadJournal} />
+      </Form.Group>
     </div>
   )
 }
