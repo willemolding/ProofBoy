@@ -1,9 +1,0 @@
-[package]
-name = "extractor"
-authors = [ "Willem Olding <willemolding@gmail.com>" ]
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-rgy = { workspace = true }
-serde = { workspace = true }
