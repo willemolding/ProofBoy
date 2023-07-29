@@ -19,7 +19,17 @@ const CYCLES_PER_FRAME: usize = 70224;
 struct KeyJournal(pub Journal);
 
 #[wasm_bindgen]
-pub fn run(canvas_selector: &str, output_callback: js_sys::Function) {
+pub fn run(canvas_selector: &str, output_callback: js_sys::Function, journal: Option<Vec<u8>>) {
+    let mut gb = Gameboy::default();
+
+    if let Some(journal) = journal {
+        let journal = Journal::from_bytes(&journal);
+        journal.into_iter().for_each(|keys| {
+            gb.kbd.0.replace(KeyState::from_byte(keys));
+            gb.step();
+        });
+    }
+
     App::new()
         .add_plugins(
             DefaultPlugins
@@ -45,7 +55,7 @@ pub fn run(canvas_selector: &str, output_callback: js_sys::Function) {
         //     FrameTimeDiagnosticsPlugin::default(),
         // ))
         .init_resource::<KeyJournal>()
-        .insert_non_send_resource(Gameboy::default())
+        .insert_non_send_resource(gb)
         .insert_non_send_resource(output_callback)
         .add_systems(Startup, setup_screen)
         .add_systems(Update, (update_gameboy, update_screen, check_for_dump))
@@ -105,8 +115,7 @@ fn update_gameboy(
     if gb.active {
         for _ in 0..CYCLES_PER_FRAME {
             journal.0.tick(gb.cycle_count, gb.kbd.0.borrow().as_byte());
-            gb.sys.poll();
-            gb.cycle_count += 1;
+            gb.step();
         }
     }
 
@@ -151,6 +160,13 @@ struct Gameboy {
     kbd: Keyboard,
     cycle_count: u64,
     active: bool,
+}
+
+impl Gameboy {
+    pub fn step(&mut self) {
+        self.sys.poll();
+        self.cycle_count += 1;
+    }
 }
 
 impl Default for Gameboy {
