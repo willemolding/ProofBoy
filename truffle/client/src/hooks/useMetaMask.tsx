@@ -49,9 +49,9 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
       method: 'eth_getBalance',
       params: [accounts[0], 'latest'],
     }))
-    const chainId = await window.ethereum.request({
+    const chainId = Number(await window.ethereum.request({
       method: 'eth_chainId',
-    })
+    })).toString() // convert to decimal representation
 
     setWallet({ accounts, balance, chainId })
   }, [])
