@@ -18,6 +18,11 @@ import { GameTypes, Claim } from "@eth-optimism/contracts-bedrock/src/libraries/
 *
 *      The second stage is a claim where the original proposer can receive an actual NFT
 *      if it remains unchallenged for sufficiently long.
+*
+*       ---
+*
+*      This contract uses on-chain metadata since the metadata itself is required to check the
+*      validity of the token. This may be expensive for large metadata.
 */
 contract ERC1155ChallengeableMint is ERC1155URIStorage {
 
@@ -40,14 +45,15 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
     /// @dev The hash of the code to be run in the provable execution
     Claim public immutable ROOT_CLAIM;
 
+    /// @dev The dispute game factory used to create and track open disputes
+    IDisputeGameFactory public immutable disputeGameFactory;
+    
     /// @dev Used to generate a fresh token ID for each token
     uint256 private nonce;
 
     /// @dev Mapping from token nonce to mintable status
     mapping(uint256 => PendingMint) public pendingMints;
 
-    /// @dev The dispute game factory used to create and track open disputes
-    IDisputeGameFactory public disputeGameFactory;
 
     event MintProposed(uint256 indexed id, uint256 timestamp);
     event MintChallenged(uint256 indexed id, address challenger);
@@ -88,9 +94,10 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
 
     /**
     * @dev Challenge a pending mint.
-        This will lead to the creation of a challenge game on this mint.
-        The winner of the game receives 1/2 the bond from the opponent.
-        The rest goes into the dev fund :)
+    *    This will lead to the creation of a challenge game on this mint.
+    *    The winner of the game receives 1/2 the bond from the opponent.
+    *    The rest goes into the dev fund :)
+    * @param id The ID of the pending mint to challenge
     */
     function ChallengeMint(uint256 id) external {
         PendingMint memory proposal = pendingMints[id];
