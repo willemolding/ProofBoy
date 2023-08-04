@@ -1,0 +1,400 @@
+{
+  "contractName": "LibHashing",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"Hashing\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"This library contains all of the hashing utilities used in the Cannon contracts.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibHashing.sol\":\"LibHashing\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibClock.sol\":{\"keccak256\":\"0xa5e0ab5658506760ac26d6b73755af9c03e43184dee996e40113dbaa71199551\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1305bffdb301d190ce749d67274f6caac24002846e506f28d950f8cbc230e8c0\",\"dweb:/ipfs/QmdG6DAX2nznmwyp4VmTNxHy7orx6sdGzUKwgJ9kB69Epm\"]},\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibHashing.sol\":{\"keccak256\":\"0xc0174b32e6585e7192d385b405c3825528150f9fc941a4f14448edaa662e042c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cae57fb5cb98d7b4b96cd60779920122e800d0d7db9415f16808e19175e45f89\",\"dweb:/ipfs/QmRZfqzW7Aa5FtfL5d16UdjD53q95w1VeVDkeGsnTJusrE\"]},\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibPosition.sol\":{\"keccak256\":\"0x1836d08aaf755a6afea8a4d6bc92b8b96061c7df681a7308a536114ec3cd9276\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cd7a4e1cfdf656f32f5959e78a79872be90c9d5f089f1b0c56595b929d030ecc\",\"dweb:/ipfs/QmZsLmahruxKVRxpMXbnqeVonLwcaiuqHEXK1dXfx2YCZk\"]},\"@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol\":{\"keccak256\":\"0x11ba4465bbe25641801a34aef36fc6fd754afcf8811f1a5c2275d1a3f4567a9c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://eeb9fb8f3e78ca4a02952a15b8163d298298c315bf61ade3e3198068c25351b9\",\"dweb:/ipfs/QmRBBtVzEXY66UcSjonGiP1RZ32KmugDjgXexu5sswe7sh\"]}},\"version\":1}",
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220c1d49e5630c1b024e18a8edd6623a6dfadd8f31de5e7f324df9888f2a2f22a1a64736f6c634300080f0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220c1d49e5630c1b024e18a8edd6623a6dfadd8f31de5e7f324df9888f2a2f22a1a64736f6c634300080f0033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "214:496:5:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "214:496:5:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.15;\n\nimport \"../../libraries/DisputeTypes.sol\";\n\n/// @title Hashing\n/// @notice This library contains all of the hashing utilities used in the Cannon contracts.\nlibrary LibHashing {\n\n    /// @notice Hashes a claim and a position together.\n    /// @param _claim A Claim type.\n    /// @param _position The position of `claim`.\n    /// @return claimHash_ A hash of abi.encodePacked(claim, position);\n    function hashClaimPos(Claim _claim, Position _position) internal pure returns (ClaimHash claimHash_) {\n        assembly {\n            mstore(0x00, _claim)\n            mstore(0x20, _position)\n            claimHash_ := keccak256(0x00, 0x40)\n        }\n    }\n}\n",
+  "sourcePath": "@eth-optimism/contracts-bedrock/src/dispute/lib/LibHashing.sol",
+  "ast": {
+    "absolutePath": "@eth-optimism/contracts-bedrock/src/dispute/lib/LibHashing.sol",
+    "exportedSymbols": {
+      "BondAmount": [
+        510
+      ],
+      "Claim": [
+        506
+      ],
+      "ClaimHash": [
+        508
+      ],
+      "Clock": [
+        518
+      ],
+      "Duration": [
+        514
+      ],
+      "GameId": [
+        516
+      ],
+      "GameStatus": [
+        526
+      ],
+      "GameType": [
+        522
+      ],
+      "GameTypes": [
+        552
+      ],
+      "Hash": [
+        504
+      ],
+      "LibHashing": [
+        324
+      ],
+      "Position": [
+        520
+      ],
+      "Timestamp": [
+        512
+      ]
+    },
+    "id": 325,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 306,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".15"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:5"
+      },
+      {
+        "absolutePath": "@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol",
+        "file": "../../libraries/DisputeTypes.sol",
+        "id": 307,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 325,
+        "sourceUnit": 553,
+        "src": "58:42:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "LibHashing",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": {
+          "id": 308,
+          "nodeType": "StructuredDocumentation",
+          "src": "102:112:5",
+          "text": "@title Hashing\n @notice This library contains all of the hashing utilities used in the Cannon contracts."
+        },
+        "fullyImplemented": true,
+        "id": 324,
+        "linearizedBaseContracts": [
+          324
+        ],
+        "name": "LibHashing",
+        "nameLocation": "222:10:5",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 322,
+              "nodeType": "Block",
+              "src": "555:153:5",
+              "statements": [
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "574:128:5",
+                    "statements": [
+                      {
+                        "expression": {
+                          "arguments": [
+                            {
+                              "kind": "number",
+                              "nodeType": "YulLiteral",
+                              "src": "595:4:5",
+                              "type": "",
+                              "value": "0x00"
+                            },
+                            {
+                              "name": "_claim",
+                              "nodeType": "YulIdentifier",
+                              "src": "601:6:5"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "mstore",
+                            "nodeType": "YulIdentifier",
+                            "src": "588:6:5"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "588:20:5"
+                        },
+                        "nodeType": "YulExpressionStatement",
+                        "src": "588:20:5"
+                      },
+                      {
+                        "expression": {
+                          "arguments": [
+                            {
+                              "kind": "number",
+                              "nodeType": "YulLiteral",
+                              "src": "628:4:5",
+                              "type": "",
+                              "value": "0x20"
+                            },
+                            {
+                              "name": "_position",
+                              "nodeType": "YulIdentifier",
+                              "src": "634:9:5"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "mstore",
+                            "nodeType": "YulIdentifier",
+                            "src": "621:6:5"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "621:23:5"
+                        },
+                        "nodeType": "YulExpressionStatement",
+                        "src": "621:23:5"
+                      },
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "657:35:5",
+                        "value": {
+                          "arguments": [
+                            {
+                              "kind": "number",
+                              "nodeType": "YulLiteral",
+                              "src": "681:4:5",
+                              "type": "",
+                              "value": "0x00"
+                            },
+                            {
+                              "kind": "number",
+                              "nodeType": "YulLiteral",
+                              "src": "687:4:5",
+                              "type": "",
+                              "value": "0x40"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "keccak256",
+                            "nodeType": "YulIdentifier",
+                            "src": "671:9:5"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "671:21:5"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "claimHash_",
+                            "nodeType": "YulIdentifier",
+                            "src": "657:10:5"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "london",
+                  "externalReferences": [
+                    {
+                      "declaration": 312,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "601:6:5",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 315,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "634:9:5",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 319,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "657:10:5",
+                      "valueSize": 1
+                    }
+                  ],
+                  "id": 321,
+                  "nodeType": "InlineAssembly",
+                  "src": "565:137:5"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 309,
+              "nodeType": "StructuredDocumentation",
+              "src": "240:209:5",
+              "text": "@notice Hashes a claim and a position together.\n @param _claim A Claim type.\n @param _position The position of `claim`.\n @return claimHash_ A hash of abi.encodePacked(claim, position);"
+            },
+            "id": 323,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "hashClaimPos",
+            "nameLocation": "463:12:5",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 316,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 312,
+                  "mutability": "mutable",
+                  "name": "_claim",
+                  "nameLocation": "482:6:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "476:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Claim_$506",
+                    "typeString": "Claim"
+                  },
+                  "typeName": {
+                    "id": 311,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 310,
+                      "name": "Claim",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 506,
+                      "src": "476:5:5"
+                    },
+                    "referencedDeclaration": 506,
+                    "src": "476:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Claim_$506",
+                      "typeString": "Claim"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 315,
+                  "mutability": "mutable",
+                  "name": "_position",
+                  "nameLocation": "499:9:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "490:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Position_$520",
+                    "typeString": "Position"
+                  },
+                  "typeName": {
+                    "id": 314,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 313,
+                      "name": "Position",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 520,
+                      "src": "490:8:5"
+                    },
+                    "referencedDeclaration": 520,
+                    "src": "490:8:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Position_$520",
+                      "typeString": "Position"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "475:34:5"
+            },
+            "returnParameters": {
+              "id": 320,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 319,
+                  "mutability": "mutable",
+                  "name": "claimHash_",
+                  "nameLocation": "543:10:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "533:20:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_ClaimHash_$508",
+                    "typeString": "ClaimHash"
+                  },
+                  "typeName": {
+                    "id": 318,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 317,
+                      "name": "ClaimHash",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 508,
+                      "src": "533:9:5"
+                    },
+                    "referencedDeclaration": 508,
+                    "src": "533:9:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_ClaimHash_$508",
+                      "typeString": "ClaimHash"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "532:22:5"
+            },
+            "scope": 324,
+            "src": "454:254:5",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 325,
+        "src": "214:496:5",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:679:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.15+commit.e14f2714.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.14",
+  "updatedAt": "2023-08-04T01:54:51.031Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "title": "Hashing",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "This library contains all of the hashing utilities used in the Cannon contracts.",
+    "version": 1
+  }
+}

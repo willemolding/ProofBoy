@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/truffle-box/nft-box#readme",
   "dependencies": {
+    "@eth-optimism/contracts-bedrock": "https://gitpkg.now.sh/ethereum-optimism/optimism/packages/contracts-bedrock?develop",
     "@openzeppelin/contracts": "^4.5.0",
     "dotenv": "^16.0.0",
     "typescript": "^4.6.4"
