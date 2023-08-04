@@ -1,2 +1,3 @@
 pub mod pokemon_red_blue_party_leader;
+pub mod super_mario_land_highest_score_before_10_seconds;
 mod id_to_pokedex;

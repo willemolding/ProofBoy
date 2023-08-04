@@ -19,7 +19,12 @@ extern crate alloc;
 pub extern "C" fn _start() {
     init_heap!(HEAP_SIZE);
 
-    print("Lets do something amazing!\n");
+    // read the journal from the pre-image oracle
+    // read the expected output from the pre-image oracle
+
+    // apply all the inputs and get the final memory state
+
+    // extract using the given extractor and compare with the expected output
 
     exit(0); // 0 code indicates success
 }

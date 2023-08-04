@@ -44,8 +44,9 @@ use super::id_to_pokedex::ID_TO_POKEDEX;
 
 impl crate::Extractor for PartyLeaderExtractor {
     type Output = Metadata;
+    type Error = &'static str;
 
-    fn extract<R: crate::MemoryReader>(reader: &R) -> Self::Output {
+    fn extract<R: crate::MemoryReader>(reader: &R) -> Result<Self::Output, Self::Error> {
         let id = reader.get8(0xD16B);
         let level = reader.get8(0xD18C);
         let max_hp: u16 = reader.get16(0xD18D);
@@ -56,7 +57,7 @@ impl crate::Extractor for PartyLeaderExtractor {
 
         let (pokedex_num, name) = ID_TO_POKEDEX[id as usize];
 
-        Metadata {
+        Ok(Metadata {
             name: name.to_string(),
             description: "A Pokemon NFT produced by ProofBoy".to_string(),
             image: alloc::format!("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{}.png", pokedex_num).to_string(),
@@ -68,6 +69,6 @@ impl crate::Extractor for PartyLeaderExtractor {
                 Attribute::new_numeric("Speed", speed as u32),
                 Attribute::new_numeric("Special", special as u32),
             ]
-        }
+        })
     }
 }

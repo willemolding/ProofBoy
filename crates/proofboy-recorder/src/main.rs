@@ -61,7 +61,7 @@ fn main() {
         //     FrameTimeDiagnosticsPlugin::default(),
         // ))
         .add_plugins(app::ProofBoyPlugin {
-            rom: include_bytes!("../../../roms/pokemon-blue.gb").to_vec(),
+            rom: include_bytes!("../../../roms/super-mario-land.gb").to_vec(),
             startup_journal: journal,
         })
         .insert_resource(args)
@@ -73,10 +73,11 @@ fn main() {
 fn check_for_dump(
     gb: NonSend<app::Gameboy>,
     keys: Res<Input<KeyCode>>,
-    journal: Res<app::KeyJournal>,
+    mut journal: ResMut<app::KeyJournal>,
     args: Res<Args>,
 ) {
     if keys.pressed(KeyCode::Space) {
+        journal.0.close();
         log::info!("{:?}", PartyLeaderExtractor::extract(&gb.sys));
         log::info!("{:?}", journal);
         let journal_bytes = journal.0.clone().to_bytes();

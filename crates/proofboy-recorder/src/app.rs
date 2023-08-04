@@ -7,6 +7,7 @@ use journal::{Journal, KeyState};
 
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System};
 pub use rgy::{VRAM_HEIGHT, VRAM_WIDTH};
+use serde_json::de::Read;
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -127,7 +128,12 @@ pub struct Gameboy {
 
 impl Gameboy {
     pub fn step(&mut self) {
-        self.sys.poll();
+        self.sys.poll(true);
+        self.cycle_count += 1;
+    }
+
+    pub fn step_nogpu(&mut self) {
+        self.sys.poll(false);
         self.cycle_count += 1;
     }
 

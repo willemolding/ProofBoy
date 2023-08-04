@@ -8,6 +8,9 @@ edition = "2021"
 cannon-io = { git = "https://github.com/badboilabs/Cannon-rs" }
 cannon-heap = { git = "https://github.com/badboilabs/Cannon-rs" }
 
+journal = { workspace = true }
+extractor = { workspace = true }
+
 [profile.dev]
 panic = "abort"
 

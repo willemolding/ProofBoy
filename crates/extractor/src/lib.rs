@@ -11,5 +11,6 @@ pub use metadata::{Metadata, Attribute};
 
 pub trait Extractor {
     type Output;
-    fn extract<R: MemoryReader>(reader: &R) -> Self::Output;
+    type Error;
+    fn extract<R: MemoryReader>(reader: &R) -> Result<Self::Output, Self::Error>;
 }

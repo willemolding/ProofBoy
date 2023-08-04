@@ -32,6 +32,16 @@ impl Journal {
         self.cycle+=1;
     }
 
+    // add a terminating value to the journal
+    // this just writes whatever is in pending to the journal
+    pub fn close(&mut self) {
+        let new_entry = JournalEntry {
+            joypad: self.pending,
+            delta: (self.cycle - self.last_add) as u32,
+        };
+        log::info!("Journal added: {:?}", new_entry);
+    }
+
     pub fn to_bytes(self) -> Vec<u8> {
         self.entries
             .into_iter()
