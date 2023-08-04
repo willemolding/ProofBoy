@@ -49,7 +49,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
     IDisputeGameFactory public immutable disputeGameFactory;
     
     /// @dev Used to generate a fresh token ID for each token
-    uint256 private nonce;
+    uint256 public nonce;
 
     /// @dev Mapping from token nonce to mintable status
     mapping(uint256 => PendingMint) public pendingMints;
@@ -123,7 +123,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
     function ClaimMint(uint256 id, string memory metadataJson) external {
         PendingMint storage proposal = pendingMints[id];
 
-        if (proposal.timestamp + SETTLEMENT_PERIOD <= block.timestamp)
+        if (block.timestamp <= proposal.timestamp + SETTLEMENT_PERIOD)
             revert MintProposalNotSettled(id);
 
         if (proposal.metadataHash != keccak256(bytes(metadataJson)))
@@ -141,6 +141,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
 
         _mint(proposal.to, id, 1, "");
         _setURI(id, Base64.encode(bytes(metadataJson)));
+        delete pendingMints[id];
 
         emit Minted(id, proposal.to);
     }
