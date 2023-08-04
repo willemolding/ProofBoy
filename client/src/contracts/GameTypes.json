@@ -7,65 +7,65 @@
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "3072:485:7:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "3072:485:7:-:0;;;;;;;;",
+  "sourceMap": "3072:485:15:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "3072:485:15:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.15;\n\nimport { LibHashing } from \"../dispute/lib/LibHashing.sol\";\nimport { LibPosition } from \"../dispute/lib/LibPosition.sol\";\nimport { LibClock } from \"../dispute/lib/LibClock.sol\";\n\nusing LibHashing for Claim global;\nusing LibPosition for Position global;\nusing LibClock for Clock global;\n\n/// @notice A custom type for a generic hash.\ntype Hash is bytes32;\n\n/// @notice A claim represents an MPT root representing the state of the fault proof program.\ntype Claim is bytes32;\n\n/// @notice A claim hash represents a hash of a claim and a position within the game tree.\n/// @dev Keccak hash of abi.encodePacked(Claim, Position);\ntype ClaimHash is bytes32;\n\n/// @notice A bondamount represents the amount of collateral that a user has locked up in a claim.\ntype BondAmount is uint256;\n\n/// @notice A dedicated timestamp type.\ntype Timestamp is uint64;\n\n/// @notice A dedicated duration type.\n/// @dev Unit: seconds\ntype Duration is uint64;\n\n/// @notice A `GameId` represents a packed 12 byte timestamp and a 20 byte address.\n/// @dev The packed layout of this type is as follows:\n/// ┌────────────┬────────────────┐\n/// │    Bits    │     Value      │\n/// ├────────────┼────────────────┤\n/// │ [0, 96)    │ Timestamp      │\n/// │ [96, 256)  │ Address        │\n/// └────────────┴────────────────┘\ntype GameId is bytes32;\n\n/// @notice A `Clock` represents a packed `Duration` and `Timestamp`\n/// @dev The packed layout of this type is as follows:\n/// ┌────────────┬────────────────┐\n/// │    Bits    │     Value      │\n/// ├────────────┼────────────────┤\n/// │ [0, 64)    │ Duration       │\n/// │ [64, 128)  │ Timestamp      │\n/// └────────────┴────────────────┘\ntype Clock is uint128;\n\n/// @notice A `Position` represents a position of a claim within the game tree.\n/// @dev This is represented as a \"generalized index\" where the high-order bit\n/// is the level in the tree and the remaining bits is a unique bit pattern, allowing\n/// a unique identifier for each node in the tree. Mathematically, it is calculated\n/// as 2^{depth} + indexAtDepth.\ntype Position is uint128;\n\n/// @notice A `GameType` represents the type of game being played.\ntype GameType is uint8;\n\n/// @notice The current status of the dispute game.\nenum GameStatus {\n    // The game is currently in progress, and has not been resolved.\n    IN_PROGRESS,\n    // The game has concluded, and the `rootClaim` was challenged successfully.\n    CHALLENGER_WINS,\n    // The game has concluded, and the `rootClaim` could not be contested.\n    DEFENDER_WINS\n}\n\n/// @title GameTypes\n/// @notice A library that defines the IDs of games that can be played.\nlibrary GameTypes {\n    /// @dev The game will use a `IDisputeGame` implementation that utilizes fault proofs.\n    GameType internal constant FAULT = GameType.wrap(0);\n\n    /// @dev The game will use a `IDisputeGame` implementation that utilizes validity proofs.\n    GameType internal constant VALIDITY = GameType.wrap(1);\n\n    /// @dev The game will use a `IDisputeGame` implementation that utilizes attestation proofs.\n    GameType internal constant ATTESTATION = GameType.wrap(2);\n}\n",
   "sourcePath": "@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol",
   "ast": {
     "absolutePath": "@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol",
     "exportedSymbols": {
       "BondAmount": [
-        510
+        2610
       ],
       "Claim": [
-        506
+        2606
       ],
       "ClaimHash": [
-        508
+        2608
       ],
       "Clock": [
-        518
+        2618
       ],
       "Duration": [
-        514
+        2614
       ],
       "GameId": [
-        516
+        2616
       ],
       "GameStatus": [
-        526
+        2626
       ],
       "GameType": [
-        522
+        2622
       ],
       "GameTypes": [
-        552
+        2652
       ],
       "Hash": [
-        504
+        2604
       ],
       "LibClock": [
-        304
+        2194
       ],
       "LibHashing": [
-        324
+        2214
       ],
       "LibPosition": [
-        482
+        2372
       ],
       "Position": [
-        520
+        2620
       ],
       "Timestamp": [
-        512
+        2612
       ]
     },
-    "id": 553,
+    "id": 2653,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 484,
+        "id": 2584,
         "literals": [
           "solidity",
           "^",
@@ -73,26 +73,26 @@
           ".15"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:24:7"
+        "src": "32:24:15"
       },
       {
         "absolutePath": "@eth-optimism/contracts-bedrock/src/dispute/lib/LibHashing.sol",
         "file": "../dispute/lib/LibHashing.sol",
-        "id": 486,
+        "id": 2586,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 553,
-        "sourceUnit": 325,
-        "src": "58:59:7",
+        "scope": 2653,
+        "sourceUnit": 2215,
+        "src": "58:59:15",
         "symbolAliases": [
           {
             "foreign": {
-              "id": 485,
+              "id": 2585,
               "name": "LibHashing",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 324,
-              "src": "67:10:7",
+              "referencedDeclaration": 2214,
+              "src": "67:10:15",
               "typeDescriptions": {}
             },
             "nameLocation": "-1:-1:-1"
@@ -103,21 +103,21 @@
       {
         "absolutePath": "@eth-optimism/contracts-bedrock/src/dispute/lib/LibPosition.sol",
         "file": "../dispute/lib/LibPosition.sol",
-        "id": 488,
+        "id": 2588,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 553,
-        "sourceUnit": 483,
-        "src": "118:61:7",
+        "scope": 2653,
+        "sourceUnit": 2373,
+        "src": "118:61:15",
         "symbolAliases": [
           {
             "foreign": {
-              "id": 487,
+              "id": 2587,
               "name": "LibPosition",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 482,
-              "src": "127:11:7",
+              "referencedDeclaration": 2372,
+              "src": "127:11:15",
               "typeDescriptions": {}
             },
             "nameLocation": "-1:-1:-1"
@@ -128,21 +128,21 @@
       {
         "absolutePath": "@eth-optimism/contracts-bedrock/src/dispute/lib/LibClock.sol",
         "file": "../dispute/lib/LibClock.sol",
-        "id": 490,
+        "id": 2590,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 553,
-        "sourceUnit": 305,
-        "src": "180:55:7",
+        "scope": 2653,
+        "sourceUnit": 2195,
+        "src": "180:55:15",
         "symbolAliases": [
           {
             "foreign": {
-              "id": 489,
+              "id": 2589,
               "name": "LibClock",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 304,
-              "src": "189:8:7",
+              "referencedDeclaration": 2194,
+              "src": "189:8:15",
               "typeDescriptions": {}
             },
             "nameLocation": "-1:-1:-1"
@@ -152,106 +152,106 @@
       },
       {
         "global": true,
-        "id": 494,
+        "id": 2594,
         "libraryName": {
-          "id": 491,
+          "id": 2591,
           "name": "LibHashing",
           "nodeType": "IdentifierPath",
-          "referencedDeclaration": 324,
-          "src": "243:10:7"
+          "referencedDeclaration": 2214,
+          "src": "243:10:15"
         },
         "nodeType": "UsingForDirective",
-        "src": "237:34:7",
+        "src": "237:34:15",
         "typeName": {
-          "id": 493,
+          "id": 2593,
           "nodeType": "UserDefinedTypeName",
           "pathNode": {
-            "id": 492,
+            "id": 2592,
             "name": "Claim",
             "nodeType": "IdentifierPath",
-            "referencedDeclaration": 506,
-            "src": "258:5:7"
+            "referencedDeclaration": 2606,
+            "src": "258:5:15"
           },
-          "referencedDeclaration": 506,
-          "src": "258:5:7",
+          "referencedDeclaration": 2606,
+          "src": "258:5:15",
           "typeDescriptions": {
-            "typeIdentifier": "t_userDefinedValueType$_Claim_$506",
+            "typeIdentifier": "t_userDefinedValueType$_Claim_$2606",
             "typeString": "Claim"
           }
         }
       },
       {
         "global": true,
-        "id": 498,
+        "id": 2598,
         "libraryName": {
-          "id": 495,
+          "id": 2595,
           "name": "LibPosition",
           "nodeType": "IdentifierPath",
-          "referencedDeclaration": 482,
-          "src": "278:11:7"
+          "referencedDeclaration": 2372,
+          "src": "278:11:15"
         },
         "nodeType": "UsingForDirective",
-        "src": "272:38:7",
+        "src": "272:38:15",
         "typeName": {
-          "id": 497,
+          "id": 2597,
           "nodeType": "UserDefinedTypeName",
           "pathNode": {
-            "id": 496,
+            "id": 2596,
             "name": "Position",
             "nodeType": "IdentifierPath",
-            "referencedDeclaration": 520,
-            "src": "294:8:7"
+            "referencedDeclaration": 2620,
+            "src": "294:8:15"
           },
-          "referencedDeclaration": 520,
-          "src": "294:8:7",
+          "referencedDeclaration": 2620,
+          "src": "294:8:15",
           "typeDescriptions": {
-            "typeIdentifier": "t_userDefinedValueType$_Position_$520",
+            "typeIdentifier": "t_userDefinedValueType$_Position_$2620",
             "typeString": "Position"
           }
         }
       },
       {
         "global": true,
-        "id": 502,
+        "id": 2602,
         "libraryName": {
-          "id": 499,
+          "id": 2599,
           "name": "LibClock",
           "nodeType": "IdentifierPath",
-          "referencedDeclaration": 304,
-          "src": "317:8:7"
+          "referencedDeclaration": 2194,
+          "src": "317:8:15"
         },
         "nodeType": "UsingForDirective",
-        "src": "311:32:7",
+        "src": "311:32:15",
         "typeName": {
-          "id": 501,
+          "id": 2601,
           "nodeType": "UserDefinedTypeName",
           "pathNode": {
-            "id": 500,
+            "id": 2600,
             "name": "Clock",
             "nodeType": "IdentifierPath",
-            "referencedDeclaration": 518,
-            "src": "330:5:7"
+            "referencedDeclaration": 2618,
+            "src": "330:5:15"
           },
-          "referencedDeclaration": 518,
-          "src": "330:5:7",
+          "referencedDeclaration": 2618,
+          "src": "330:5:15",
           "typeDescriptions": {
-            "typeIdentifier": "t_userDefinedValueType$_Clock_$518",
+            "typeIdentifier": "t_userDefinedValueType$_Clock_$2618",
             "typeString": "Clock"
           }
         }
       },
       {
         "canonicalName": "Hash",
-        "id": 504,
+        "id": 2604,
         "name": "Hash",
-        "nameLocation": "396:4:7",
+        "nameLocation": "396:4:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "391:21:7",
+        "src": "391:21:15",
         "underlyingType": {
-          "id": 503,
+          "id": 2603,
           "name": "bytes32",
           "nodeType": "ElementaryTypeName",
-          "src": "404:7:7",
+          "src": "404:7:15",
           "typeDescriptions": {
             "typeIdentifier": "t_bytes32",
             "typeString": "bytes32"
@@ -260,16 +260,16 @@
       },
       {
         "canonicalName": "Claim",
-        "id": 506,
+        "id": 2606,
         "name": "Claim",
-        "nameLocation": "513:5:7",
+        "nameLocation": "513:5:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "508:22:7",
+        "src": "508:22:15",
         "underlyingType": {
-          "id": 505,
+          "id": 2605,
           "name": "bytes32",
           "nodeType": "ElementaryTypeName",
-          "src": "522:7:7",
+          "src": "522:7:15",
           "typeDescriptions": {
             "typeIdentifier": "t_bytes32",
             "typeString": "bytes32"
@@ -278,16 +278,16 @@
       },
       {
         "canonicalName": "ClaimHash",
-        "id": 508,
+        "id": 2608,
         "name": "ClaimHash",
-        "nameLocation": "687:9:7",
+        "nameLocation": "687:9:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "682:26:7",
+        "src": "682:26:15",
         "underlyingType": {
-          "id": 507,
+          "id": 2607,
           "name": "bytes32",
           "nodeType": "ElementaryTypeName",
-          "src": "700:7:7",
+          "src": "700:7:15",
           "typeDescriptions": {
             "typeIdentifier": "t_bytes32",
             "typeString": "bytes32"
@@ -296,16 +296,16 @@
       },
       {
         "canonicalName": "BondAmount",
-        "id": 510,
+        "id": 2610,
         "name": "BondAmount",
-        "nameLocation": "814:10:7",
+        "nameLocation": "814:10:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "809:27:7",
+        "src": "809:27:15",
         "underlyingType": {
-          "id": 509,
+          "id": 2609,
           "name": "uint256",
           "nodeType": "ElementaryTypeName",
-          "src": "828:7:7",
+          "src": "828:7:15",
           "typeDescriptions": {
             "typeIdentifier": "t_uint256",
             "typeString": "uint256"
@@ -314,16 +314,16 @@
       },
       {
         "canonicalName": "Timestamp",
-        "id": 512,
+        "id": 2612,
         "name": "Timestamp",
-        "nameLocation": "883:9:7",
+        "nameLocation": "883:9:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "878:25:7",
+        "src": "878:25:15",
         "underlyingType": {
-          "id": 511,
+          "id": 2611,
           "name": "uint64",
           "nodeType": "ElementaryTypeName",
-          "src": "896:6:7",
+          "src": "896:6:15",
           "typeDescriptions": {
             "typeIdentifier": "t_uint64",
             "typeString": "uint64"
@@ -332,16 +332,16 @@
       },
       {
         "canonicalName": "Duration",
-        "id": 514,
+        "id": 2614,
         "name": "Duration",
-        "nameLocation": "972:8:7",
+        "nameLocation": "972:8:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "967:24:7",
+        "src": "967:24:15",
         "underlyingType": {
-          "id": 513,
+          "id": 2613,
           "name": "uint64",
           "nodeType": "ElementaryTypeName",
-          "src": "984:6:7",
+          "src": "984:6:15",
           "typeDescriptions": {
             "typeIdentifier": "t_uint64",
             "typeString": "uint64"
@@ -350,16 +350,16 @@
       },
       {
         "canonicalName": "GameId",
-        "id": 516,
+        "id": 2616,
         "name": "GameId",
-        "nameLocation": "1557:6:7",
+        "nameLocation": "1557:6:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "1552:23:7",
+        "src": "1552:23:15",
         "underlyingType": {
-          "id": 515,
+          "id": 2615,
           "name": "bytes32",
           "nodeType": "ElementaryTypeName",
-          "src": "1567:7:7",
+          "src": "1567:7:15",
           "typeDescriptions": {
             "typeIdentifier": "t_bytes32",
             "typeString": "bytes32"
@@ -368,16 +368,16 @@
       },
       {
         "canonicalName": "Clock",
-        "id": 518,
+        "id": 2618,
         "name": "Clock",
-        "nameLocation": "2126:5:7",
+        "nameLocation": "2126:5:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "2121:22:7",
+        "src": "2121:22:15",
         "underlyingType": {
-          "id": 517,
+          "id": 2617,
           "name": "uint128",
           "nodeType": "ElementaryTypeName",
-          "src": "2135:7:7",
+          "src": "2135:7:15",
           "typeDescriptions": {
             "typeIdentifier": "t_uint128",
             "typeString": "uint128"
@@ -386,16 +386,16 @@
       },
       {
         "canonicalName": "Position",
-        "id": 520,
+        "id": 2620,
         "name": "Position",
-        "nameLocation": "2512:8:7",
+        "nameLocation": "2512:8:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "2507:25:7",
+        "src": "2507:25:15",
         "underlyingType": {
-          "id": 519,
+          "id": 2619,
           "name": "uint128",
           "nodeType": "ElementaryTypeName",
-          "src": "2524:7:7",
+          "src": "2524:7:15",
           "typeDescriptions": {
             "typeIdentifier": "t_uint128",
             "typeString": "uint128"
@@ -404,16 +404,16 @@
       },
       {
         "canonicalName": "GameType",
-        "id": 522,
+        "id": 2622,
         "name": "GameType",
-        "nameLocation": "2606:8:7",
+        "nameLocation": "2606:8:15",
         "nodeType": "UserDefinedValueTypeDefinition",
-        "src": "2601:23:7",
+        "src": "2601:23:15",
         "underlyingType": {
-          "id": 521,
+          "id": 2621,
           "name": "uint8",
           "nodeType": "ElementaryTypeName",
-          "src": "2618:5:7",
+          "src": "2618:5:15",
           "typeDescriptions": {
             "typeIdentifier": "t_uint8",
             "typeString": "uint8"
@@ -422,34 +422,34 @@
       },
       {
         "canonicalName": "GameStatus",
-        "id": 526,
+        "id": 2626,
         "members": [
           {
-            "id": 523,
+            "id": 2623,
             "name": "IN_PROGRESS",
-            "nameLocation": "2769:11:7",
+            "nameLocation": "2769:11:15",
             "nodeType": "EnumValue",
-            "src": "2769:11:7"
+            "src": "2769:11:15"
           },
           {
-            "id": 524,
+            "id": 2624,
             "name": "CHALLENGER_WINS",
-            "nameLocation": "2866:15:7",
+            "nameLocation": "2866:15:15",
             "nodeType": "EnumValue",
-            "src": "2866:15:7"
+            "src": "2866:15:15"
           },
           {
-            "id": 525,
+            "id": 2625,
             "name": "DEFENDER_WINS",
-            "nameLocation": "2962:13:7",
+            "nameLocation": "2962:13:15",
             "nodeType": "EnumValue",
-            "src": "2962:13:7"
+            "src": "2962:13:15"
           }
         ],
         "name": "GameStatus",
-        "nameLocation": "2683:10:7",
+        "nameLocation": "2683:10:15",
         "nodeType": "EnumDefinition",
-        "src": "2678:299:7"
+        "src": "2678:299:15"
       },
       {
         "abstract": false,
@@ -458,55 +458,55 @@
         "contractDependencies": [],
         "contractKind": "library",
         "documentation": {
-          "id": 527,
+          "id": 2627,
           "nodeType": "StructuredDocumentation",
-          "src": "2979:93:7",
+          "src": "2979:93:15",
           "text": "@title GameTypes\n @notice A library that defines the IDs of games that can be played."
         },
         "fullyImplemented": true,
-        "id": 552,
+        "id": 2652,
         "linearizedBaseContracts": [
-          552
+          2652
         ],
         "name": "GameTypes",
-        "nameLocation": "3080:9:7",
+        "nameLocation": "3080:9:15",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
             "documentation": {
-              "id": 528,
+              "id": 2628,
               "nodeType": "StructuredDocumentation",
-              "src": "3096:86:7",
+              "src": "3096:86:15",
               "text": "@dev The game will use a `IDisputeGame` implementation that utilizes fault proofs."
             },
-            "id": 535,
+            "id": 2635,
             "mutability": "constant",
             "name": "FAULT",
-            "nameLocation": "3214:5:7",
+            "nameLocation": "3214:5:15",
             "nodeType": "VariableDeclaration",
-            "scope": 552,
-            "src": "3187:51:7",
+            "scope": 2652,
+            "src": "3187:51:15",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_userDefinedValueType$_GameType_$522",
+              "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
               "typeString": "GameType"
             },
             "typeName": {
-              "id": 530,
+              "id": 2630,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 529,
+                "id": 2629,
                 "name": "GameType",
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 522,
-                "src": "3187:8:7"
+                "referencedDeclaration": 2622,
+                "src": "3187:8:15"
               },
-              "referencedDeclaration": 522,
-              "src": "3187:8:7",
+              "referencedDeclaration": 2622,
+              "src": "3187:8:15",
               "typeDescriptions": {
-                "typeIdentifier": "t_userDefinedValueType$_GameType_$522",
+                "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
                 "typeString": "GameType"
               }
             },
@@ -514,14 +514,14 @@
               "arguments": [
                 {
                   "hexValue": "30",
-                  "id": 533,
+                  "id": 2633,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
                   "kind": "number",
                   "lValueRequested": false,
                   "nodeType": "Literal",
-                  "src": "3236:1:7",
+                  "src": "3236:1:15",
                   "typeDescriptions": {
                     "typeIdentifier": "t_rational_0_by_1",
                     "typeString": "int_const 0"
@@ -537,31 +537,31 @@
                   }
                 ],
                 "expression": {
-                  "id": 531,
+                  "id": 2631,
                   "name": "GameType",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 522,
-                  "src": "3222:8:7",
+                  "referencedDeclaration": 2622,
+                  "src": "3222:8:15",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_userDefinedValueType$_GameType_$522_$",
+                    "typeIdentifier": "t_type$_t_userDefinedValueType$_GameType_$2622_$",
                     "typeString": "type(GameType)"
                   }
                 },
-                "id": 532,
+                "id": 2632,
                 "isConstant": false,
                 "isLValue": false,
                 "isPure": true,
                 "lValueRequested": false,
                 "memberName": "wrap",
                 "nodeType": "MemberAccess",
-                "src": "3222:13:7",
+                "src": "3222:13:15",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_function_wrap_pure$_t_uint8_$returns$_t_userDefinedValueType$_GameType_$522_$",
+                  "typeIdentifier": "t_function_wrap_pure$_t_uint8_$returns$_t_userDefinedValueType$_GameType_$2622_$",
                   "typeString": "function (uint8) pure returns (GameType)"
                 }
               },
-              "id": 534,
+              "id": 2634,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -569,10 +569,10 @@
               "lValueRequested": false,
               "names": [],
               "nodeType": "FunctionCall",
-              "src": "3222:16:7",
+              "src": "3222:16:15",
               "tryCall": false,
               "typeDescriptions": {
-                "typeIdentifier": "t_userDefinedValueType$_GameType_$522",
+                "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
                 "typeString": "GameType"
               }
             },
@@ -581,38 +581,38 @@
           {
             "constant": true,
             "documentation": {
-              "id": 536,
+              "id": 2636,
               "nodeType": "StructuredDocumentation",
-              "src": "3245:89:7",
+              "src": "3245:89:15",
               "text": "@dev The game will use a `IDisputeGame` implementation that utilizes validity proofs."
             },
-            "id": 543,
+            "id": 2643,
             "mutability": "constant",
             "name": "VALIDITY",
-            "nameLocation": "3366:8:7",
+            "nameLocation": "3366:8:15",
             "nodeType": "VariableDeclaration",
-            "scope": 552,
-            "src": "3339:54:7",
+            "scope": 2652,
+            "src": "3339:54:15",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_userDefinedValueType$_GameType_$522",
+              "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
               "typeString": "GameType"
             },
             "typeName": {
-              "id": 538,
+              "id": 2638,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 537,
+                "id": 2637,
                 "name": "GameType",
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 522,
-                "src": "3339:8:7"
+                "referencedDeclaration": 2622,
+                "src": "3339:8:15"
               },
-              "referencedDeclaration": 522,
-              "src": "3339:8:7",
+              "referencedDeclaration": 2622,
+              "src": "3339:8:15",
               "typeDescriptions": {
-                "typeIdentifier": "t_userDefinedValueType$_GameType_$522",
+                "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
                 "typeString": "GameType"
               }
             },
@@ -620,14 +620,14 @@
               "arguments": [
                 {
                   "hexValue": "31",
-                  "id": 541,
+                  "id": 2641,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
                   "kind": "number",
                   "lValueRequested": false,
                   "nodeType": "Literal",
-                  "src": "3391:1:7",
+                  "src": "3391:1:15",
                   "typeDescriptions": {
                     "typeIdentifier": "t_rational_1_by_1",
                     "typeString": "int_const 1"
@@ -643,31 +643,31 @@
                   }
                 ],
                 "expression": {
-                  "id": 539,
+                  "id": 2639,
                   "name": "GameType",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 522,
-                  "src": "3377:8:7",
+                  "referencedDeclaration": 2622,
+                  "src": "3377:8:15",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_userDefinedValueType$_GameType_$522_$",
+                    "typeIdentifier": "t_type$_t_userDefinedValueType$_GameType_$2622_$",
                     "typeString": "type(GameType)"
                   }
                 },
-                "id": 540,
+                "id": 2640,
                 "isConstant": false,
                 "isLValue": false,
                 "isPure": true,
                 "lValueRequested": false,
                 "memberName": "wrap",
                 "nodeType": "MemberAccess",
-                "src": "3377:13:7",
+                "src": "3377:13:15",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_function_wrap_pure$_t_uint8_$returns$_t_userDefinedValueType$_GameType_$522_$",
+                  "typeIdentifier": "t_function_wrap_pure$_t_uint8_$returns$_t_userDefinedValueType$_GameType_$2622_$",
                   "typeString": "function (uint8) pure returns (GameType)"
                 }
               },
-              "id": 542,
+              "id": 2642,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -675,10 +675,10 @@
               "lValueRequested": false,
               "names": [],
               "nodeType": "FunctionCall",
-              "src": "3377:16:7",
+              "src": "3377:16:15",
               "tryCall": false,
               "typeDescriptions": {
-                "typeIdentifier": "t_userDefinedValueType$_GameType_$522",
+                "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
                 "typeString": "GameType"
               }
             },
@@ -687,38 +687,38 @@
           {
             "constant": true,
             "documentation": {
-              "id": 544,
+              "id": 2644,
               "nodeType": "StructuredDocumentation",
-              "src": "3400:92:7",
+              "src": "3400:92:15",
               "text": "@dev The game will use a `IDisputeGame` implementation that utilizes attestation proofs."
             },
-            "id": 551,
+            "id": 2651,
             "mutability": "constant",
             "name": "ATTESTATION",
-            "nameLocation": "3524:11:7",
+            "nameLocation": "3524:11:15",
             "nodeType": "VariableDeclaration",
-            "scope": 552,
-            "src": "3497:57:7",
+            "scope": 2652,
+            "src": "3497:57:15",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_userDefinedValueType$_GameType_$522",
+              "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
               "typeString": "GameType"
             },
             "typeName": {
-              "id": 546,
+              "id": 2646,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 545,
+                "id": 2645,
                 "name": "GameType",
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 522,
-                "src": "3497:8:7"
+                "referencedDeclaration": 2622,
+                "src": "3497:8:15"
               },
-              "referencedDeclaration": 522,
-              "src": "3497:8:7",
+              "referencedDeclaration": 2622,
+              "src": "3497:8:15",
               "typeDescriptions": {
-                "typeIdentifier": "t_userDefinedValueType$_GameType_$522",
+                "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
                 "typeString": "GameType"
               }
             },
@@ -726,14 +726,14 @@
               "arguments": [
                 {
                   "hexValue": "32",
-                  "id": 549,
+                  "id": 2649,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
                   "kind": "number",
                   "lValueRequested": false,
                   "nodeType": "Literal",
-                  "src": "3552:1:7",
+                  "src": "3552:1:15",
                   "typeDescriptions": {
                     "typeIdentifier": "t_rational_2_by_1",
                     "typeString": "int_const 2"
@@ -749,31 +749,31 @@
                   }
                 ],
                 "expression": {
-                  "id": 547,
+                  "id": 2647,
                   "name": "GameType",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 522,
-                  "src": "3538:8:7",
+                  "referencedDeclaration": 2622,
+                  "src": "3538:8:15",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_userDefinedValueType$_GameType_$522_$",
+                    "typeIdentifier": "t_type$_t_userDefinedValueType$_GameType_$2622_$",
                     "typeString": "type(GameType)"
                   }
                 },
-                "id": 548,
+                "id": 2648,
                 "isConstant": false,
                 "isLValue": false,
                 "isPure": true,
                 "lValueRequested": false,
                 "memberName": "wrap",
                 "nodeType": "MemberAccess",
-                "src": "3538:13:7",
+                "src": "3538:13:15",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_function_wrap_pure$_t_uint8_$returns$_t_userDefinedValueType$_GameType_$522_$",
+                  "typeIdentifier": "t_function_wrap_pure$_t_uint8_$returns$_t_userDefinedValueType$_GameType_$2622_$",
                   "typeString": "function (uint8) pure returns (GameType)"
                 }
               },
-              "id": 550,
+              "id": 2650,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -781,22 +781,22 @@
               "lValueRequested": false,
               "names": [],
               "nodeType": "FunctionCall",
-              "src": "3538:16:7",
+              "src": "3538:16:15",
               "tryCall": false,
               "typeDescriptions": {
-                "typeIdentifier": "t_userDefinedValueType$_GameType_$522",
+                "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
                 "typeString": "GameType"
               }
             },
             "visibility": "internal"
           }
         ],
-        "scope": 553,
-        "src": "3072:485:7",
+        "scope": 2653,
+        "src": "3072:485:15",
         "usedErrors": []
       }
     ],
-    "src": "32:3526:7"
+    "src": "32:3526:15"
   },
   "compiler": {
     "name": "solc",
@@ -804,7 +804,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-04T03:01:24.748Z",
+  "updatedAt": "2023-08-04T03:28:37.493Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
