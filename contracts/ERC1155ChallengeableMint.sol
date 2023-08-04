@@ -28,8 +28,8 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
         address to;
         /// metadata is not stored, only the hash
         bytes32 metadataHash;
-        /// journal hash
-        bytes32 journalHash;
+        /// hash of public input data to provable computation
+        bytes32 witnessHash;
         /// block timestamp when proposal created
         uint256 timestamp;
     }
@@ -71,16 +71,16 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
     /**
     * @dev Propose a new mint.
     * @param metadataJson The string of metadata.json to associate with the token.
-    * @param journal The journal given as input to the provable program 
+    * @param witness The witness given as input to the provable program 
     *                to produce this metadata output.
     *                This must be provided in calldata so watchers can replicate the computation
     */
-    function ProposeMint(address to, string calldata metadataJson, bytes calldata journal) external {
+    function ProposeMint(address to, string calldata metadataJson, bytes calldata witness) external {
         uint256 id = nonce++;
         pendingMints[id] = PendingMint({
             to: to,
             metadataHash: keccak256(bytes(metadataJson)),
-            journalHash: keccak256(journal),
+            witnessHash: keccak256(witness),
             timestamp: block.timestamp
         });
         emit MintProposed(id,  block.timestamp);
@@ -101,7 +101,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
         disputeGameFactory.create(
             GameTypes.FAULT,
             ROOT_CLAIM,
-            bytes(abi.encodePacked(proposal.to, proposal.metadataHash, proposal.journalHash, proposal.timestamp))
+            bytes(abi.encodePacked(proposal.to, proposal.metadataHash, proposal.witnessHash, proposal.timestamp))
         );
 
         emit MintChallenged(id, msg.sender);
@@ -126,7 +126,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
         (IDisputeGame game,) = disputeGameFactory.games(
             GameTypes.FAULT,
             ROOT_CLAIM,
-            bytes(abi.encodePacked(proposal.metadataHash, proposal.journalHash, proposal.timestamp))
+            bytes(abi.encodePacked(proposal.metadataHash, proposal.witnessHash, proposal.timestamp))
         );
         if (address(game) != address(0)) {
             revert ProposalHasOpenChallenge(id);
