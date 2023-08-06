@@ -39,4 +39,9 @@ contract("ERC1155ChallengeableMint", accounts => {
     await contract.ClaimMint(0, metadata)
   });
 
+  it("Can open challenge", async () => {
+    const contract = await ERC1155ChallengeableMint.deployed();
+    await contract.ChallengeMint(0);
+  });
+
 });
