@@ -99,13 +99,13 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
     *    The rest goes into the dev fund :)
     * @param id The ID of the pending mint to challenge
     */
-    function ChallengeMint(uint256 id) external {
+    function ChallengeMint(uint256 id) external returns (IDisputeGame proxy) {
         PendingMint memory proposal = pendingMints[id];
 
-        if (proposal.timestamp + SETTLEMENT_PERIOD > block.timestamp)
+        if (block.timestamp > proposal.timestamp + SETTLEMENT_PERIOD)
             revert CannotChallengeProposalHasSettled(id);
 
-        disputeGameFactory.create(
+        proxy = disputeGameFactory.create(
             GameTypes.FAULT,
             ROOT_CLAIM,
             bytes(abi.encodePacked(proposal.to, proposal.metadataHash, proposal.witnessHash, proposal.timestamp))
@@ -133,7 +133,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
         (IDisputeGame game,) = disputeGameFactory.games(
             GameTypes.FAULT,
             ROOT_CLAIM,
-            bytes(abi.encodePacked(proposal.metadataHash, proposal.witnessHash, proposal.timestamp))
+            bytes(abi.encodePacked(proposal.to, proposal.metadataHash, proposal.witnessHash, proposal.timestamp))
         );
         if (address(game) != address(0)) {
             revert ProposalHasOpenChallenge(id);

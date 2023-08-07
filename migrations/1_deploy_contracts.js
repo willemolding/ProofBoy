@@ -4,9 +4,9 @@ var ERC1155ChallengeableMint = artifacts.require("ERC1155ChallengeableMint");
 var FaultDisputeGame = artifacts.require("FaultDisputeGame");
 var DisputeGameFactory = artifacts.require("DisputeGameFactory");
 
-const ROOT_CLAIM = "0x0";
-const MAX_DEPTH = 999999;
-const GAME_DURATION = 999999;
+const ROOT_CLAIM = "0x0"; // set this once the final game binary has been built
+const MAX_DEPTH = 999999; // same for this once max game length is known
+const GAME_DURATION = 86400; // one day
 
 module.exports = async function(deployer) {
 
