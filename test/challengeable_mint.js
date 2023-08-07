@@ -43,7 +43,6 @@ contract("ERC1155ChallengeableMint proposals", accounts => {
 contract("ERC1155ChallengeableMint challenges", accounts => {
   let proposer = accounts[1];
   let challenger = accounts[2];
-  let disputeGameAddr;
 
   let metadata = "test";
 
@@ -51,8 +50,6 @@ contract("ERC1155ChallengeableMint challenges", accounts => {
     const contract = await ERC1155ChallengeableMint.deployed();
     await contract.ProposeMint(proposer, metadata, []);
     assert.equal(await contract.nonce(), 1);
-    // simulate the call to obtain what the contract address will be
-    disputeGameAddr = await contract.ChallengeMint.call(0, { from: challenger });
     await contract.ChallengeMint(0, { from: challenger });
   });
 
@@ -69,6 +66,7 @@ contract("ERC1155ChallengeableMint challenges", accounts => {
 
   it("Challenge can be cleared by timeout and mint claimed", async () => {
     const contract = await ERC1155ChallengeableMint.deployed();
+    let disputeGameAddr = await contract.gameAddress(0);
     let faultGame = await FaultDisputeGame.at(disputeGameAddr);
     await time.increase(86400)
     await faultGame.resolve()
