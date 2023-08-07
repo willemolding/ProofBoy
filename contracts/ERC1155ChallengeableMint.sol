@@ -5,7 +5,7 @@ import { Base64 } from "@openzeppelin/contracts/utils/Base64.sol";
 import { ERC1155URIStorage, ERC1155 } from "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol";
 import { IDisputeGameFactory } from "@eth-optimism/contracts-bedrock/src/dispute/interfaces/IDisputeGameFactory.sol";
 import { IDisputeGame } from "@eth-optimism/contracts-bedrock/src/dispute/interfaces/IDisputeGame.sol";
-import { GameTypes, Claim } from "@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol";
+import { GameTypes, Claim, GameStatus } from "@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol";
 
 /**
 * @title ERC1155ChallengeableMint
@@ -135,7 +135,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
             ROOT_CLAIM,
             bytes(abi.encodePacked(proposal.to, proposal.metadataHash, proposal.witnessHash, proposal.timestamp))
         );
-        if (address(game) != address(0)) {
+        if (address(game) != address(0) && game.status() == GameStatus.IN_PROGRESS) {
             revert ProposalHasOpenChallenge(id);
         }
 
