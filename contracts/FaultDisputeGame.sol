@@ -1,43 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.15;
 
-// import { FaultDisputeGame as OpFaultDisputeGame } from "@eth-optimism/contracts-bedrock/src/dispute/FaultDisputeGame.sol";
-// import { IBigStepper } from "@eth-optimism/contracts-bedrock/src/dispute/interfaces/IBigStepper.sol";
-// import { Claim, Duration } from "@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol";
-
-// contract FaultDisputeGame is OpFaultDisputeGame {
-//     constructor(
-//         Claim _absolutePrestate,
-//         uint256 _maxGameDepth,
-//         Duration _gameDuration,
-//         IBigStepper _vm
-//     ) OpFaultDisputeGame(_absolutePrestate, _maxGameDepth, _gameDuration, _vm, L2OutputOracle(address(0)), BlockOracle(address(0))) {}
-
-//     /// @inheritdoc IInitializable
-//     function initialize() override external {
-//         // SAFETY: Any revert in this function will bubble up to the DisputeGameFactory and
-//         // prevent the game from being created.
-
-//         // Set the game start
-//         gameStart = Timestamp.wrap(uint64(block.timestamp));
-//         // Set the game status
-//         status = GameStatus.IN_PROGRESS;
-
-//         // Set the root claim
-//         claimData.push(
-//             ClaimData({
-//                 parentIndex: type(uint32).max,
-//                 claim: rootClaim(),
-//                 position: ROOT_POSITION,
-//                 clock: LibClock.wrap(Duration.wrap(0), Timestamp.wrap(uint64(block.timestamp))),
-//                 countered: false
-//             })
-//         );
-//     }
-
-// }
-
-
 import { IDisputeGame } from "@eth-optimism/contracts-bedrock/src/dispute/interfaces/IDisputeGame.sol";
 import { IFaultDisputeGame } from "@eth-optimism/contracts-bedrock/src/dispute/interfaces/IFaultDisputeGame.sol";
 import { IInitializable } from "@eth-optimism/contracts-bedrock/src/dispute/interfaces/IInitializable.sol";

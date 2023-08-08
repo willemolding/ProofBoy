@@ -40,7 +40,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
     }
 
     /// @dev The amount of time that must pass before a pending mint can be minted
-    uint256 public constant SETTLEMENT_PERIOD = 1 hours;
+    uint256 public constant SETTLEMENT_PERIOD = 2 hours;
 
     /// @dev The hash of the code to be run in the provable execution
     Claim public immutable ROOT_CLAIM;
@@ -61,6 +61,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
 
     error MintProposalNotSettled(uint256 id);
     error ProposalHasOpenChallenge(uint256 id);
+    error ProposalClaimDisproven(uint256 id);
     error MetadataHashMismatch(uint256 id);
     error CannotChallengeProposalHasSettled(uint256 id);
 
@@ -137,6 +138,9 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
         );
         if (address(game) != address(0) && game.status() == GameStatus.IN_PROGRESS) {
             revert ProposalHasOpenChallenge(id);
+        }
+        if (address(game) != address(0) && game.status() == GameStatus.DEFENDER_WINS) {
+            revert ProposalClaimDisproven(id);
         }
 
         _mint(proposal.to, id, 1, "");

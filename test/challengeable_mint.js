@@ -2,9 +2,6 @@ const ERC1155ChallengeableMint = artifacts.require("ERC1155ChallengeableMint");
 const FaultDisputeGame = artifacts.require("FaultDisputeGame");
 
 const {
-  BN,           // Big Number support
-  constants,    // Common constants, like the zero address and largest integers
-  expectEvent,  // Assertions for emitted events
   expectRevert, // Assertions for transactions that should fail
   time,
 } = require('@openzeppelin/test-helpers');
@@ -35,12 +32,12 @@ contract("ERC1155ChallengeableMint proposals", accounts => {
 
   it("Can claim after settlement", async () => {
     const contract = await ERC1155ChallengeableMint.deployed();
-    await time.increase(60*60*60)
+    await time.increase(time.duration.hours(2)+1)
     await contract.ClaimMint(0, metadata)
   });
 });
 
-contract("ERC1155ChallengeableMint challenges", accounts => {
+contract("ERC1155ChallengeableMint proposer clear challenge by timeout", accounts => {
   let proposer = accounts[1];
   let challenger = accounts[2];
 
@@ -60,7 +57,7 @@ contract("ERC1155ChallengeableMint challenges", accounts => {
 
   it("Cannot claim if challenge open", async () => {
     const contract = await ERC1155ChallengeableMint.deployed();
-    await time.increase(60*60*60)
+    await time.increase(time.duration.hours(2)+1)
     await expectRevert.unspecified(contract.ClaimMint(0, metadata))
   });
 
@@ -68,7 +65,6 @@ contract("ERC1155ChallengeableMint challenges", accounts => {
     const contract = await ERC1155ChallengeableMint.deployed();
     let disputeGameAddr = await contract.gameAddress(0);
     let faultGame = await FaultDisputeGame.at(disputeGameAddr);
-    await time.increase(86400)
     await faultGame.resolve()
     await contract.ClaimMint(0, metadata)
   })
