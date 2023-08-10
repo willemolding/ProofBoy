@@ -7,7 +7,7 @@
 /// Changing this will change the size of the resulting json file built by converting the elf file
 /// How big you can make this depends on the program size but it should be possible to make it very large (close to 4GB).
 /// See https://image1.slideserve.com/3443033/memory-map-l.jpg
-const HEAP_SIZE: usize = 0x400000;
+const HEAP_SIZE: usize = 0x4000000;
 
 use cannon_io::prelude::*;
 use cannon_heap::init_heap;
@@ -47,8 +47,10 @@ pub extern "C" fn _start() {
     let result_metadata = PartyLeaderExtractor::extract(&gb.sys).expect("Failed to extract metadata");
 
     if expected_metadata == result_metadata {
+        print("Verified successfully!");
         exit(0); // 0 code indicates success
     } else {
+        print("Metadata does not match!");
         exit(1); // 1 code indicates code ran successfully but verified to false
     }
 
