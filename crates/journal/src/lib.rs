@@ -34,7 +34,7 @@ impl Journal {
             self.pending = joypad;
             self.last_add = self.cycle;
         }
-        self.cycle+=1;
+        self.cycle += 1;
     }
 
     // add a terminating value to the journal
@@ -76,13 +76,11 @@ impl Journal {
     }
 
     pub fn into_iter(self) -> impl Iterator<Item = u8> {
-        self.entries.into_iter()
-            .flat_map(|entry| {
-                core::iter::repeat(entry.joypad).take(entry.delta as usize)
-            })
+        self.entries
+            .into_iter()
+            .flat_map(|entry| core::iter::repeat(entry.joypad).take(entry.delta as usize))
     }
 }
-
 
 #[cfg(test)]
 mod test {
@@ -114,14 +112,14 @@ mod test {
     fn test_iterator_single_held() {
         let journal = Journal {
             entries: vec![
-            JournalEntry {
-                joypad: 0x1,
-                delta: 3,
-            },
-            JournalEntry {
-                joypad: 0x2,
-                delta: 2,
-            }
+                JournalEntry {
+                    joypad: 0x1,
+                    delta: 3,
+                },
+                JournalEntry {
+                    joypad: 0x2,
+                    delta: 2,
+                },
             ],
             ..Journal::default()
         };
@@ -136,5 +134,4 @@ mod test {
         }
         assert_eq!(iter.next(), None);
     }
-
 }

@@ -1,5 +1,5 @@
-use alloc::vec::Vec;
 use alloc::string::{String, ToString};
+use alloc::vec::Vec;
 
 #[derive(Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Metadata {
@@ -13,7 +13,7 @@ pub struct Metadata {
 pub struct Attribute {
     pub trait_type: String,
     pub value: u32,
-    pub display_type: Option<String>
+    pub display_type: Option<String>,
 }
 
 impl Attribute {
@@ -21,7 +21,7 @@ impl Attribute {
         Self {
             trait_type: name.to_string(),
             value,
-            display_type: Some("number".to_string(),)
+            display_type: Some("number".to_string()),
         }
     }
 }
@@ -39,6 +39,9 @@ mod tests {
             attributes: vec![Attribute::new_numeric("foo", 42)],
         };
         let json = serde_json::to_string(&metadata).unwrap();
-        assert_eq!(json, r#"{"name":"foo","description":"bar","image":"baz","attributes":[{"trait_type":"foo","value":42,"display_type":"number"}]}"#);
+        assert_eq!(
+            json,
+            r#"{"name":"foo","description":"bar","image":"baz","attributes":[{"trait_type":"foo","value":42,"display_type":"number"}]}"#
+        );
     }
 }

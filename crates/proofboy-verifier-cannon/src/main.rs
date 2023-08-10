@@ -9,11 +9,13 @@
 /// See https://image1.slideserve.com/3443033/memory-map-l.jpg
 const HEAP_SIZE: usize = 0x4000000;
 
-use cannon_io::prelude::*;
 use cannon_heap::init_heap;
-use extractor::{Metadata, extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor};
-use journal::{Journal, KeyState};
+use cannon_io::prelude::*;
+use extractor::{
+    extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor, Metadata,
+};
 use gameboy::Gameboy;
+use journal::{Journal, KeyState};
 
 extern crate alloc;
 
@@ -29,11 +31,16 @@ pub extern "C" fn _start() {
     let mut oracle_reader = oracle_reader();
 
     // read the expected output metadata from the pre-image oracle
-    let metadata_bytes = oracle_reader.get(PreimageKey::new_local(&[0x0])).expect("Failed to read metadata from pre-image oracle");
-    let expected_metadata: Metadata = serde_json::from_slice(&metadata_bytes).expect("Failed to parse metadata as json");
-    
+    let metadata_bytes = oracle_reader
+        .get(PreimageKey::new_local(&[0x0]))
+        .expect("Failed to read metadata from pre-image oracle");
+    let expected_metadata: Metadata =
+        serde_json::from_slice(&metadata_bytes).expect("Failed to parse metadata as json");
+
     // read the journal from the pre-image oracle
-    let journal_bytes = oracle_reader.get(PreimageKey::new_local(&[0x1])).expect("Failed to read journal form pre-image oracle");
+    let journal_bytes = oracle_reader
+        .get(PreimageKey::new_local(&[0x1]))
+        .expect("Failed to read journal form pre-image oracle");
     let journal = Journal::from_bytes(&journal_bytes);
 
     // apply the journal to our emulator and get the final memory state
@@ -44,7 +51,8 @@ pub extern "C" fn _start() {
     });
 
     // extract using the given extractor and compare with the expected output
-    let result_metadata = PartyLeaderExtractor::extract(&gb.sys).expect("Failed to extract metadata");
+    let result_metadata =
+        PartyLeaderExtractor::extract(&gb.sys).expect("Failed to extract metadata");
 
     if expected_metadata == result_metadata {
         print("Verified successfully!");
@@ -53,7 +61,6 @@ pub extern "C" fn _start() {
         print("Metadata does not match!");
         exit(1); // 1 code indicates code ran successfully but verified to false
     }
-
 }
 
 #[panic_handler]

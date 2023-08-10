@@ -17,7 +17,9 @@ pub struct Cli {
 fn parse_txn_hash(arg: &str) -> Result<TxHash, anyhow::Error> {
     let mut tx_hash_bytes = [0_u8; 32];
     if &arg[0..2] != "0x" {
-        return Err(anyhow::anyhow!("Transaction hash must be hex encoded with 0x prefix"));
+        return Err(anyhow::anyhow!(
+            "Transaction hash must be hex encoded with 0x prefix"
+        ));
     }
     tx_hash_bytes.copy_from_slice(&hex::decode(&arg[2..])?);
     Ok(tx_hash_bytes.into())

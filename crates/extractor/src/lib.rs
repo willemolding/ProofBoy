@@ -7,7 +7,7 @@ mod memory_reader;
 pub mod metadata;
 
 pub use memory_reader::MemoryReader;
-pub use metadata::{Metadata, Attribute};
+pub use metadata::{Attribute, Metadata};
 
 pub trait Extractor {
     type Output;

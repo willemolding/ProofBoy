@@ -1,11 +1,11 @@
-use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System};
 use journal::KeyState;
+use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System};
 
-use core::cell::RefCell;
-use alloc::rc::Rc;
 use alloc::boxed::Box;
-use alloc::vec::Vec;
+use alloc::rc::Rc;
 use alloc::vec;
+use alloc::vec::Vec;
+use core::cell::RefCell;
 
 /// A gameboy emulator for speed! Does not emulator sound or GPU
 pub struct Gameboy {
@@ -72,7 +72,9 @@ impl rgy::Hardware for Hardware {
 
     fn sound_play(&mut self, _stream: Box<dyn Stream>) {}
 
-    fn clock(&mut self) -> u64 { 0 }
+    fn clock(&mut self) -> u64 {
+        0
+    }
 
     fn send_byte(&mut self, _b: u8) {}
 

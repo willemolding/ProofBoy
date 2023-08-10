@@ -17,7 +17,7 @@ const CYCLES_PER_FRAME: usize = 70224;
 #[derive(Resource, Default, Debug)]
 pub struct KeyJournal(pub Journal);
 
-pub struct ProofBoyPlugin{
+pub struct ProofBoyPlugin {
     /// ROM to load into the gameboy
     pub rom: Vec<u8>,
     /// This journal is used to fast-forward the game to the given state
@@ -26,11 +26,13 @@ pub struct ProofBoyPlugin{
 
 impl Plugin for ProofBoyPlugin {
     fn build(&self, app: &mut App) {
-
         let mut gb: Gameboy = Gameboy::new(&self.rom);
 
         if let Some(startup_journal) = self.startup_journal.clone() {
-            log::info!("Input journal detected {:?}. Applying key presses...", startup_journal);
+            log::info!(
+                "Input journal detected {:?}. Applying key presses...",
+                startup_journal
+            );
 
             startup_journal.into_iter().for_each(|keys| {
                 gb.kbd.0.replace(KeyState::from_byte(keys));

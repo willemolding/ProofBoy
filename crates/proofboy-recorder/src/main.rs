@@ -17,25 +17,17 @@ mod app;
 #[derive(Parser, Debug, Resource, Clone)]
 #[command(author, version, about)]
 struct Args {
-    /// Name of the person to greet
-    #[arg(short, long)]
-    journal: Option<PathBuf>,
-
-    /// Number of times to greet
+    /// place to write the output journal to
     #[arg(short = 'o', long)]
     journal_out: Option<PathBuf>,
+
+    /// place to write the metadata extracted from memory which can be used to mint an NFT
+    #[arg(short = 'm', long)]
+    metadata_out: Option<PathBuf>,
 }
 
 fn main() {
     let args = Args::parse();
-
-    // load journal from file if provided
-    let journal = if let Some(journal) = args.journal.clone() {
-        let journal_bytes = std::fs::read(journal).expect("failed to read journal from file");
-        Some(Journal::from_bytes(&journal_bytes))
-    } else {
-        None
-    };
 
     App::new()
         .add_plugins(
@@ -62,13 +54,12 @@ fn main() {
         // ))
         .add_plugins(app::ProofBoyPlugin {
             rom: include_bytes!("../../../roms/pokemon-blue.gb").to_vec(),
-            startup_journal: journal,
+            startup_journal: None,
         })
         .insert_resource(args)
         .add_systems(Update, check_for_dump)
         .run();
 }
-
 
 fn check_for_dump(
     gb: NonSend<app::Gameboy>,
@@ -78,11 +69,19 @@ fn check_for_dump(
 ) {
     if keys.pressed(KeyCode::Space) {
         journal.0.close();
-        log::info!("{:?}", PartyLeaderExtractor::extract(&gb.sys));
+        let metadata = PartyLeaderExtractor::extract(&gb.sys).expect("failed to extract metadata");
+        log::info!("{:?}", &metadata);
         log::info!("{:?}", journal);
         let journal_bytes = journal.0.clone().to_bytes();
         if let Some(journal_out) = args.journal_out.clone() {
             std::fs::write(journal_out, journal_bytes).expect("failed to write journal to file");
+        }
+        if let Some(metadata_out) = args.metadata_out.clone() {
+            std::fs::write(
+                metadata_out,
+                serde_json::to_string(&metadata).expect("Failed to serialize metadata"),
+            )
+            .expect("failed to write journal to file");
         }
     }
 }

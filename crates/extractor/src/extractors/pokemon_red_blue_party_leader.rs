@@ -36,9 +36,9 @@
 //!
 
 pub struct PartyLeaderExtractor;
+use crate::metadata::{Attribute, Metadata};
 use alloc::string::ToString;
 use alloc::vec;
-use crate::metadata::{Metadata, Attribute};
 
 use super::id_to_pokedex::ID_TO_POKEDEX;
 
@@ -60,7 +60,11 @@ impl crate::Extractor for PartyLeaderExtractor {
         Ok(Metadata {
             name: name.to_string(),
             description: "A Pokemon NFT produced by ProofBoy".to_string(),
-            image: alloc::format!("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{}.png", pokedex_num).to_string(),
+            image: alloc::format!(
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{}.png",
+                pokedex_num
+            )
+            .to_string(),
             attributes: vec![
                 Attribute::new_numeric("Level", level as u32),
                 Attribute::new_numeric("Max HP", max_hp as u32),
@@ -68,7 +72,7 @@ impl crate::Extractor for PartyLeaderExtractor {
                 Attribute::new_numeric("Defense", defense as u32),
                 Attribute::new_numeric("Speed", speed as u32),
                 Attribute::new_numeric("Special", special as u32),
-            ]
+            ],
         })
     }
 }

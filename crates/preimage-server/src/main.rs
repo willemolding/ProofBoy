@@ -19,7 +19,8 @@ async fn main() -> Result<()> {
     env_logger::init();
     let args = cli::Cli::parse();
 
-    let preimage_provider = rpc_preimage_provider::new_proof_preimages(&args.rpc, args.txn_hash).await?;
+    let preimage_provider =
+        rpc_preimage_provider::new_proof_preimages(&args.rpc, args.txn_hash).await?;
 
     let reader = unsafe { File::from_raw_fd(PCLIENT_RFD) };
     let writer = unsafe { File::from_raw_fd(PCLIENT_WFD) };

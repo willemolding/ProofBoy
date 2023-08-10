@@ -1,15 +1,21 @@
-use std::collections::HashMap;
-use ethers::prelude::*;
 use anyhow::Result;
+use ethers::prelude::*;
 use ethers::{
     contract::abigen,
     core::{abi::AbiDecode, types::Bytes},
 };
+use std::collections::HashMap;
 
 /// Connect to the given RPC and produce a pre-image map by extracting the calldata from the given transaction
-pub async fn new_proof_preimages<T: Send + Sync + Into<TxHash>>(rpc_url: &url::Url, txn_hash: T) -> Result<HashMap::<[u8; 32], Vec<u8>>> {
+pub async fn new_proof_preimages<T: Send + Sync + Into<TxHash>>(
+    rpc_url: &url::Url,
+    txn_hash: T,
+) -> Result<HashMap<[u8; 32], Vec<u8>>> {
     let web3_provider = Provider::<Http>::try_from(rpc_url.as_str())?;
-    let tx = web3_provider.get_transaction(txn_hash).await?.ok_or(anyhow::anyhow!("Transaction not found"))?;
+    let tx = web3_provider
+        .get_transaction(txn_hash)
+        .await?
+        .ok_or(anyhow::anyhow!("Transaction not found"))?;
 
     let mut cache = HashMap::<[u8; 32], Vec<u8>>::new();
 
@@ -40,7 +46,6 @@ fn witness_from_calldata(calldata: &Bytes) -> Result<Vec<u8>> {
     log::debug!("witness: {}", decoded.witness);
     Ok(hex::decode(decoded.witness)?)
 }
-
 
 #[derive(Debug, Default, Clone, Copy)]
 /// Types of preimage oracle keys. See https://github.com/ethereum-optimism/optimism/blob/develop/specs/fault-proof.md#pre-image-key-types
@@ -79,4 +84,3 @@ impl From<PreimageKey> for [u8; 32] {
         result
     }
 }
-
