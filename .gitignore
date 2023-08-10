@@ -27,4 +27,6 @@ verifier-initial-state.json
 meta.json
 out.json
 
+journal.bin
+nft_metadata.json
 .env

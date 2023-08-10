@@ -1,5 +1,4 @@
 use clap::Parser;
-use journal::Journal;
 use std::path::PathBuf;
 
 use bevy::{
@@ -10,6 +9,8 @@ use bevy::{
 };
 
 use extractor::{extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor};
+
+const CYCLES_PER_FRAME: usize = 70224;
 
 mod app;
 
@@ -54,7 +55,8 @@ fn main() {
         // ))
         .add_plugins(app::ProofBoyPlugin {
             rom: include_bytes!("../../../roms/pokemon-blue.gb").to_vec(),
-            startup_journal: None,
+            startup_journal: None,,
+            cycles_per_frame: CYCLES_PER_FRAME,
         })
         .insert_resource(args)
         .add_systems(Update, check_for_dump)
@@ -67,7 +69,7 @@ fn check_for_dump(
     mut journal: ResMut<app::KeyJournal>,
     args: Res<Args>,
 ) {
-    if keys.pressed(KeyCode::Space) {
+    if keys.just_pressed(KeyCode::Space) {
         journal.0.close();
         let metadata = PartyLeaderExtractor::extract(&gb.sys).expect("failed to extract metadata");
         log::info!("{:?}", &metadata);

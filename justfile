@@ -5,7 +5,7 @@ default:
   @just --list
 
 build_web:
-    cd crates/proofboy-recorder && wasm-pack build --release --target web
+    cd crates/proofboy-recorder && wasm-pack build --target web
 
 check:
     cd crates && cargo check --workspace --exclude proofboy-verifier-cannon
@@ -21,3 +21,6 @@ emulate txhash:
         --input ./verifier-initial-state.json \
         --info-at %100000 --stop-at never -- \
         cargo run --manifest-path ./crates/preimage-server/Cargo.toml
+
+recorder:
+    cargo run --manifest-path ./crates/proofboy-recorder/Cargo.toml -- -o journal.bin -m nft_metadata.json

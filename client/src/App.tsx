@@ -30,7 +30,7 @@ export const App = () => {
     <MetaMaskContextProvider>
       <div className={styles.appContainer}>
         <Navigation />
-        <ProofBoyPlayer onNewData={onProofBoyData} startupJournal={proofBoyData.journal}/>
+        <ProofBoyPlayer onNewData={onProofBoyData}/>
         <NftPreview metadata={proofBoyData.data}/>
         <Display proofBoyData={proofBoyData} onJournalUpload={ (j) => { console.log("new journal", j); setProofboyData({journal: j} as ProofBoyData) } }/>
         <MetaMaskError />

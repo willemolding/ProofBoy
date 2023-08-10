@@ -7,12 +7,10 @@ use journal::{Journal, KeyState};
 
 use rgy::{debug::NullDebugger, Config, Key as GBKey, Stream, System};
 pub use rgy::{VRAM_HEIGHT, VRAM_WIDTH};
-use serde_json::de::Read;
 use std::cell::RefCell;
 use std::rc::Rc;
 
 pub const SCALE: f32 = 2.0;
-const CYCLES_PER_FRAME: usize = 70224;
 
 #[derive(Resource, Default, Debug)]
 pub struct KeyJournal(pub Journal);
@@ -22,11 +20,13 @@ pub struct ProofBoyPlugin {
     pub rom: Vec<u8>,
     /// This journal is used to fast-forward the game to the given state
     pub startup_journal: Option<Journal>,
+    /// number of gameboy cycles to execute per bevy frame
+    pub cycles_per_frame: usize,
 }
 
 impl Plugin for ProofBoyPlugin {
     fn build(&self, app: &mut App) {
-        let mut gb: Gameboy = Gameboy::new(&self.rom);
+        let mut gb: Gameboy = Gameboy::new(&self.rom, self.cycles_per_frame);
 
         if let Some(startup_journal) = self.startup_journal.clone() {
             log::info!(
@@ -96,7 +96,7 @@ fn update_gameboy(
     }
 
     if gb.active {
-        for _ in 0..CYCLES_PER_FRAME {
+        for _ in 0..gb.cycles_per_frame {
             journal.0.tick(gb.kbd.0.borrow().as_byte());
             gb.step();
         }
@@ -126,6 +126,7 @@ pub struct Gameboy {
     pub kbd: Keyboard,
     pub cycle_count: u64,
     pub active: bool,
+    pub cycles_per_frame: usize,
 }
 
 impl Gameboy {
@@ -134,12 +135,7 @@ impl Gameboy {
         self.cycle_count += 1;
     }
 
-    pub fn step_nogpu(&mut self) {
-        self.sys.poll(false);
-        self.cycle_count += 1;
-    }
-
-    pub fn new(rom: &[u8]) -> Self {
+    pub fn new(rom: &[u8], cycles_per_frame: usize) -> Self {
         let kbd = Keyboard::new();
         let display = Display::new();
         let cfg = Config::new().native_speed(true);
@@ -151,6 +147,7 @@ impl Gameboy {
             kbd,
             cycle_count: 0,
             active: false,
+            cycles_per_frame,
         }
     }
 }
