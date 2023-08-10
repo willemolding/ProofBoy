@@ -23,6 +23,11 @@ import Container from 'react-bootstrap/Container';
 export const App = () => {
 
   const [proofBoyData, setProofboyData] = useState({} as ProofBoyData);
+  const [indexedNfts, setIndexedNfts] = useState<Map<Number, ProofBoyData>>(new Map());
+
+  const addIndexedNft = (k: Number, v: ProofBoyData) => {
+    setIndexedNfts(new Map(indexedNfts.set(k, v)));
+};
 
   const onProofBoyData = (data: string, journal: string) => {
     console.log(data)
@@ -43,13 +48,13 @@ export const App = () => {
         >
           <Tab eventKey="recorder" title="ProofBoy Recorder">
             <Stack className="d-flex align-items-center justify-content-center text-center min-vh-100">
-              {/* <ProofBoyPlayer onNewData={onProofBoyData}/> */}
-              <NftPreview proofBoyData={proofBoyData}/>
+              <ProofBoyPlayer onNewData={onProofBoyData}/>
+              <NftPreview proofBoyData={proofBoyData} addIndexedNft={addIndexedNft}/>
               <Display/>
             </Stack>
           </Tab>
           <Tab eventKey="claim" title="Claim Mints">
-            <PendingMints />
+            <PendingMints indexedNfts={indexedNfts}/>
           </Tab>
         </Tabs>
       </Container>

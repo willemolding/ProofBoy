@@ -82,7 +82,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
     *                to produce this metadata output.
     *                This must be provided in calldata so watchers can replicate the computation
     */
-    function ProposeMint(address to, string calldata metadataJson, bytes calldata witness) external {
+    function ProposeMint(address to, string calldata metadataJson, bytes calldata witness) external returns (uint256) {
         uint256 id = nonce++;
         pendingMints[id] = PendingMint({
             to: to,
@@ -91,6 +91,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
             timestamp: block.timestamp
         });
         emit MintProposed(id,  block.timestamp);
+        return id;
     }
 
     /**

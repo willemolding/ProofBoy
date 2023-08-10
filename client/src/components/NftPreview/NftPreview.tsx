@@ -9,7 +9,7 @@ import { Button } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Table from 'react-bootstrap/Table';
 
-export const NftPreview = ({ proofBoyData }: { proofBoyData: ProofBoyData}) => {
+export const NftPreview = ({ proofBoyData, addIndexedNft }: { proofBoyData: ProofBoyData, addIndexedNft: any}) => {
 
   const { wallet } = useMetaMask()
 
@@ -22,6 +22,10 @@ export const NftPreview = ({ proofBoyData }: { proofBoyData: ProofBoyData}) => {
     const contractAddress: string = ERC1155ChallengeableMint.networks[wallet.chainId].address;
     let contract = new ethers.Contract(contractAddress, ERC1155ChallengeableMint.abi, signer);
     await contract.ProposeMint(wallet.accounts[0], JSON.stringify(proofBoyData.data), proofBoyData.journal)
+
+    contract.on("MintProposed", (id, timestamp) => {
+      addIndexedNft(Number(id), proofBoyData)
+    })
   }
 
   const metadata = proofBoyData.data as NftMetadata;

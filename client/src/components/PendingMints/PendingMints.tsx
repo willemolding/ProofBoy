@@ -9,10 +9,10 @@ import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-
+import {registerNft} from '~/utils';
 import Stack from 'react-bootstrap/Stack';
 
-export const PendingMints = () => {
+export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyData>}) => {
 
   const { wallet } = useMetaMask()
 
@@ -27,14 +27,14 @@ export const PendingMints = () => {
       let contract = new ethers.Contract(contractAddress, ERC1155ChallengeableMint.abi, provider);
 
       let retrieved = [];
-      for (let i = 0; i < 10; i++) {
-        let [to, metadataHash, witnessHash, timestamp] = await contract.pendingMints(i);
+      for (const [id, value] of indexedNfts.entries()) {
+        let [to, metadataHash, witnessHash, timestamp] = await contract.pendingMints(id);
         if (to !== ethers.ZeroAddress) {
           retrieved.push({
-            id: i,
+            id,
             to: to,
-            metadataHash: metadataHash,
-            witnessHash: witnessHash,
+            metadata: value.data,
+            journal: value.journal,
             timestamp: timestamp
           });
         }
@@ -42,21 +42,25 @@ export const PendingMints = () => {
       setPendingMints(retrieved)
     }
     retrievePending();
-  }, [wallet]);
+  }, [wallet, indexedNfts]);
 
   const claimMint = async (id: Number) => {
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
-    console.log("Account:", await signer.getAddress());
 
     // @ts-ignore
     const contractAddress: string = ERC1155ChallengeableMint.networks[wallet.chainId].address;
     let contract = new ethers.Contract(contractAddress, ERC1155ChallengeableMint.abi, signer);
-    await contract.ClaimMint(id, JSON.stringify(proofBoyData.data))
 
-    // contract.on("Minted", (tokenId, to) => {
-    //   registerNft(window.ethereum, contractAddress, tokenId.toString())
-    // });
+    try {
+      await contract.ClaimMint(id, JSON.stringify(indexedNfts.get(id)?.data))
+    } catch (error) {
+      console.log(error)
+    }
+
+    contract.on("Minted", (tokenId, to) => {
+      registerNft(window.ethereum, contractAddress, tokenId.toString())
+    });
 
   }
 
@@ -71,9 +75,7 @@ export const PendingMints = () => {
                 <Card.Title>ID: {id}</Card.Title>
                 <Card.Img variant="top" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" />
                 <Card.Text>
-                  <p>Metadata Hash: {metadataHash}</p>
                   <p>Submitted By: {to}</p>
-                  <p>Witness Hash: {witnessHash}</p>
                 </Card.Text>
                 <Stack direction="horizontal" gap={3}>
                   <Button onClick={() => claimMint(id)}>Claim</Button>
