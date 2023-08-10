@@ -2,7 +2,7 @@ import { useMetaMask } from '~/hooks/useMetaMask'
 import { formatChainAsNum } from '~/utils'
 import styles from './Display.module.css'
 
-import NFTCollection from '../../contracts/NFTCollection.json';
+import ERC1155ChallengeableMint from '../../contracts/ERC1155ChallengeableMint.json';
 
 import { Button, Form } from 'react-bootstrap';
 import { ProofBoyData } from '~/types';
@@ -22,10 +22,10 @@ export const Display = ({ proofBoyData, onJournalUpload }: { proofBoyData: Proof
     console.log("Account:", await signer.getAddress());
 
     // @ts-ignore
-    const contractAddress: string = NFTCollection.networks[wallet.chainId].address;
-    let contract = new ethers.Contract(contractAddress, NFTCollection.abi, signer);
+    const contractAddress: string = ERC1155ChallengeableMint.networks[wallet.chainId].address;
+    let contract = new ethers.Contract(contractAddress, ERC1155ChallengeableMint.abi, signer);
 
-    await contract.mint(wallet.accounts[0], JSON.stringify(proofBoyData.data))
+    await contract.ProposeMint(wallet.accounts[0], JSON.stringify(proofBoyData.data), proofBoyData.journal)
 
     contract.on("Minted", (to, tokenId) => {
       registerNft(window.ethereum, contractAddress, tokenId.toString())
@@ -72,7 +72,6 @@ export const Display = ({ proofBoyData, onJournalUpload }: { proofBoyData: Proof
         </>
       }
       <Button onClick={submitNft}>Submit</Button>
-      <Button onClick={() => saveJournal(proofBoyData.journal)}>Save Journal</Button>
       <Form.Group controlId="formFileLg" className="mb-3">
         <Form.Label>Large file input example</Form.Label>
         <Form.Control type="file" accept=".proofboy" size="lg" onChange={loadJournal} />
