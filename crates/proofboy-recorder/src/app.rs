@@ -209,11 +209,7 @@ impl rgy::Hardware for Hardware {
     fn sound_play(&mut self, _stream: Box<dyn Stream>) {}
 
     fn clock(&mut self) -> u64 {
-        0 // This was nerfing the performance!!
-          // let epoch = std::time::SystemTime::now()
-          //     .duration_since(std::time::UNIX_EPOCH)
-          //     .expect("Couldn't get epoch");
-          // epoch.as_micros() as u64
+        0 // this is used for framerate regulating but we do this ourselves
     }
 
     fn send_byte(&mut self, _b: u8) {}

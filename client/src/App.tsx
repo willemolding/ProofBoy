@@ -27,7 +27,7 @@ export const App = () => {
 
   const addIndexedNft = (k: Number, v: ProofBoyData) => {
     setIndexedNfts(new Map(indexedNfts.set(k, v)));
-};
+  };
 
   const onProofBoyData = (data: string, journal: string) => {
     console.log(data)

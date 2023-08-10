@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styles from './PendingMints.module.css'
-import { NftMetadata } from '../../types';
 import { useMetaMask } from '~/hooks/useMetaMask'
 import { ethers } from "ethers";
 import ERC1155ChallengeableMint from '../../contracts/ERC1155ChallengeableMint.json';
@@ -11,6 +10,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import {registerNft} from '~/utils';
 import Stack from 'react-bootstrap/Stack';
+import Table from 'react-bootstrap/Table';
 
 export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyData>}) => {
 
@@ -29,15 +29,13 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
       let retrieved = [];
       for (const [id, value] of indexedNfts.entries()) {
         let [to, metadataHash, witnessHash, timestamp] = await contract.pendingMints(id);
-        if (to !== ethers.ZeroAddress) {
-          retrieved.push({
-            id,
-            to: to,
-            metadata: value.data,
-            journal: value.journal,
-            timestamp: timestamp
-          });
-        }
+        retrieved.push({
+          id,
+          to: to,
+          metadata: value.data,
+          journal: value.journal,
+          timestamp: timestamp
+        });
       }
       setPendingMints(retrieved)
     }
@@ -59,6 +57,7 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
     }
 
     contract.on("Minted", (tokenId, to) => {
+      // register with MetaMask SDK so it will appear in the wallet right away :)
       registerNft(window.ethereum, contractAddress, tokenId.toString())
     });
 
@@ -68,15 +67,35 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
     <div className={styles.nft_preview}>
       <Row>
       {
-        pendingMints.map(({id, to, metadataHash, witnessHash, timestamp}, index) => {
+        pendingMints.map(({id, to, metadata, timestamp}, index) => {
           return(
             <Card key={index} style={{ width: '20rem' }}>
               <Card.Body>
                 <Card.Title>ID: {id}</Card.Title>
-                <Card.Img variant="top" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" />
+                <Card.Img variant="top" src={metadata.image} />
                 <Card.Text>
                   <p>Submitted By: {to}</p>
                 </Card.Text>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Stat</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {
+                    metadata.attributes.map(({trait_type, value}: {trait_type: string, value: string}, index: Number) => {
+                      return(
+                        <tr>
+                          <td>{trait_type}</td>
+                          <td>{value}</td>
+                        </tr>
+                      )
+                    })
+                  }
+                  </tbody>
+                  </Table>
                 <Stack direction="horizontal" gap={3}>
                   <Button onClick={() => claimMint(id)}>Claim</Button>
                   <Button>Challenge</Button>

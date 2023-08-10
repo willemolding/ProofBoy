@@ -17318,6 +17318,89 @@
       "address": "0x6F0fe0B8b5Ded85dC9678A8d8aAb41E9c4DeD09e",
       "transactionHash": "0xafda9cd7ad531ed5ccdd8f6b0ac2669eecd5a88d85305d5d9dd7686d2be6c6ac"
     },
+    "1414": {
+      "events": {
+        "0xfad0599ff449d8d9685eadecca8cb9e00924c5fd8367c1c09469824939e1ffec": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "disputeProxy",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "GameType",
+              "name": "gameType",
+              "type": "uint8"
+            },
+            {
+              "indexed": true,
+              "internalType": "Claim",
+              "name": "rootClaim",
+              "type": "bytes32"
+            }
+          ],
+          "name": "DisputeGameCreated",
+          "type": "event"
+        },
+        "0x623713f72f6e427a8044bb8b3bd6834357cf285decbaa21bcc73c1d0632c4d84": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "impl",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "GameType",
+              "name": "gameType",
+              "type": "uint8"
+            }
+          ],
+          "name": "ImplementationSet",
+          "type": "event"
+        },
+        "0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "transactionHash": "0xcfd0d5354df14a06e5dad60eb92a68d97201cb8ac42b8fcde7c281c9d8a979c5"
+    },
     "5777": {
       "events": {
         "0xfad0599ff449d8d9685eadecca8cb9e00924c5fd8367c1c09469824939e1ffec": {
@@ -17569,7 +17652,7 @@
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-10T08:46:40.063Z",
+  "updatedAt": "2023-08-10T09:01:56.528Z",
   "networkType": "ethereum",
   "devdoc": {
     "errors": {
