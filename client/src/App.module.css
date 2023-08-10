@@ -3,4 +3,5 @@
   flex-direction: column;
   height: 100vh;
   min-width: 100vw;
+  align-items: center;
 }
