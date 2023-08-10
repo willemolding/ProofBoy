@@ -2,7 +2,6 @@ use anyhow::Result;
 use clap::Parser;
 use log::debug;
 use preimage_provider::PreimageProvider;
-use std::collections::HashMap;
 use std::os::fd::FromRawFd;
 use tokio::fs::File;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};

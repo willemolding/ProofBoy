@@ -31,11 +31,13 @@ abigen!(
 
 fn metadata_from_calldata(calldata: &Bytes) -> Result<Vec<u8>> {
     let decoded = ProposeMintCall::decode(calldata)?;
-    Ok(hex::decode(decoded.metadata_json)?)
+    log::debug!("metadata: {}", String::from(&decoded.metadata_json));
+    Ok(decoded.metadata_json.into())
 }
 
 fn witness_from_calldata(calldata: &Bytes) -> Result<Vec<u8>> {
     let decoded = ProposeMintCall::decode(calldata)?;
+    log::debug!("witness: {}", decoded.witness);
     Ok(hex::decode(decoded.witness)?)
 }
 
