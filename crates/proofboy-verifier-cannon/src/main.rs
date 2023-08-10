@@ -20,6 +20,12 @@ pub extern "C" fn _start() {
     init_heap!(HEAP_SIZE);
 
     // read the journal from the pre-image oracle
+    let mut oracle_reader = oracle_reader();
+    let journal_bytes = oracle_reader.get(PreimageKey::new_local([0x0]));
+    let journal = Journal::from_bytes(&journal_bytes);
+
+    let metadata_bytes = oracle_reader.get(PreimageKey::new_local([0x1]));
+    let expected_metadata = Metadata::from_bytes(&metadata_bytes);
     // read the expected output from the pre-image oracle
 
     // apply all the inputs and get the final memory state

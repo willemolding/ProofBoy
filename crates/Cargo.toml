@@ -5,6 +5,7 @@ resolver = "2"
 members = [
     "proofboy-recorder",
     "proofboy-verifier-cannon",
+    "preimage-server",
     "extractor",
     "journal",
 ]
