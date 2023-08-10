@@ -8,7 +8,7 @@ const {
 
 contract("ERC1155ChallengeableMint proposals", accounts => {
   let proposer = accounts[1];
-  let metadata = "test";
+  let metadata = `{"name":"foo","description":"bar","image":"baz","attributes":[{"trait_type":"foo","value":42,"display_type":"number"}]}`;
 
   it("Can propose mint", async () => {
     const contract = await ERC1155ChallengeableMint.deployed();
@@ -41,7 +41,7 @@ contract("ERC1155ChallengeableMint proposer clear challenge by timeout", account
   let proposer = accounts[1];
   let challenger = accounts[2];
 
-  let metadata = "test";
+  let metadata = `{"name":"foo","description":"bar","image":"baz","attributes":[{"trait_type":"foo","value":42,"display_type":"number"}]}`;
 
   it("Can open challenge", async () => {
     const contract = await ERC1155ChallengeableMint.deployed();

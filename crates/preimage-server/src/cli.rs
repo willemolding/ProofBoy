@@ -5,11 +5,11 @@ use ethers::prelude::*;
 #[command(author, version, about, long_about = None)]
 pub struct Cli {
     /// URL of RPC endpoint
-    #[arg(long)]
+    #[arg(long, env = "RPC_URL")]
     pub rpc: url::Url,
 
     /// Hash of the mint transaction we want to check. Must be hex encoded 32 byte hash
-    #[arg(long)]
+    #[arg(long, env = "TXN_HASH")]
     #[arg(value_parser = parse_txn_hash)]
     pub txn_hash: TxHash,
 }

@@ -21,3 +21,10 @@ pkg/
 
 node_modules/
 build/
+
+# cannon patched elf files
+verifier-initial-state.json
+meta.json
+out.json
+
+.env

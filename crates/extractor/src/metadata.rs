@@ -25,3 +25,20 @@ impl Attribute {
         }
     }
 }
+
+mod tests {
+    use super::*;
+    use alloc::vec;
+
+    #[test]
+    fn test_serialize_metadata() {
+        let metadata = Metadata {
+            name: "foo".to_string(),
+            description: "bar".to_string(),
+            image: "baz".to_string(),
+            attributes: vec![Attribute::new_numeric("foo", 42)],
+        };
+        let json = serde_json::to_string(&metadata).unwrap();
+        assert_eq!(json, r#"{"name":"foo","description":"bar","image":"baz","attributes":[{"trait_type":"foo","value":42,"display_type":"number"}]}"#);
+    }
+}
