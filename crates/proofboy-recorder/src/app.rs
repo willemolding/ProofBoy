@@ -27,7 +27,7 @@ pub struct ProofBoyPlugin{
 impl Plugin for ProofBoyPlugin {
     fn build(&self, app: &mut App) {
 
-        let mut gb = Gameboy::new(&self.rom);
+        let mut gb: Gameboy = Gameboy::new(&self.rom);
 
         if let Some(startup_journal) = self.startup_journal.clone() {
             log::info!("Input journal detected {:?}. Applying key presses...", startup_journal);

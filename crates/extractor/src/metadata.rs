@@ -1,7 +1,7 @@
 use alloc::vec::Vec;
 use alloc::string::{String, ToString};
 
-#[derive(Debug, serde::Serialize)]
+#[derive(Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Metadata {
     pub name: String,
     pub description: String,
@@ -9,7 +9,7 @@ pub struct Metadata {
     pub attributes: Vec<Attribute>,
 }
 
-#[derive(Debug, serde::Serialize)]
+#[derive(Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Attribute {
     pub trait_type: String,
     pub value: u32,

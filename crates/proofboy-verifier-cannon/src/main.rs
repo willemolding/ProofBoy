@@ -11,28 +11,47 @@ const HEAP_SIZE: usize = 0x400000;
 
 use cannon_io::prelude::*;
 use cannon_heap::init_heap;
+use extractor::{Metadata, extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor};
+use journal::{Journal, KeyState};
+use gameboy::Gameboy;
 
 extern crate alloc;
+
+mod gameboy;
 
 /// Main entrypoint for a verifiable computation
 #[no_mangle]
 pub extern "C" fn _start() {
     init_heap!(HEAP_SIZE);
+    let rom = [0u8; 0x8000];
+    // let rom = include_bytes!("../../../roms/pokemon-blue.gb");
 
-    // read the journal from the pre-image oracle
     let mut oracle_reader = oracle_reader();
-    let journal_bytes = oracle_reader.get(PreimageKey::new_local([0x0]));
+
+    // read the expected output metadata from the pre-image oracle
+    let metadata_bytes = oracle_reader.get(PreimageKey::new_local(&[0x0])).expect("Failed to read metadata from pre-image oracle");
+    let expected_metadata: Metadata = serde_json::from_slice(&metadata_bytes).expect("Failed to parse metadata as json");
+    
+    // read the journal from the pre-image oracle
+    let journal_bytes = oracle_reader.get(PreimageKey::new_local(&[0x1])).expect("Failed to read journal form pre-image oracle");
     let journal = Journal::from_bytes(&journal_bytes);
 
-    let metadata_bytes = oracle_reader.get(PreimageKey::new_local([0x1]));
-    let expected_metadata = Metadata::from_bytes(&metadata_bytes);
-    // read the expected output from the pre-image oracle
-
-    // apply all the inputs and get the final memory state
+    // apply the journal to our emulator and get the final memory state
+    let mut gb: Gameboy = Gameboy::new(&rom);
+    journal.into_iter().for_each(|keys| {
+        gb.kbd.0.replace(KeyState::from_byte(keys));
+        gb.step();
+    });
 
     // extract using the given extractor and compare with the expected output
+    let result_metadata = PartyLeaderExtractor::extract(&gb.sys).expect("Failed to extract metadata");
 
-    exit(0); // 0 code indicates success
+    if expected_metadata == result_metadata {
+        exit(0); // 0 code indicates success
+    } else {
+        exit(1); // 1 code indicates code ran successfully but verified to false
+    }
+
 }
 
 #[panic_handler]

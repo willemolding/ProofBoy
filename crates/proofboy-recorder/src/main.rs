@@ -61,7 +61,7 @@ fn main() {
         //     FrameTimeDiagnosticsPlugin::default(),
         // ))
         .add_plugins(app::ProofBoyPlugin {
-            rom: include_bytes!("../../../roms/super-mario-land.gb").to_vec(),
+            rom: include_bytes!("../../../roms/pokemon-blue.gb").to_vec(),
             startup_journal: journal,
         })
         .insert_resource(args)

@@ -1,5 +1,5 @@
 [package]
-name = "proofboy-verifier"
+name = "proofboy-verifier-cannon"
 version = "0.1.0"
 authors = ["Willem Olding <willemoldindg@gmail.com>"]
 edition = "2021"
@@ -8,8 +8,13 @@ edition = "2021"
 cannon-io = { git = "https://github.com/badboilabs/Cannon-rs" }
 cannon-heap = { git = "https://github.com/badboilabs/Cannon-rs" }
 
+rgy = { workspace = true }
+
 journal = { workspace = true }
 extractor = { workspace = true }
+
+serde = { workspace = true }
+serde_json = { workspace = true }
 
 [profile.dev]
 panic = "abort"

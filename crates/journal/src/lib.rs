@@ -1,3 +1,8 @@
+#![no_std]
+
+extern crate alloc;
+use alloc::vec::Vec;
+
 mod key_state;
 
 pub use key_state::KeyState;
@@ -73,7 +78,7 @@ impl Journal {
     pub fn into_iter(self) -> impl Iterator<Item = u8> {
         self.entries.into_iter()
             .flat_map(|entry| {
-                std::iter::repeat(entry.joypad).take(entry.delta as usize)
+                core::iter::repeat(entry.joypad).take(entry.delta as usize)
             })
     }
 }
@@ -82,7 +87,7 @@ impl Journal {
 #[cfg(test)]
 mod test {
     use super::*;
-    use std::vec;
+    use alloc::vec;
 
     #[test]
     fn test_iterator_on_empty() {
