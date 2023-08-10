@@ -9,7 +9,6 @@ export const Navigation = () => {
   return (
     <div className={styles.navigation}>
       <div className={styles.flexContainer}>
-        <div className={styles.leftNav}>Vite + React & MetaMask</div>
         <div className={styles.rightNav}>
           {!hasProvider &&
             <a href="https://metamask.io" target="_blank" rel="noreferrer">

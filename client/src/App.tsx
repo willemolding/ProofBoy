@@ -18,6 +18,7 @@ import { ProofBoyData, NftMetadata } from './types';
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Container from 'react-bootstrap/Container';
 
 export const App = () => {
 
@@ -35,14 +36,14 @@ export const App = () => {
   return (
     <MetaMaskContextProvider>
       <div className={styles.appContainer}>
-      <Stack>
-        <Navigation />
+      <Navigation />
+      <Container>
         <Tabs
           defaultActiveKey="recorder"
         >
           <Tab eventKey="recorder" title="ProofBoy Recorder">
             <Stack className="d-flex align-items-center justify-content-center text-center min-vh-100">
-              <ProofBoyPlayer onNewData={onProofBoyData}/>
+              {/* <ProofBoyPlayer onNewData={onProofBoyData}/> */}
               <NftPreview proofBoyData={proofBoyData}/>
               <Display/>
             </Stack>
@@ -51,8 +52,9 @@ export const App = () => {
             <PendingMints />
           </Tab>
         </Tabs>
-        <MetaMaskError />
-      </Stack>
+      </Container>
+      <MetaMaskError />
+
       </div>
     </MetaMaskContextProvider>
   )
