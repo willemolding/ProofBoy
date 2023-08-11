@@ -6,7 +6,7 @@ dataSources:
     name: ERC1155ChallengeableMint
     network: mainnet
     source:
-      address: "0x888736e3e2CEE9484a0235a186Df4a749278dedf"
+      address: "0xEA84a5c33349732964DAD24C6aE5e8C8e86A0f97"
       abi: ERC1155ChallengeableMint
       startBlock: 0
     mapping:
@@ -21,4 +21,6 @@ dataSources:
       eventHandlers:
         - event: MintProposed(indexed uint256,address,uint256)
           handler: handleMintProposed
+        - event: Minted(indexed uint256,indexed address)
+          handler: handleMinted
       file: ./src/erc-1155-challengeable-mint.ts
