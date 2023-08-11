@@ -58,7 +58,7 @@ export const App = () => {
         >
           <Tab eventKey="recorder" title="ProofBoy Recorder">
             <Stack className="d-flex align-items-center justify-content-center text-center min-vh-100">
-              {/* <ProofBoyPlayer onNewData={onProofBoyData}/> */}
+              <ProofBoyPlayer onNewData={onProofBoyData}/>
               <NftPreview proofBoyData={proofBoyData} addIndexedNft={addIndexedNft}/>
               <Display/>
             </Stack>

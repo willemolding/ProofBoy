@@ -40,7 +40,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
     }
 
     /// @dev The amount of time that must pass before a pending mint can be minted
-    uint256 public constant SETTLEMENT_PERIOD = 2 hours;
+    uint256 public constant SETTLEMENT_PERIOD = 1 minutes;
 
     /// @dev The hash of the code to be run in the provable execution
     Claim public immutable ROOT_CLAIM;

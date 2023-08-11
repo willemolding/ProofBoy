@@ -69,7 +69,9 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
             let [too, metadataString, witness] = iface.decodeFunctionData("ProposeMint", calldata);
             let metadata: NftMetadata = JSON.parse(metadataString);
 
-            const timeToClaim = 2*60*60*1000 - (Date.now() - Number(timestamp)*1000) // in milliseconds
+            const timeToClaim = 60*1000 - (Date.now() - Number(timestamp)*1000) // in milliseconds
+
+            // const timeToClaim = 2*60*60*1000 - (Date.now() - Number(timestamp)*1000) // in milliseconds
 
             return(
               <Card key={id} style={{ width: '20rem' }}>
@@ -101,7 +103,7 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
                     <br />
                     Tx Hash: {txn_hash}
                   </Card.Text>
-                    {timeToClaim > 0 ? <Button variant="danger">Challenge</Button> : <Button variant="success" onClick={() => claimMint(id, metadataString)}>Claim</Button>}
+                    {timeToClaim > 0 ? <Button variant="danger">Challenge</Button> : <Button variant="success" onClick={() => claimMint(token_id, metadataString)}>Claim</Button>}
                 </Card.Body>
                 <Card.Footer>
                   <small className="text-muted">{Math.round(timeToClaim / 1000 / 60)} minutes until claimable</small>

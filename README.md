@@ -1,48 +1,51 @@
 # ProofBoy
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-You caught a shiny pokemon? Prove it!
+*You caught a shiny pokemon? Prove it!*
 
 ProofBoy allows for proving state of Gameboy games on-chain using fraud proofs.
 
 Created as an entry to the 2023 Consensys NAV Hackathon.
+
+<img src="./docs/navh-banner.jpg"/>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 Many blockchain games produce assets such as NFTs to reward players for certain in-game achievements. The common way to verify that players actually did the achievements they claim is to have a game server performing these checks and minting the assets.
 
-But we want to move to a world of fully on-chain games! In this case the chain itself must verify the achievements within its restricted execution environment. ProofBoy shows how something as complex as a Gameboy emulator can be proven on-chain using fault proofs.
+This projects takes a step toward enabling fully on-chain gaming by allowing complex game state to be proven on-chain. ProofBoy shows how something as complex as a Gameboy emulator can be verified on-chain using fault proofs.
 
 ### How it works
 
 #### Recording
 
-Players play a game off-chain inside a special emulator called the **ProofBoy Recorder**. This works just like a regular emulator but it keeps track of every key press made by the player and the exact CPU cycle at which it occurred. This record of inputs we call a Journal.
+Players play a game inside a special emulator called the **ProofBoy Recorder**. This works just like a regular emulator but it keeps track of every key press made by the player and the exact CPU cycle at which it occurred. This record of inputs we call a Journal.
 
 <p align="center">
-<img src="./docs/recorder.excalidraw.svg" width="700"/>
+<img src="./docs/recorder.excalidraw.svg" width="900"/>
 </p>
 
-This journal can be taken by anyone else and replayed into their own emulator to recreate the exact same Gameboy memory state. ProofBoy also defines something called an Extractor which takes a memory state and maps it into something meaningful. In our example we have an extractor which extracts the stats of the Pokemon in the first party slot.
+This journal can be taken by anyone else and replayed into their own emulator to recreate the exact same Gameboy memory state. ProofBoy also defines something called an Extractor which takes a memory state and maps it into something meaningful. In our example we have an extractor which extracts the stats of the players pokemon.
 
 Both of these operations are deterministic. Anyone can take a fresh copy of a game and a journal obtain the pokemon the player is holding.
 
-#### Proving
+#### Verifying
 
-To prove this on-chain there is a second piece called the **Proofboy Verifier**. This is the same emulator but it operates in headless mode. It is built to compile to MIPS in a way that is compatible with the Optimism Cannon fault proving system. Cannon was built to verify the Optimism optimistic rollup state transaction on L1 but it can actually be used for any MIPS program including our emulator!
+To verify this on-chain there is a second piece called the **Proofboy Verifier**. This is the same emulator but it operates in headless mode and takes a journal as input. It is built to compile to the MIPS instruction set in a way that is compatible with the [Optimism Cannon fault proving system](https://github.com/ethereum-optimism/optimism/tree/develop/cannon). Cannon was built to verify the Optimism rollup state transition but it can actually be used for any MIPS program including our emulator!
 
 <p align="center">
-<img src="./docs/verifier.excalidraw.svg" width="700"/>
+<img src="./docs/verifier.excalidraw.svg" width="900"/>
 </p>
 
-Watchers can execute the **Proofboy verifier** off-chain inside the Cannon MIPS emulator (emulators within emulators!). If they identify a fraudulent claim (e.g. you claim your journal produces a Pokemon that it doesn't) they can challenge it on-chain.
+Anyone can execute the **Proofboy verifier** off-chain inside the Cannon emulator (emulators within emulators!). If they identify a fraudulent claim (e.g. you claim your journal produces a Pokemon that it doesn't) they can challenge it on-chain.
 
-The program itself never fully executed on-chain but if there is a fault in a claim then an honest observer can always show that you are committing fraud. If no one can show your claim is fraudulent for sufficiently long it is assumed to be correct. Just like an optimistic rollup. 
+The program itself never fully executed on-chain but if there is a fault in a claim then an honest observer can always show that you are committing fraud. If no one can show your claim is fraudulent for sufficiently long it is assumed to be correct.
 
 #### On-Chain
 
@@ -57,13 +60,13 @@ From this point two things can occur:
 1. The player was honest so no one can challenge their claim. After 2 hours the mint settles they can call `ClaimMint` to receive their Pokemon NFT and their bond back. This uses the MetaMask SDK to automatically register the minted NFT in the players wallet.
 
 <p align="center">
-<img src="./docs/flow-no-challenge.excalidraw.svg" width="700"/>
+<img src="./docs/flow-no-challenge.excalidraw.svg" width="900"/>
 </p>
 
 2. The player was dishonest. An honest watcher can call `ChallengeMint` to initiate a dispute game. This plays out according to the [Optimism dispute game](https://blog.oplabs.co/building-a-fault-proof-system/) and if the challenge is successful they are awarded the bond and the mint is cancelled
 
 <p align="center">
-<img src="./docs/flow-fraud.excalidraw.svg" width="700"/>
+<img src="./docs/flow-fraud.excalidraw.svg" width="900"/>
 </p>
 
 Under the assumption that at least one honest watcher is checking any given mint then mints which are allowed to settle can be considered valid. Any invalid mint should be challenged because it is free money for the challenger. These are the same assumptions under which an optimistic rollup operates however since the value secured is much less the settlement period can be reduced from 7 days to a more acceptable few hours.
@@ -77,6 +80,7 @@ Under the assumption that at least one honest watcher is checking any given mint
 | Proofboy Verifier Cannon  | A headless Gameboy emulator which recreates state given a journal. Builds to a Cannon compatible MIPS binary which reads inputs via a pre-image oracle | [![documentation](https://img.shields.io/badge/readme-blue)](./crates/proofboy-verifier-cannon/)  |
 | Preimage Server | A Cannon compatible pre-image server which fetches the required input data to verify a proof from calldata on the given chain using Infura | [![documentation](https://img.shields.io/badge/readme-blue)](./crates/preimage-server/)  |
 | Client | React web client for ProofBoy. Allows playing games and submitting NFT claims directly from within the browser | [![documentation](https://img.shields.io/badge/readme-blue)](./client/)  |
+| Subgraph | Graph protocol indexer. Allows client to view pending mints along with their metadata | [![documentation](https://img.shields.io/badge/readme-blue)](./subgraph/)  |
 ## Technologies Used
 
 ProofBoy uses the following Consensys products:
@@ -88,6 +92,7 @@ ProofBoy uses the following Consensys products:
 
 Also a special thanks to:
 
+- [Graph Protocol](https://thegraph.com/) Used to index the pending Mints
 - [RGY](https://github.com/YushiOMOTE/rgy) A no_std Rust implementation of a Gameboy emulator
 - [Bevy Engine](https://bevyengine.org) An excellent Rust game engine which we use to wrap the emulator
 - [Cannon-rs](https://github.com/BadBoiLabs/Cannon-rs) A collection of Rust crates and other tools to build Cannon programs in Rust. (Disclaimer this is maintained by me)
@@ -103,6 +108,10 @@ Also a special thanks to:
  <text>
   <a href="https://linea.build/">
     <img src="https://images.ctfassets.net/64upluvbiuck/3jYGu3XwBgiRxNPRbzEoyh/53cbb5c2fb09ac12bc073cd15385f625/logo-icon.svg" width="100" style="padding-right: 30px"/>
+  </a>
+  <text>
+  <a href="https://thegraph.com/">
+    <img src="https://freeairdrop.io/Images%20for/Airdrops/thegraph.jpg" width="100" style="padding-right: 30px"/>
   </a>
   <text>
   <a href="https://bevyengine.org/">
@@ -180,6 +189,7 @@ npm run preview
 There are some limits to what ProofBoy can do that should be kept in mind if you plan to use it for your own project.
 
 - Journals need to be submitted in calldata. This is to ensure data availability so anyone can recreate your state. This can get expensive for large journals (for example if you have been playing a game for a long time). This will reduce significantly if ERC4844 or similar can be used to provided data availability instead.
+- Journals are public data. This means another player can easily copy your game state although there is still a public record of who did it first.
 - Verifying time is a function of journal size. Again for very long plays the time required to prove may grow too large to complete in the settlement window. Journals longer than a given length should be considered invalid to prevent unbounded execution.
 - Optimism's FaultProofGame implementation is still under active development. This forms a core part of the project so any progress in that should be upstreamed.
 

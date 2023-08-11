@@ -16,7 +16,6 @@ export const NftPreview = ({ proofBoyData, addIndexedNft }: { proofBoyData: Proo
   const submitMintProposal = async () => {
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
-    console.log("Account:", await signer.getAddress());
 
     // @ts-ignore
     const contractAddress: string = ERC1155ChallengeableMint.networks[wallet.chainId].address;

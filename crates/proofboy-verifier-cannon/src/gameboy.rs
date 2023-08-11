@@ -7,7 +7,7 @@ use alloc::vec;
 use alloc::vec::Vec;
 use core::cell::RefCell;
 
-/// A gameboy emulator for speed! Does not emulator sound or GPU
+/// A headless gameboy emulator for speed! Does not emulator sound or GPU
 pub struct Gameboy {
     pub sys: System<NullDebugger>,
     pub kbd: Keyboard,
@@ -25,7 +25,7 @@ impl Gameboy {
         let kbd = Keyboard::new();
         let cfg = Config::new().native_speed(true);
         let hw = Hardware::new(kbd.clone());
-        let sys = System::new(cfg, rom, hw, NullDebugger);
+        let sys = System::new(cfg, rom, vec![0u8; 0x10000], hw, NullDebugger);
         Self {
             sys,
             kbd,

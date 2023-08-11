@@ -11,7 +11,7 @@ members = [
 ]
 
 [workspace.dependencies]
-rgy = { git = "https://github.com/willemolding/rgy" } # my fork of YushiOMOTE/rgy to allow direct memory access and fast-forward
+rgy = { git = "https://github.com/willemolding/rgy", rev = "12728626bd89955f830e76bd0eae8ef938568c4f" } # my fork of YushiOMOTE/rgy to allow direct memory access and fast-forward
 extractor = { path = "./extractor" }
 journal = { path = "./journal" }
 log = { version = "0.4.19", features = ["release_max_level_off"] }
@@ -21,9 +21,3 @@ serde_json = { version = "1.0.104", default-features = false, features = ["alloc
 # Enable max optimizations for dependencies, but not for our code when building dev builds:
 [profile.dev.package."*"]
 opt-level = 3
-
-# Go ham for performance on release builds
-[profile.release]
-codegen-units = 1
-lto = true
-panic = "abort"
