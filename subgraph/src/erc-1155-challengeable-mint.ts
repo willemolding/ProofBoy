@@ -1,5 +1,6 @@
 import {
   MintProposed,
+  Minted
 } from "../generated/ERC1155ChallengeableMint/ERC1155ChallengeableMint"
 import { PendingMint } from "../generated/schema"
 import { store } from '@graphprotocol/graph-ts'
@@ -15,6 +16,6 @@ export function handleMintProposed(event: MintProposed): void {
   entity.save()
 }
 
-export function handleMinted(event: MintProposed): void {  
+export function handleMinted(event: Minted): void {  
   store.remove("PendingMint", event.params.id.toHex())
 }
