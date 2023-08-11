@@ -54,6 +54,19 @@ export class PendingMint extends Entity {
     this.set("id", Value.fromBytes(value));
   }
 
+  get calldata(): Bytes {
+    let value = this.get("calldata");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set calldata(value: Bytes) {
+    this.set("calldata", Value.fromBytes(value));
+  }
+
   get token_id(): BigInt {
     let value = this.get("token_id");
     if (!value || value.kind == ValueKind.NULL) {
@@ -78,32 +91,6 @@ export class PendingMint extends Entity {
 
   set to(value: Bytes) {
     this.set("to", Value.fromBytes(value));
-  }
-
-  get metadataHash(): Bytes {
-    let value = this.get("metadataHash");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set metadataHash(value: Bytes) {
-    this.set("metadataHash", Value.fromBytes(value));
-  }
-
-  get witnessHash(): Bytes {
-    let value = this.get("witnessHash");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set witnessHash(value: Bytes) {
-    this.set("witnessHash", Value.fromBytes(value));
   }
 
   get timestamp(): BigInt {

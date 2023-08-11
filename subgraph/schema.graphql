@@ -1,5 +1,6 @@
 type PendingMint @entity {
   id: Bytes! # txhash of mint
+  calldata: Bytes! # calldata of transaction. Contains metadata and journal
   token_id: BigInt!
   to: Bytes! # address
   timestamp: BigInt!

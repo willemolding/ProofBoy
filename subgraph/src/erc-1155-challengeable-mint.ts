@@ -5,7 +5,7 @@ import { PendingMint } from "../generated/schema"
 
 export function handleMintProposed(event: MintProposed): void {  
   let entity = new PendingMint(event.transaction.hash)
-
+  entity.calldata = event.transaction.input
   entity.token_id = event.params.id
   entity.to = event.params.to
   entity.timestamp = event.params.timestamp
