@@ -10,7 +10,7 @@ use wasm_bindgen::prelude::*;
 
 mod app;
 
-const CYCLES_PER_FRAME: usize = 70224;
+const CYCLES_PER_FRAME: usize = 70224/5;
 
 #[wasm_bindgen]
 pub fn run(canvas_selector: &str, output_callback: js_sys::Function) {

@@ -10,7 +10,7 @@ use bevy::{
 
 use extractor::{extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor};
 
-const CYCLES_PER_FRAME: usize = 70224;
+const CYCLES_PER_FRAME: usize = 70224/5;
 
 mod app;
 
@@ -25,7 +25,12 @@ struct Args {
     /// place to write the metadata extracted from memory which can be used to mint an NFT
     #[arg(short = 'm', long)]
     metadata_out: Option<PathBuf>,
+
+    /// place to write the RAM dump which can be used to restart the emulator from the given point
+    #[arg(short = 'r', long)]
+    ram_out: Option<PathBuf>,
 }
+
 
 fn main() {
     let args = Args::parse();
@@ -55,7 +60,7 @@ fn main() {
         // ))
         .add_plugins(app::ProofBoyPlugin {
             rom: include_bytes!("../../../roms/pokemon-blue.gb").to_vec(),
-            startup_journal: None,,
+            startup_journal: None,
             cycles_per_frame: CYCLES_PER_FRAME,
         })
         .insert_resource(args)
@@ -82,6 +87,13 @@ fn check_for_dump(
             std::fs::write(
                 metadata_out,
                 serde_json::to_string(&metadata).expect("Failed to serialize metadata"),
+            )
+            .expect("failed to write journal to file");
+        }
+        if let Some(ram_out) = args.ram_out.clone() {
+            std::fs::write(
+                ram_out,
+                gb.sys.mmu_dump(),
             )
             .expect("failed to write journal to file");
         }

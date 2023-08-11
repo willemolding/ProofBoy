@@ -26,7 +26,7 @@ pub struct ProofBoyPlugin {
 
 impl Plugin for ProofBoyPlugin {
     fn build(&self, app: &mut App) {
-        let mut gb: Gameboy = Gameboy::new(&self.rom, self.cycles_per_frame);
+        let mut gb: Gameboy = Gameboy::new(&self.rom, self.cycles_per_frame, vec![0u8; 0x10000]);
 
         if let Some(startup_journal) = self.startup_journal.clone() {
             log::info!(
@@ -135,12 +135,12 @@ impl Gameboy {
         self.cycle_count += 1;
     }
 
-    pub fn new(rom: &[u8], cycles_per_frame: usize) -> Self {
+    pub fn new(rom: &[u8], cycles_per_frame: usize, ram: Vec<u8>) -> Self {
         let kbd = Keyboard::new();
         let display = Display::new();
         let cfg = Config::new().native_speed(true);
         let hw = Hardware::new(display.clone(), kbd.clone());
-        let sys = System::new(cfg, rom, hw, NullDebugger);
+        let sys = System::new(cfg, rom, ram, hw, NullDebugger);
         Self {
             sys,
             display,
