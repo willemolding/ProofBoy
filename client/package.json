@@ -1,6 +1,5 @@
 {
-  "name": "mm-dapp-react",
-  "private": true,
+  "name": "proofboy-client",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
