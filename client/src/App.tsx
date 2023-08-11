@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Stack from 'react-bootstrap/Stack';
 
 import { useState } from 'react';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 import { Navigation } from './components/Navigation'
 import { Display } from './components/Display'
@@ -21,6 +22,14 @@ import Tabs from 'react-bootstrap/Tabs';
 import Container from 'react-bootstrap/Container';
 
 export const App = () => {
+
+  const graphClient = new ApolloClient({
+    cache: new InMemoryCache(),
+    uri: "http://localhost:8000/subgraphs/name/willemolding/ProofBoy"
+  });
+  
+  
+  
 
   const [proofBoyData, setProofboyData] = useState({} as ProofBoyData);
   const [indexedNfts, setIndexedNfts] = useState<Map<Number, ProofBoyData>>(new Map());
@@ -40,6 +49,7 @@ export const App = () => {
 
   return (
     <MetaMaskContextProvider>
+    <ApolloProvider client={graphClient}>
       <div className={styles.appContainer}>
       <Navigation />
       <Container>
@@ -48,7 +58,7 @@ export const App = () => {
         >
           <Tab eventKey="recorder" title="ProofBoy Recorder">
             <Stack className="d-flex align-items-center justify-content-center text-center min-vh-100">
-              <ProofBoyPlayer onNewData={onProofBoyData}/>
+              {/* <ProofBoyPlayer onNewData={onProofBoyData}/> */}
               <NftPreview proofBoyData={proofBoyData} addIndexedNft={addIndexedNft}/>
               <Display/>
             </Stack>
@@ -61,6 +71,7 @@ export const App = () => {
       <MetaMaskError />
 
       </div>
+    </ApolloProvider>
     </MetaMaskContextProvider>
   )
 }

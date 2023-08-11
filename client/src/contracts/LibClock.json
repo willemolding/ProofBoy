@@ -7,59 +7,59 @@
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "208:1464:10:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "208:1464:10:-:0;;;;;;;;",
+  "sourceMap": "208:1464:11:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "208:1464:11:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.15;\n\nimport \"../../libraries/DisputeTypes.sol\";\n\n/// @title LibClock\n/// @notice This library contains helper functions for working with the `Clock` type.\nlibrary LibClock {\n    /// @notice Packs a `Duration` and `Timestamp` into a `Clock` type.\n    /// @param _duration The `Duration` to pack into the `Clock` type.\n    /// @param _timestamp The `Timestamp` to pack into the `Clock` type.\n    /// @return clock_ The `Clock` containing the `_duration` and `_timestamp`.\n    function wrap(Duration _duration, Timestamp _timestamp) internal pure returns (Clock clock_) {\n        assembly {\n            clock_ := or(shl(0x40, _duration), _timestamp)\n        }\n    }\n\n    /// @notice Pull the `Duration` out of a `Clock` type.\n    /// @param _clock The `Clock` type to pull the `Duration` out of.\n    /// @return duration_ The `Duration` pulled out of `_clock`.\n    function duration(Clock _clock) internal pure returns (Duration duration_) {\n        // Shift the high-order 64 bits into the low-order 64 bits, leaving only the `duration`.\n        assembly {\n            duration_ := shr(0x40, _clock)\n        }\n    }\n\n    /// @notice Pull the `Timestamp` out of a `Clock` type.\n    /// @param _clock The `Clock` type to pull the `Timestamp` out of.\n    /// @return timestamp_ The `Timestamp` pulled out of `_clock`.\n    function timestamp(Clock _clock) internal pure returns (Timestamp timestamp_) {\n        // Clean the high-order 192 bits by shifting the clock left and then right again, leaving\n        // only the `timestamp`.\n        assembly {\n            timestamp_ := shr(0xC0, shl(0xC0, _clock))\n        }\n    }\n}\n",
   "sourcePath": "@eth-optimism/contracts-bedrock/src/dispute/lib/LibClock.sol",
   "ast": {
     "absolutePath": "@eth-optimism/contracts-bedrock/src/dispute/lib/LibClock.sol",
     "exportedSymbols": {
       "BondAmount": [
-        2610
+        3500
       ],
       "Claim": [
-        2606
+        3496
       ],
       "ClaimHash": [
-        2608
+        3498
       ],
       "Clock": [
-        2618
+        3508
       ],
       "Duration": [
-        2614
+        3504
       ],
       "GameId": [
-        2616
+        3506
       ],
       "GameStatus": [
-        2626
+        3516
       ],
       "GameType": [
-        2622
+        3512
       ],
       "GameTypes": [
-        2652
+        3542
       ],
       "Hash": [
-        2604
+        3494
       ],
       "LibClock": [
-        2194
+        3084
       ],
       "Position": [
-        2620
+        3510
       ],
       "Timestamp": [
-        2612
+        3502
       ]
     },
-    "id": 2195,
+    "id": 3085,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2152,
+        "id": 3042,
         "literals": [
           "solidity",
           "^",
@@ -67,17 +67,17 @@
           ".15"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:24:10"
+        "src": "32:24:11"
       },
       {
         "absolutePath": "@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol",
         "file": "../../libraries/DisputeTypes.sol",
-        "id": 2153,
+        "id": 3043,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 2195,
-        "sourceUnit": 2653,
-        "src": "58:42:10",
+        "scope": 3085,
+        "sourceUnit": 3543,
+        "src": "58:42:11",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -88,34 +88,34 @@
         "contractDependencies": [],
         "contractKind": "library",
         "documentation": {
-          "id": 2154,
+          "id": 3044,
           "nodeType": "StructuredDocumentation",
-          "src": "102:106:10",
+          "src": "102:106:11",
           "text": "@title LibClock\n @notice This library contains helper functions for working with the `Clock` type."
         },
         "fullyImplemented": true,
-        "id": 2194,
+        "id": 3084,
         "linearizedBaseContracts": [
-          2194
+          3084
         ],
         "name": "LibClock",
-        "nameLocation": "216:8:10",
+        "nameLocation": "216:8:11",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 2168,
+              "id": 3058,
               "nodeType": "Block",
-              "src": "620:95:10",
+              "src": "620:95:11",
               "statements": [
                 {
                   "AST": {
                     "nodeType": "YulBlock",
-                    "src": "639:70:10",
+                    "src": "639:70:11",
                     "statements": [
                       {
                         "nodeType": "YulAssignment",
-                        "src": "653:46:10",
+                        "src": "653:46:11",
                         "value": {
                           "arguments": [
                             {
@@ -123,43 +123,43 @@
                                 {
                                   "kind": "number",
                                   "nodeType": "YulLiteral",
-                                  "src": "670:4:10",
+                                  "src": "670:4:11",
                                   "type": "",
                                   "value": "0x40"
                                 },
                                 {
                                   "name": "_duration",
                                   "nodeType": "YulIdentifier",
-                                  "src": "676:9:10"
+                                  "src": "676:9:11"
                                 }
                               ],
                               "functionName": {
                                 "name": "shl",
                                 "nodeType": "YulIdentifier",
-                                "src": "666:3:10"
+                                "src": "666:3:11"
                               },
                               "nodeType": "YulFunctionCall",
-                              "src": "666:20:10"
+                              "src": "666:20:11"
                             },
                             {
                               "name": "_timestamp",
                               "nodeType": "YulIdentifier",
-                              "src": "688:10:10"
+                              "src": "688:10:11"
                             }
                           ],
                           "functionName": {
                             "name": "or",
                             "nodeType": "YulIdentifier",
-                            "src": "663:2:10"
+                            "src": "663:2:11"
                           },
                           "nodeType": "YulFunctionCall",
-                          "src": "663:36:10"
+                          "src": "663:36:11"
                         },
                         "variableNames": [
                           {
                             "name": "clock_",
                             "nodeType": "YulIdentifier",
-                            "src": "653:6:10"
+                            "src": "653:6:11"
                           }
                         ]
                       }
@@ -168,79 +168,79 @@
                   "evmVersion": "london",
                   "externalReferences": [
                     {
-                      "declaration": 2158,
+                      "declaration": 3048,
                       "isOffset": false,
                       "isSlot": false,
-                      "src": "676:9:10",
+                      "src": "676:9:11",
                       "valueSize": 1
                     },
                     {
-                      "declaration": 2161,
+                      "declaration": 3051,
                       "isOffset": false,
                       "isSlot": false,
-                      "src": "688:10:10",
+                      "src": "688:10:11",
                       "valueSize": 1
                     },
                     {
-                      "declaration": 2165,
+                      "declaration": 3055,
                       "isOffset": false,
                       "isSlot": false,
-                      "src": "653:6:10",
+                      "src": "653:6:11",
                       "valueSize": 1
                     }
                   ],
-                  "id": 2167,
+                  "id": 3057,
                   "nodeType": "InlineAssembly",
-                  "src": "630:79:10"
+                  "src": "630:79:11"
                 }
               ]
             },
             "documentation": {
-              "id": 2155,
+              "id": 3045,
               "nodeType": "StructuredDocumentation",
-              "src": "231:291:10",
+              "src": "231:291:11",
               "text": "@notice Packs a `Duration` and `Timestamp` into a `Clock` type.\n @param _duration The `Duration` to pack into the `Clock` type.\n @param _timestamp The `Timestamp` to pack into the `Clock` type.\n @return clock_ The `Clock` containing the `_duration` and `_timestamp`."
             },
-            "id": 2169,
+            "id": 3059,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "wrap",
-            "nameLocation": "536:4:10",
+            "nameLocation": "536:4:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2162,
+              "id": 3052,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2158,
+                  "id": 3048,
                   "mutability": "mutable",
                   "name": "_duration",
-                  "nameLocation": "550:9:10",
+                  "nameLocation": "550:9:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2169,
-                  "src": "541:18:10",
+                  "scope": 3059,
+                  "src": "541:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Duration_$2614",
+                    "typeIdentifier": "t_userDefinedValueType$_Duration_$3504",
                     "typeString": "Duration"
                   },
                   "typeName": {
-                    "id": 2157,
+                    "id": 3047,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2156,
+                      "id": 3046,
                       "name": "Duration",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2614,
-                      "src": "541:8:10"
+                      "referencedDeclaration": 3504,
+                      "src": "541:8:11"
                     },
-                    "referencedDeclaration": 2614,
-                    "src": "541:8:10",
+                    "referencedDeclaration": 3504,
+                    "src": "541:8:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Duration_$2614",
+                      "typeIdentifier": "t_userDefinedValueType$_Duration_$3504",
                       "typeString": "Duration"
                     }
                   },
@@ -248,130 +248,130 @@
                 },
                 {
                   "constant": false,
-                  "id": 2161,
+                  "id": 3051,
                   "mutability": "mutable",
                   "name": "_timestamp",
-                  "nameLocation": "571:10:10",
+                  "nameLocation": "571:10:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2169,
-                  "src": "561:20:10",
+                  "scope": 3059,
+                  "src": "561:20:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Timestamp_$2612",
+                    "typeIdentifier": "t_userDefinedValueType$_Timestamp_$3502",
                     "typeString": "Timestamp"
                   },
                   "typeName": {
-                    "id": 2160,
+                    "id": 3050,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2159,
+                      "id": 3049,
                       "name": "Timestamp",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2612,
-                      "src": "561:9:10"
+                      "referencedDeclaration": 3502,
+                      "src": "561:9:11"
                     },
-                    "referencedDeclaration": 2612,
-                    "src": "561:9:10",
+                    "referencedDeclaration": 3502,
+                    "src": "561:9:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Timestamp_$2612",
+                      "typeIdentifier": "t_userDefinedValueType$_Timestamp_$3502",
                       "typeString": "Timestamp"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "540:42:10"
+              "src": "540:42:11"
             },
             "returnParameters": {
-              "id": 2166,
+              "id": 3056,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2165,
+                  "id": 3055,
                   "mutability": "mutable",
                   "name": "clock_",
-                  "nameLocation": "612:6:10",
+                  "nameLocation": "612:6:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2169,
-                  "src": "606:12:10",
+                  "scope": 3059,
+                  "src": "606:12:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Clock_$2618",
+                    "typeIdentifier": "t_userDefinedValueType$_Clock_$3508",
                     "typeString": "Clock"
                   },
                   "typeName": {
-                    "id": 2164,
+                    "id": 3054,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2163,
+                      "id": 3053,
                       "name": "Clock",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2618,
-                      "src": "606:5:10"
+                      "referencedDeclaration": 3508,
+                      "src": "606:5:11"
                     },
-                    "referencedDeclaration": 2618,
-                    "src": "606:5:10",
+                    "referencedDeclaration": 3508,
+                    "src": "606:5:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Clock_$2618",
+                      "typeIdentifier": "t_userDefinedValueType$_Clock_$3508",
                       "typeString": "Clock"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "605:14:10"
+              "src": "605:14:11"
             },
-            "scope": 2194,
-            "src": "527:188:10",
+            "scope": 3084,
+            "src": "527:188:11",
             "stateMutability": "pure",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 2180,
+              "id": 3070,
               "nodeType": "Block",
-              "src": "990:176:10",
+              "src": "990:176:11",
               "statements": [
                 {
                   "AST": {
                     "nodeType": "YulBlock",
-                    "src": "1106:54:10",
+                    "src": "1106:54:11",
                     "statements": [
                       {
                         "nodeType": "YulAssignment",
-                        "src": "1120:30:10",
+                        "src": "1120:30:11",
                         "value": {
                           "arguments": [
                             {
                               "kind": "number",
                               "nodeType": "YulLiteral",
-                              "src": "1137:4:10",
+                              "src": "1137:4:11",
                               "type": "",
                               "value": "0x40"
                             },
                             {
                               "name": "_clock",
                               "nodeType": "YulIdentifier",
-                              "src": "1143:6:10"
+                              "src": "1143:6:11"
                             }
                           ],
                           "functionName": {
                             "name": "shr",
                             "nodeType": "YulIdentifier",
-                            "src": "1133:3:10"
+                            "src": "1133:3:11"
                           },
                           "nodeType": "YulFunctionCall",
-                          "src": "1133:17:10"
+                          "src": "1133:17:11"
                         },
                         "variableNames": [
                           {
                             "name": "duration_",
                             "nodeType": "YulIdentifier",
-                            "src": "1120:9:10"
+                            "src": "1120:9:11"
                           }
                         ]
                       }
@@ -380,147 +380,147 @@
                   "evmVersion": "london",
                   "externalReferences": [
                     {
-                      "declaration": 2173,
+                      "declaration": 3063,
                       "isOffset": false,
                       "isSlot": false,
-                      "src": "1143:6:10",
+                      "src": "1143:6:11",
                       "valueSize": 1
                     },
                     {
-                      "declaration": 2177,
+                      "declaration": 3067,
                       "isOffset": false,
                       "isSlot": false,
-                      "src": "1120:9:10",
+                      "src": "1120:9:11",
                       "valueSize": 1
                     }
                   ],
-                  "id": 2179,
+                  "id": 3069,
                   "nodeType": "InlineAssembly",
-                  "src": "1097:63:10"
+                  "src": "1097:63:11"
                 }
               ]
             },
             "documentation": {
-              "id": 2170,
+              "id": 3060,
               "nodeType": "StructuredDocumentation",
-              "src": "721:189:10",
+              "src": "721:189:11",
               "text": "@notice Pull the `Duration` out of a `Clock` type.\n @param _clock The `Clock` type to pull the `Duration` out of.\n @return duration_ The `Duration` pulled out of `_clock`."
             },
-            "id": 2181,
+            "id": 3071,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "duration",
-            "nameLocation": "924:8:10",
+            "nameLocation": "924:8:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2174,
+              "id": 3064,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2173,
+                  "id": 3063,
                   "mutability": "mutable",
                   "name": "_clock",
-                  "nameLocation": "939:6:10",
+                  "nameLocation": "939:6:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2181,
-                  "src": "933:12:10",
+                  "scope": 3071,
+                  "src": "933:12:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Clock_$2618",
+                    "typeIdentifier": "t_userDefinedValueType$_Clock_$3508",
                     "typeString": "Clock"
                   },
                   "typeName": {
-                    "id": 2172,
+                    "id": 3062,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2171,
+                      "id": 3061,
                       "name": "Clock",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2618,
-                      "src": "933:5:10"
+                      "referencedDeclaration": 3508,
+                      "src": "933:5:11"
                     },
-                    "referencedDeclaration": 2618,
-                    "src": "933:5:10",
+                    "referencedDeclaration": 3508,
+                    "src": "933:5:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Clock_$2618",
+                      "typeIdentifier": "t_userDefinedValueType$_Clock_$3508",
                       "typeString": "Clock"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "932:14:10"
+              "src": "932:14:11"
             },
             "returnParameters": {
-              "id": 2178,
+              "id": 3068,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2177,
+                  "id": 3067,
                   "mutability": "mutable",
                   "name": "duration_",
-                  "nameLocation": "979:9:10",
+                  "nameLocation": "979:9:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2181,
-                  "src": "970:18:10",
+                  "scope": 3071,
+                  "src": "970:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Duration_$2614",
+                    "typeIdentifier": "t_userDefinedValueType$_Duration_$3504",
                     "typeString": "Duration"
                   },
                   "typeName": {
-                    "id": 2176,
+                    "id": 3066,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2175,
+                      "id": 3065,
                       "name": "Duration",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2614,
-                      "src": "970:8:10"
+                      "referencedDeclaration": 3504,
+                      "src": "970:8:11"
                     },
-                    "referencedDeclaration": 2614,
-                    "src": "970:8:10",
+                    "referencedDeclaration": 3504,
+                    "src": "970:8:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Duration_$2614",
+                      "typeIdentifier": "t_userDefinedValueType$_Duration_$3504",
                       "typeString": "Duration"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "969:20:10"
+              "src": "969:20:11"
             },
-            "scope": 2194,
-            "src": "915:251:10",
+            "scope": 3084,
+            "src": "915:251:11",
             "stateMutability": "pure",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 2192,
+              "id": 3082,
               "nodeType": "Block",
-              "src": "1448:222:10",
+              "src": "1448:222:11",
               "statements": [
                 {
                   "AST": {
                     "nodeType": "YulBlock",
-                    "src": "1598:66:10",
+                    "src": "1598:66:11",
                     "statements": [
                       {
                         "nodeType": "YulAssignment",
-                        "src": "1612:42:10",
+                        "src": "1612:42:11",
                         "value": {
                           "arguments": [
                             {
                               "kind": "number",
                               "nodeType": "YulLiteral",
-                              "src": "1630:4:10",
+                              "src": "1630:4:11",
                               "type": "",
                               "value": "0xC0"
                             },
@@ -529,38 +529,38 @@
                                 {
                                   "kind": "number",
                                   "nodeType": "YulLiteral",
-                                  "src": "1640:4:10",
+                                  "src": "1640:4:11",
                                   "type": "",
                                   "value": "0xC0"
                                 },
                                 {
                                   "name": "_clock",
                                   "nodeType": "YulIdentifier",
-                                  "src": "1646:6:10"
+                                  "src": "1646:6:11"
                                 }
                               ],
                               "functionName": {
                                 "name": "shl",
                                 "nodeType": "YulIdentifier",
-                                "src": "1636:3:10"
+                                "src": "1636:3:11"
                               },
                               "nodeType": "YulFunctionCall",
-                              "src": "1636:17:10"
+                              "src": "1636:17:11"
                             }
                           ],
                           "functionName": {
                             "name": "shr",
                             "nodeType": "YulIdentifier",
-                            "src": "1626:3:10"
+                            "src": "1626:3:11"
                           },
                           "nodeType": "YulFunctionCall",
-                          "src": "1626:28:10"
+                          "src": "1626:28:11"
                         },
                         "variableNames": [
                           {
                             "name": "timestamp_",
                             "nodeType": "YulIdentifier",
-                            "src": "1612:10:10"
+                            "src": "1612:10:11"
                           }
                         ]
                       }
@@ -569,134 +569,134 @@
                   "evmVersion": "london",
                   "externalReferences": [
                     {
-                      "declaration": 2185,
+                      "declaration": 3075,
                       "isOffset": false,
                       "isSlot": false,
-                      "src": "1646:6:10",
+                      "src": "1646:6:11",
                       "valueSize": 1
                     },
                     {
-                      "declaration": 2189,
+                      "declaration": 3079,
                       "isOffset": false,
                       "isSlot": false,
-                      "src": "1612:10:10",
+                      "src": "1612:10:11",
                       "valueSize": 1
                     }
                   ],
-                  "id": 2191,
+                  "id": 3081,
                   "nodeType": "InlineAssembly",
-                  "src": "1589:75:10"
+                  "src": "1589:75:11"
                 }
               ]
             },
             "documentation": {
-              "id": 2182,
+              "id": 3072,
               "nodeType": "StructuredDocumentation",
-              "src": "1172:193:10",
+              "src": "1172:193:11",
               "text": "@notice Pull the `Timestamp` out of a `Clock` type.\n @param _clock The `Clock` type to pull the `Timestamp` out of.\n @return timestamp_ The `Timestamp` pulled out of `_clock`."
             },
-            "id": 2193,
+            "id": 3083,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "timestamp",
-            "nameLocation": "1379:9:10",
+            "nameLocation": "1379:9:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2186,
+              "id": 3076,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2185,
+                  "id": 3075,
                   "mutability": "mutable",
                   "name": "_clock",
-                  "nameLocation": "1395:6:10",
+                  "nameLocation": "1395:6:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2193,
-                  "src": "1389:12:10",
+                  "scope": 3083,
+                  "src": "1389:12:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Clock_$2618",
+                    "typeIdentifier": "t_userDefinedValueType$_Clock_$3508",
                     "typeString": "Clock"
                   },
                   "typeName": {
-                    "id": 2184,
+                    "id": 3074,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2183,
+                      "id": 3073,
                       "name": "Clock",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2618,
-                      "src": "1389:5:10"
+                      "referencedDeclaration": 3508,
+                      "src": "1389:5:11"
                     },
-                    "referencedDeclaration": 2618,
-                    "src": "1389:5:10",
+                    "referencedDeclaration": 3508,
+                    "src": "1389:5:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Clock_$2618",
+                      "typeIdentifier": "t_userDefinedValueType$_Clock_$3508",
                       "typeString": "Clock"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "1388:14:10"
+              "src": "1388:14:11"
             },
             "returnParameters": {
-              "id": 2190,
+              "id": 3080,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2189,
+                  "id": 3079,
                   "mutability": "mutable",
                   "name": "timestamp_",
-                  "nameLocation": "1436:10:10",
+                  "nameLocation": "1436:10:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2193,
-                  "src": "1426:20:10",
+                  "scope": 3083,
+                  "src": "1426:20:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Timestamp_$2612",
+                    "typeIdentifier": "t_userDefinedValueType$_Timestamp_$3502",
                     "typeString": "Timestamp"
                   },
                   "typeName": {
-                    "id": 2188,
+                    "id": 3078,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2187,
+                      "id": 3077,
                       "name": "Timestamp",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2612,
-                      "src": "1426:9:10"
+                      "referencedDeclaration": 3502,
+                      "src": "1426:9:11"
                     },
-                    "referencedDeclaration": 2612,
-                    "src": "1426:9:10",
+                    "referencedDeclaration": 3502,
+                    "src": "1426:9:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Timestamp_$2612",
+                      "typeIdentifier": "t_userDefinedValueType$_Timestamp_$3502",
                       "typeString": "Timestamp"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "1425:22:10"
+              "src": "1425:22:11"
             },
-            "scope": 2194,
-            "src": "1370:300:10",
+            "scope": 3084,
+            "src": "1370:300:11",
             "stateMutability": "pure",
             "virtual": false,
             "visibility": "internal"
           }
         ],
-        "scope": 2195,
-        "src": "208:1464:10",
+        "scope": 3085,
+        "src": "208:1464:11",
         "usedErrors": []
       }
     ],
-    "src": "32:1641:10"
+    "src": "32:1641:11"
   },
   "compiler": {
     "name": "solc",
@@ -704,7 +704,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-04T03:28:37.491Z",
+  "updatedAt": "2023-08-11T06:02:10.818Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

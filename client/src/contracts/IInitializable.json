@@ -23,15 +23,15 @@
     "absolutePath": "@eth-optimism/contracts-bedrock/src/dispute/interfaces/IInitializable.sol",
     "exportedSymbols": {
       "IInitializable": [
-        2150
+        3040
       ]
     },
-    "id": 2151,
+    "id": 3041,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2144,
+        "id": 3034,
         "literals": [
           "solidity",
           "^",
@@ -39,7 +39,7 @@
           ".15"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:24:9"
+        "src": "32:24:10"
       },
       {
         "abstract": false,
@@ -48,60 +48,60 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 2145,
+          "id": 3035,
           "nodeType": "StructuredDocumentation",
-          "src": "58:80:9",
+          "src": "58:80:10",
           "text": "@title IInitializable\n @notice An interface for initializable contracts."
         },
         "fullyImplemented": false,
-        "id": 2150,
+        "id": 3040,
         "linearizedBaseContracts": [
-          2150
+          3040
         ],
         "name": "IInitializable",
-        "nameLocation": "148:14:9",
+        "nameLocation": "148:14:10",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "documentation": {
-              "id": 2146,
+              "id": 3036,
               "nodeType": "StructuredDocumentation",
-              "src": "169:89:9",
+              "src": "169:89:10",
               "text": "@notice Initializes the contract.\n @dev This function may only be called once."
             },
             "functionSelector": "8129fc1c",
-            "id": 2149,
+            "id": 3039,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "initialize",
-            "nameLocation": "272:10:9",
+            "nameLocation": "272:10:10",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2147,
+              "id": 3037,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "282:2:9"
+              "src": "282:2:10"
             },
             "returnParameters": {
-              "id": 2148,
+              "id": 3038,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "293:0:9"
+              "src": "293:0:10"
             },
-            "scope": 2150,
-            "src": "263:31:9",
+            "scope": 3040,
+            "src": "263:31:10",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2151,
-        "src": "138:158:9",
+        "scope": 3041,
+        "src": "138:158:10",
         "usedErrors": []
       }
     ],
-    "src": "32:265:9"
+    "src": "32:265:10"
   },
   "compiler": {
     "name": "solc",
@@ -109,7 +109,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-04T03:28:37.491Z",
+  "updatedAt": "2023-08-11T06:02:10.818Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

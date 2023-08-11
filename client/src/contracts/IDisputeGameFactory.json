@@ -226,63 +226,63 @@
     "absolutePath": "@eth-optimism/contracts-bedrock/src/dispute/interfaces/IDisputeGameFactory.sol",
     "exportedSymbols": {
       "BondAmount": [
-        2610
+        3500
       ],
       "Claim": [
-        2606
+        3496
       ],
       "ClaimHash": [
-        2608
+        3498
       ],
       "Clock": [
-        2618
+        3508
       ],
       "Duration": [
-        2614
+        3504
       ],
       "GameId": [
-        2616
+        3506
       ],
       "GameStatus": [
-        2626
+        3516
       ],
       "GameType": [
-        2622
+        3512
       ],
       "GameTypes": [
-        2652
+        3542
       ],
       "Hash": [
-        2604
+        3494
       ],
       "IDisputeGame": [
-        1927
+        2817
       ],
       "IDisputeGameFactory": [
-        2037
+        2927
       ],
       "LibClock": [
-        2194
+        3084
       ],
       "LibHashing": [
-        2214
+        3104
       ],
       "LibPosition": [
-        2372
+        3262
       ],
       "Position": [
-        2620
+        3510
       ],
       "Timestamp": [
-        2612
+        3502
       ]
     },
-    "id": 2038,
+    "id": 2928,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1929,
+        "id": 2819,
         "literals": [
           "solidity",
           "^",
@@ -290,38 +290,38 @@
           ".15"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:24:7"
+        "src": "32:24:8"
       },
       {
         "absolutePath": "@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol",
         "file": "../../libraries/DisputeTypes.sol",
-        "id": 1930,
+        "id": 2820,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 2038,
-        "sourceUnit": 2653,
-        "src": "58:42:7",
+        "scope": 2928,
+        "sourceUnit": 3543,
+        "src": "58:42:8",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
         "absolutePath": "@eth-optimism/contracts-bedrock/src/dispute/interfaces/IDisputeGame.sol",
         "file": "./IDisputeGame.sol",
-        "id": 1932,
+        "id": 2822,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 2038,
-        "sourceUnit": 1928,
-        "src": "102:50:7",
+        "scope": 2928,
+        "sourceUnit": 2818,
+        "src": "102:50:8",
         "symbolAliases": [
           {
             "foreign": {
-              "id": 1931,
+              "id": 2821,
               "name": "IDisputeGame",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 1927,
-              "src": "111:12:7",
+              "referencedDeclaration": 2817,
+              "src": "111:12:8",
               "typeDescriptions": {}
             },
             "nameLocation": "-1:-1:-1"
@@ -336,47 +336,47 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 1933,
+          "id": 2823,
           "nodeType": "StructuredDocumentation",
-          "src": "154:92:7",
+          "src": "154:92:8",
           "text": "@title IDisputeGameFactory\n @notice The interface for a DisputeGameFactory contract."
         },
         "fullyImplemented": false,
-        "id": 2037,
+        "id": 2927,
         "linearizedBaseContracts": [
-          2037
+          2927
         ],
         "name": "IDisputeGameFactory",
-        "nameLocation": "256:19:7",
+        "nameLocation": "256:19:8",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "anonymous": false,
             "documentation": {
-              "id": 1934,
+              "id": 2824,
               "nodeType": "StructuredDocumentation",
-              "src": "282:256:7",
+              "src": "282:256:8",
               "text": "@notice Emitted when a new dispute game is created\n @param disputeProxy The address of the dispute game proxy\n @param gameType The type of the dispute game proxy's implementation\n @param rootClaim The root claim of the dispute game"
             },
             "eventSelector": "fad0599ff449d8d9685eadecca8cb9e00924c5fd8367c1c09469824939e1ffec",
-            "id": 1944,
+            "id": 2834,
             "name": "DisputeGameCreated",
-            "nameLocation": "549:18:7",
+            "nameLocation": "549:18:8",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 1943,
+              "id": 2833,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1936,
+                  "id": 2826,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "disputeProxy",
-                  "nameLocation": "593:12:7",
+                  "nameLocation": "593:12:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1944,
-                  "src": "577:28:7",
+                  "scope": 2834,
+                  "src": "577:28:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -384,10 +384,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1935,
+                    "id": 2825,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "577:7:7",
+                    "src": "577:7:8",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -398,34 +398,34 @@
                 },
                 {
                   "constant": false,
-                  "id": 1939,
+                  "id": 2829,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "gameType",
-                  "nameLocation": "632:8:7",
+                  "nameLocation": "632:8:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1944,
-                  "src": "615:25:7",
+                  "scope": 2834,
+                  "src": "615:25:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                    "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                     "typeString": "GameType"
                   },
                   "typeName": {
-                    "id": 1938,
+                    "id": 2828,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1937,
+                      "id": 2827,
                       "name": "GameType",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2622,
-                      "src": "615:8:7"
+                      "referencedDeclaration": 3512,
+                      "src": "615:8:8"
                     },
-                    "referencedDeclaration": 2622,
-                    "src": "615:8:7",
+                    "referencedDeclaration": 3512,
+                    "src": "615:8:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                      "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                       "typeString": "GameType"
                     }
                   },
@@ -433,71 +433,71 @@
                 },
                 {
                   "constant": false,
-                  "id": 1942,
+                  "id": 2832,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "rootClaim",
-                  "nameLocation": "664:9:7",
+                  "nameLocation": "664:9:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1944,
-                  "src": "650:23:7",
+                  "scope": 2834,
+                  "src": "650:23:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Claim_$2606",
+                    "typeIdentifier": "t_userDefinedValueType$_Claim_$3496",
                     "typeString": "Claim"
                   },
                   "typeName": {
-                    "id": 1941,
+                    "id": 2831,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1940,
+                      "id": 2830,
                       "name": "Claim",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2606,
-                      "src": "650:5:7"
+                      "referencedDeclaration": 3496,
+                      "src": "650:5:8"
                     },
-                    "referencedDeclaration": 2606,
-                    "src": "650:5:7",
+                    "referencedDeclaration": 3496,
+                    "src": "650:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Claim_$2606",
+                      "typeIdentifier": "t_userDefinedValueType$_Claim_$3496",
                       "typeString": "Claim"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "567:112:7"
+              "src": "567:112:8"
             },
-            "src": "543:137:7"
+            "src": "543:137:8"
           },
           {
             "anonymous": false,
             "documentation": {
-              "id": 1945,
+              "id": 2835,
               "nodeType": "StructuredDocumentation",
-              "src": "686:198:7",
+              "src": "686:198:8",
               "text": "@notice Emitted when a new game implementation added to the factory\n @param impl The implementation contract for the given `GameType`.\n @param gameType The type of the DisputeGame."
             },
             "eventSelector": "623713f72f6e427a8044bb8b3bd6834357cf285decbaa21bcc73c1d0632c4d84",
-            "id": 1952,
+            "id": 2842,
             "name": "ImplementationSet",
-            "nameLocation": "895:17:7",
+            "nameLocation": "895:17:8",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 1951,
+              "id": 2841,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1947,
+                  "id": 2837,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "impl",
-                  "nameLocation": "929:4:7",
+                  "nameLocation": "929:4:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1952,
-                  "src": "913:20:7",
+                  "scope": 2842,
+                  "src": "913:20:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -505,10 +505,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1946,
+                    "id": 2836,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "913:7:7",
+                    "src": "913:7:8",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -519,78 +519,78 @@
                 },
                 {
                   "constant": false,
-                  "id": 1950,
+                  "id": 2840,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "gameType",
-                  "nameLocation": "952:8:7",
+                  "nameLocation": "952:8:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1952,
-                  "src": "935:25:7",
+                  "scope": 2842,
+                  "src": "935:25:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                    "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                     "typeString": "GameType"
                   },
                   "typeName": {
-                    "id": 1949,
+                    "id": 2839,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1948,
+                      "id": 2838,
                       "name": "GameType",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2622,
-                      "src": "935:8:7"
+                      "referencedDeclaration": 3512,
+                      "src": "935:8:8"
                     },
-                    "referencedDeclaration": 2622,
-                    "src": "935:8:7",
+                    "referencedDeclaration": 3512,
+                    "src": "935:8:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                      "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                       "typeString": "GameType"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "912:49:7"
+              "src": "912:49:8"
             },
-            "src": "889:73:7"
+            "src": "889:73:8"
           },
           {
             "documentation": {
-              "id": 1953,
+              "id": 2843,
               "nodeType": "StructuredDocumentation",
-              "src": "968:156:7",
+              "src": "968:156:8",
               "text": "@notice The total number of dispute games created by this factory.\n @return _gameCount The total number of dispute games created by this factory."
             },
             "functionSelector": "4d1975b4",
-            "id": 1958,
+            "id": 2848,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "gameCount",
-            "nameLocation": "1138:9:7",
+            "nameLocation": "1138:9:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1954,
+              "id": 2844,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1147:2:7"
+              "src": "1147:2:8"
             },
             "returnParameters": {
-              "id": 1957,
+              "id": 2847,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1956,
+                  "id": 2846,
                   "mutability": "mutable",
                   "name": "_gameCount",
-                  "nameLocation": "1181:10:7",
+                  "nameLocation": "1181:10:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1958,
-                  "src": "1173:18:7",
+                  "scope": 2848,
+                  "src": "1173:18:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -598,10 +598,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1955,
+                    "id": 2845,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1173:7:7",
+                    "src": "1173:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -610,62 +610,62 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1172:20:7"
+              "src": "1172:20:8"
             },
-            "scope": 2037,
-            "src": "1129:64:7",
+            "scope": 2927,
+            "src": "1129:64:8",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 1959,
+              "id": 2849,
               "nodeType": "StructuredDocumentation",
-              "src": "1199:670:7",
+              "src": "1199:670:8",
               "text": "@notice `games` queries an internal mapping that maps the hash of\n         `gameType ++ rootClaim ++ extraData` to the deployed `DisputeGame` clone.\n @dev `++` equates to concatenation.\n @param gameType The type of the DisputeGame - used to decide the proxy implementation\n @param rootClaim The root claim of the DisputeGame.\n @param extraData Any extra data that should be provided to the created dispute game.\n @return _proxy The clone of the `DisputeGame` created with the given parameters.\n         Returns `address(0)` if nonexistent.\n @return _timestamp The timestamp of the creation of the dispute game."
             },
             "functionSelector": "c49d5271",
-            "id": 1975,
+            "id": 2865,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "games",
-            "nameLocation": "1883:5:7",
+            "nameLocation": "1883:5:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1968,
+              "id": 2858,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1962,
+                  "id": 2852,
                   "mutability": "mutable",
                   "name": "gameType",
-                  "nameLocation": "1907:8:7",
+                  "nameLocation": "1907:8:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1975,
-                  "src": "1898:17:7",
+                  "scope": 2865,
+                  "src": "1898:17:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                    "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                     "typeString": "GameType"
                   },
                   "typeName": {
-                    "id": 1961,
+                    "id": 2851,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1960,
+                      "id": 2850,
                       "name": "GameType",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2622,
-                      "src": "1898:8:7"
+                      "referencedDeclaration": 3512,
+                      "src": "1898:8:8"
                     },
-                    "referencedDeclaration": 2622,
-                    "src": "1898:8:7",
+                    "referencedDeclaration": 3512,
+                    "src": "1898:8:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                      "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                       "typeString": "GameType"
                     }
                   },
@@ -673,33 +673,33 @@
                 },
                 {
                   "constant": false,
-                  "id": 1965,
+                  "id": 2855,
                   "mutability": "mutable",
                   "name": "rootClaim",
-                  "nameLocation": "1931:9:7",
+                  "nameLocation": "1931:9:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1975,
-                  "src": "1925:15:7",
+                  "scope": 2865,
+                  "src": "1925:15:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Claim_$2606",
+                    "typeIdentifier": "t_userDefinedValueType$_Claim_$3496",
                     "typeString": "Claim"
                   },
                   "typeName": {
-                    "id": 1964,
+                    "id": 2854,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1963,
+                      "id": 2853,
                       "name": "Claim",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2606,
-                      "src": "1925:5:7"
+                      "referencedDeclaration": 3496,
+                      "src": "1925:5:8"
                     },
-                    "referencedDeclaration": 2606,
-                    "src": "1925:5:7",
+                    "referencedDeclaration": 3496,
+                    "src": "1925:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Claim_$2606",
+                      "typeIdentifier": "t_userDefinedValueType$_Claim_$3496",
                       "typeString": "Claim"
                     }
                   },
@@ -707,13 +707,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1967,
+                  "id": 2857,
                   "mutability": "mutable",
                   "name": "extraData",
-                  "nameLocation": "1965:9:7",
+                  "nameLocation": "1965:9:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1975,
-                  "src": "1950:24:7",
+                  "scope": 2865,
+                  "src": "1950:24:8",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -721,10 +721,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1966,
+                    "id": 2856,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1950:5:7",
+                    "src": "1950:5:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -733,41 +733,41 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1888:92:7"
+              "src": "1888:92:8"
             },
             "returnParameters": {
-              "id": 1974,
+              "id": 2864,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1971,
+                  "id": 2861,
                   "mutability": "mutable",
                   "name": "_proxy",
-                  "nameLocation": "2017:6:7",
+                  "nameLocation": "2017:6:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1975,
-                  "src": "2004:19:7",
+                  "scope": 2865,
+                  "src": "2004:19:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                    "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                     "typeString": "contract IDisputeGame"
                   },
                   "typeName": {
-                    "id": 1970,
+                    "id": 2860,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1969,
+                      "id": 2859,
                       "name": "IDisputeGame",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1927,
-                      "src": "2004:12:7"
+                      "referencedDeclaration": 2817,
+                      "src": "2004:12:8"
                     },
-                    "referencedDeclaration": 1927,
-                    "src": "2004:12:7",
+                    "referencedDeclaration": 2817,
+                    "src": "2004:12:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                      "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                       "typeString": "contract IDisputeGame"
                     }
                   },
@@ -775,13 +775,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1973,
+                  "id": 2863,
                   "mutability": "mutable",
                   "name": "_timestamp",
-                  "nameLocation": "2033:10:7",
+                  "nameLocation": "2033:10:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1975,
-                  "src": "2025:18:7",
+                  "scope": 2865,
+                  "src": "2025:18:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -789,10 +789,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1972,
+                    "id": 2862,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2025:7:7",
+                    "src": "2025:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -801,42 +801,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2003:41:7"
+              "src": "2003:41:8"
             },
-            "scope": 2037,
-            "src": "1874:171:7",
+            "scope": 2927,
+            "src": "1874:171:8",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 1976,
+              "id": 2866,
               "nodeType": "StructuredDocumentation",
-              "src": "2051:463:7",
+              "src": "2051:463:8",
               "text": "@notice `gameAtIndex` returns the dispute game contract address and its creation timestamp\n          at the given index. Each created dispute game increments the underlying index.\n @param _index The index of the dispute game.\n @return _proxy The clone of the `DisputeGame` created with the given parameters.\n         Returns `address(0)` if nonexistent.\n @return _timestamp The timestamp of the creation of the dispute game."
             },
             "functionSelector": "bb8aa1fc",
-            "id": 1986,
+            "id": 2876,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "gameAtIndex",
-            "nameLocation": "2528:11:7",
+            "nameLocation": "2528:11:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1979,
+              "id": 2869,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1978,
+                  "id": 2868,
                   "mutability": "mutable",
                   "name": "_index",
-                  "nameLocation": "2548:6:7",
+                  "nameLocation": "2548:6:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1986,
-                  "src": "2540:14:7",
+                  "scope": 2876,
+                  "src": "2540:14:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -844,10 +844,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1977,
+                    "id": 2867,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2540:7:7",
+                    "src": "2540:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -856,41 +856,41 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2539:16:7"
+              "src": "2539:16:8"
             },
             "returnParameters": {
-              "id": 1985,
+              "id": 2875,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1982,
+                  "id": 2872,
                   "mutability": "mutable",
                   "name": "_proxy",
-                  "nameLocation": "2616:6:7",
+                  "nameLocation": "2616:6:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1986,
-                  "src": "2603:19:7",
+                  "scope": 2876,
+                  "src": "2603:19:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                    "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                     "typeString": "contract IDisputeGame"
                   },
                   "typeName": {
-                    "id": 1981,
+                    "id": 2871,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1980,
+                      "id": 2870,
                       "name": "IDisputeGame",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1927,
-                      "src": "2603:12:7"
+                      "referencedDeclaration": 2817,
+                      "src": "2603:12:8"
                     },
-                    "referencedDeclaration": 1927,
-                    "src": "2603:12:7",
+                    "referencedDeclaration": 2817,
+                    "src": "2603:12:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                      "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                       "typeString": "contract IDisputeGame"
                     }
                   },
@@ -898,13 +898,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1984,
+                  "id": 2874,
                   "mutability": "mutable",
                   "name": "_timestamp",
-                  "nameLocation": "2632:10:7",
+                  "nameLocation": "2632:10:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1986,
-                  "src": "2624:18:7",
+                  "scope": 2876,
+                  "src": "2624:18:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -912,10 +912,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1983,
+                    "id": 2873,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2624:7:7",
+                    "src": "2624:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -924,165 +924,165 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2602:41:7"
+              "src": "2602:41:8"
             },
-            "scope": 2037,
-            "src": "2519:125:7",
+            "scope": 2927,
+            "src": "2519:125:8",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 1987,
+              "id": 2877,
               "nodeType": "StructuredDocumentation",
-              "src": "2650:346:7",
+              "src": "2650:346:8",
               "text": "@notice `gameImpls` is a mapping that maps `GameType`s to their respective\n         `IDisputeGame` implementations.\n @param gameType The type of the dispute game.\n @return _impl The address of the implementation of the game type.\n         Will be cloned on creation of a new dispute game with the given `gameType`."
             },
             "functionSelector": "dfa162d3",
-            "id": 1996,
+            "id": 2886,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "gameImpls",
-            "nameLocation": "3010:9:7",
+            "nameLocation": "3010:9:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1991,
+              "id": 2881,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1990,
+                  "id": 2880,
                   "mutability": "mutable",
                   "name": "gameType",
-                  "nameLocation": "3029:8:7",
+                  "nameLocation": "3029:8:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1996,
-                  "src": "3020:17:7",
+                  "scope": 2886,
+                  "src": "3020:17:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                    "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                     "typeString": "GameType"
                   },
                   "typeName": {
-                    "id": 1989,
+                    "id": 2879,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1988,
+                      "id": 2878,
                       "name": "GameType",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2622,
-                      "src": "3020:8:7"
+                      "referencedDeclaration": 3512,
+                      "src": "3020:8:8"
                     },
-                    "referencedDeclaration": 2622,
-                    "src": "3020:8:7",
+                    "referencedDeclaration": 3512,
+                    "src": "3020:8:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                      "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                       "typeString": "GameType"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "3019:19:7"
+              "src": "3019:19:8"
             },
             "returnParameters": {
-              "id": 1995,
+              "id": 2885,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1994,
+                  "id": 2884,
                   "mutability": "mutable",
                   "name": "_impl",
-                  "nameLocation": "3075:5:7",
+                  "nameLocation": "3075:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1996,
-                  "src": "3062:18:7",
+                  "scope": 2886,
+                  "src": "3062:18:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                    "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                     "typeString": "contract IDisputeGame"
                   },
                   "typeName": {
-                    "id": 1993,
+                    "id": 2883,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1992,
+                      "id": 2882,
                       "name": "IDisputeGame",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1927,
-                      "src": "3062:12:7"
+                      "referencedDeclaration": 2817,
+                      "src": "3062:12:8"
                     },
-                    "referencedDeclaration": 1927,
-                    "src": "3062:12:7",
+                    "referencedDeclaration": 2817,
+                    "src": "3062:12:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                      "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                       "typeString": "contract IDisputeGame"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "3061:20:7"
+              "src": "3061:20:8"
             },
-            "scope": 2037,
-            "src": "3001:81:7",
+            "scope": 2927,
+            "src": "3001:81:8",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 1997,
+              "id": 2887,
               "nodeType": "StructuredDocumentation",
-              "src": "3088:369:7",
+              "src": "3088:369:8",
               "text": "@notice Creates a new DisputeGame proxy contract.\n @param gameType The type of the DisputeGame - used to decide the proxy implementation.\n @param rootClaim The root claim of the DisputeGame.\n @param extraData Any extra data that should be provided to the created dispute game.\n @return proxy The address of the created DisputeGame proxy."
             },
             "functionSelector": "3142e55e",
-            "id": 2011,
+            "id": 2901,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "create",
-            "nameLocation": "3471:6:7",
+            "nameLocation": "3471:6:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2006,
+              "id": 2896,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2000,
+                  "id": 2890,
                   "mutability": "mutable",
                   "name": "gameType",
-                  "nameLocation": "3496:8:7",
+                  "nameLocation": "3496:8:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2011,
-                  "src": "3487:17:7",
+                  "scope": 2901,
+                  "src": "3487:17:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                    "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                     "typeString": "GameType"
                   },
                   "typeName": {
-                    "id": 1999,
+                    "id": 2889,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1998,
+                      "id": 2888,
                       "name": "GameType",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2622,
-                      "src": "3487:8:7"
+                      "referencedDeclaration": 3512,
+                      "src": "3487:8:8"
                     },
-                    "referencedDeclaration": 2622,
-                    "src": "3487:8:7",
+                    "referencedDeclaration": 3512,
+                    "src": "3487:8:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                      "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                       "typeString": "GameType"
                     }
                   },
@@ -1090,33 +1090,33 @@
                 },
                 {
                   "constant": false,
-                  "id": 2003,
+                  "id": 2893,
                   "mutability": "mutable",
                   "name": "rootClaim",
-                  "nameLocation": "3520:9:7",
+                  "nameLocation": "3520:9:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2011,
-                  "src": "3514:15:7",
+                  "scope": 2901,
+                  "src": "3514:15:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Claim_$2606",
+                    "typeIdentifier": "t_userDefinedValueType$_Claim_$3496",
                     "typeString": "Claim"
                   },
                   "typeName": {
-                    "id": 2002,
+                    "id": 2892,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2001,
+                      "id": 2891,
                       "name": "Claim",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2606,
-                      "src": "3514:5:7"
+                      "referencedDeclaration": 3496,
+                      "src": "3514:5:8"
                     },
-                    "referencedDeclaration": 2606,
-                    "src": "3514:5:7",
+                    "referencedDeclaration": 3496,
+                    "src": "3514:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Claim_$2606",
+                      "typeIdentifier": "t_userDefinedValueType$_Claim_$3496",
                       "typeString": "Claim"
                     }
                   },
@@ -1124,13 +1124,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2005,
+                  "id": 2895,
                   "mutability": "mutable",
                   "name": "extraData",
-                  "nameLocation": "3554:9:7",
+                  "nameLocation": "3554:9:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2011,
-                  "src": "3539:24:7",
+                  "scope": 2901,
+                  "src": "3539:24:8",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -1138,10 +1138,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 2004,
+                    "id": 2894,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3539:5:7",
+                    "src": "3539:5:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -1150,103 +1150,103 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3477:92:7"
+              "src": "3477:92:8"
             },
             "returnParameters": {
-              "id": 2010,
+              "id": 2900,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2009,
+                  "id": 2899,
                   "mutability": "mutable",
                   "name": "proxy",
-                  "nameLocation": "3601:5:7",
+                  "nameLocation": "3601:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2011,
-                  "src": "3588:18:7",
+                  "scope": 2901,
+                  "src": "3588:18:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                    "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                     "typeString": "contract IDisputeGame"
                   },
                   "typeName": {
-                    "id": 2008,
+                    "id": 2898,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2007,
+                      "id": 2897,
                       "name": "IDisputeGame",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1927,
-                      "src": "3588:12:7"
+                      "referencedDeclaration": 2817,
+                      "src": "3588:12:8"
                     },
-                    "referencedDeclaration": 1927,
-                    "src": "3588:12:7",
+                    "referencedDeclaration": 2817,
+                    "src": "3588:12:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                      "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                       "typeString": "contract IDisputeGame"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "3587:20:7"
+              "src": "3587:20:8"
             },
-            "scope": 2037,
-            "src": "3462:146:7",
+            "scope": 2927,
+            "src": "3462:146:8",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2012,
+              "id": 2902,
               "nodeType": "StructuredDocumentation",
-              "src": "3614:246:7",
+              "src": "3614:246:8",
               "text": "@notice Sets the implementation contract for a specific `GameType`.\n @dev May only be called by the `owner`.\n @param gameType The type of the DisputeGame.\n @param impl The implementation contract for the given `GameType`."
             },
             "functionSelector": "45583b7a",
-            "id": 2021,
+            "id": 2911,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setImplementation",
-            "nameLocation": "3874:17:7",
+            "nameLocation": "3874:17:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2019,
+              "id": 2909,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2015,
+                  "id": 2905,
                   "mutability": "mutable",
                   "name": "gameType",
-                  "nameLocation": "3901:8:7",
+                  "nameLocation": "3901:8:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2021,
-                  "src": "3892:17:7",
+                  "scope": 2911,
+                  "src": "3892:17:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                    "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                     "typeString": "GameType"
                   },
                   "typeName": {
-                    "id": 2014,
+                    "id": 2904,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2013,
+                      "id": 2903,
                       "name": "GameType",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2622,
-                      "src": "3892:8:7"
+                      "referencedDeclaration": 3512,
+                      "src": "3892:8:8"
                     },
-                    "referencedDeclaration": 2622,
-                    "src": "3892:8:7",
+                    "referencedDeclaration": 3512,
+                    "src": "3892:8:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                      "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                       "typeString": "GameType"
                     }
                   },
@@ -1254,101 +1254,101 @@
                 },
                 {
                   "constant": false,
-                  "id": 2018,
+                  "id": 2908,
                   "mutability": "mutable",
                   "name": "impl",
-                  "nameLocation": "3924:4:7",
+                  "nameLocation": "3924:4:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2021,
-                  "src": "3911:17:7",
+                  "scope": 2911,
+                  "src": "3911:17:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                    "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                     "typeString": "contract IDisputeGame"
                   },
                   "typeName": {
-                    "id": 2017,
+                    "id": 2907,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2016,
+                      "id": 2906,
                       "name": "IDisputeGame",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1927,
-                      "src": "3911:12:7"
+                      "referencedDeclaration": 2817,
+                      "src": "3911:12:8"
                     },
-                    "referencedDeclaration": 1927,
-                    "src": "3911:12:7",
+                    "referencedDeclaration": 2817,
+                    "src": "3911:12:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IDisputeGame_$1927",
+                      "typeIdentifier": "t_contract$_IDisputeGame_$2817",
                       "typeString": "contract IDisputeGame"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "3891:38:7"
+              "src": "3891:38:8"
             },
             "returnParameters": {
-              "id": 2020,
+              "id": 2910,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "3938:0:7"
+              "src": "3938:0:8"
             },
-            "scope": 2037,
-            "src": "3865:74:7",
+            "scope": 2927,
+            "src": "3865:74:8",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2022,
+              "id": 2912,
               "nodeType": "StructuredDocumentation",
-              "src": "3945:482:7",
+              "src": "3945:482:8",
               "text": "@notice Returns a unique identifier for the given dispute game parameters.\n @dev Hashes the concatenation of `gameType . rootClaim . extraData`\n      without expanding memory.\n @param gameType The type of the DisputeGame.\n @param rootClaim The root claim of the DisputeGame.\n @param extraData Any extra data that should be provided to the created dispute game.\n @return _uuid The unique identifier for the given dispute game parameters."
             },
             "functionSelector": "26daafbe",
-            "id": 2036,
+            "id": 2926,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getGameUUID",
-            "nameLocation": "4441:11:7",
+            "nameLocation": "4441:11:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2031,
+              "id": 2921,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2025,
+                  "id": 2915,
                   "mutability": "mutable",
                   "name": "gameType",
-                  "nameLocation": "4471:8:7",
+                  "nameLocation": "4471:8:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2036,
-                  "src": "4462:17:7",
+                  "scope": 2926,
+                  "src": "4462:17:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                    "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                     "typeString": "GameType"
                   },
                   "typeName": {
-                    "id": 2024,
+                    "id": 2914,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2023,
+                      "id": 2913,
                       "name": "GameType",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2622,
-                      "src": "4462:8:7"
+                      "referencedDeclaration": 3512,
+                      "src": "4462:8:8"
                     },
-                    "referencedDeclaration": 2622,
-                    "src": "4462:8:7",
+                    "referencedDeclaration": 3512,
+                    "src": "4462:8:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_GameType_$2622",
+                      "typeIdentifier": "t_userDefinedValueType$_GameType_$3512",
                       "typeString": "GameType"
                     }
                   },
@@ -1356,33 +1356,33 @@
                 },
                 {
                   "constant": false,
-                  "id": 2028,
+                  "id": 2918,
                   "mutability": "mutable",
                   "name": "rootClaim",
-                  "nameLocation": "4495:9:7",
+                  "nameLocation": "4495:9:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2036,
-                  "src": "4489:15:7",
+                  "scope": 2926,
+                  "src": "4489:15:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Claim_$2606",
+                    "typeIdentifier": "t_userDefinedValueType$_Claim_$3496",
                     "typeString": "Claim"
                   },
                   "typeName": {
-                    "id": 2027,
+                    "id": 2917,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2026,
+                      "id": 2916,
                       "name": "Claim",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2606,
-                      "src": "4489:5:7"
+                      "referencedDeclaration": 3496,
+                      "src": "4489:5:8"
                     },
-                    "referencedDeclaration": 2606,
-                    "src": "4489:5:7",
+                    "referencedDeclaration": 3496,
+                    "src": "4489:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Claim_$2606",
+                      "typeIdentifier": "t_userDefinedValueType$_Claim_$3496",
                       "typeString": "Claim"
                     }
                   },
@@ -1390,13 +1390,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2030,
+                  "id": 2920,
                   "mutability": "mutable",
                   "name": "extraData",
-                  "nameLocation": "4527:9:7",
+                  "nameLocation": "4527:9:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2036,
-                  "src": "4514:22:7",
+                  "scope": 2926,
+                  "src": "4514:22:8",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1404,10 +1404,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 2029,
+                    "id": 2919,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "4514:5:7",
+                    "src": "4514:5:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -1416,62 +1416,62 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "4452:90:7"
+              "src": "4452:90:8"
             },
             "returnParameters": {
-              "id": 2035,
+              "id": 2925,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2034,
+                  "id": 2924,
                   "mutability": "mutable",
                   "name": "_uuid",
-                  "nameLocation": "4571:5:7",
+                  "nameLocation": "4571:5:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2036,
-                  "src": "4566:10:7",
+                  "scope": 2926,
+                  "src": "4566:10:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_userDefinedValueType$_Hash_$2604",
+                    "typeIdentifier": "t_userDefinedValueType$_Hash_$3494",
                     "typeString": "Hash"
                   },
                   "typeName": {
-                    "id": 2033,
+                    "id": 2923,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2032,
+                      "id": 2922,
                       "name": "Hash",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2604,
-                      "src": "4566:4:7"
+                      "referencedDeclaration": 3494,
+                      "src": "4566:4:8"
                     },
-                    "referencedDeclaration": 2604,
-                    "src": "4566:4:7",
+                    "referencedDeclaration": 3494,
+                    "src": "4566:4:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_userDefinedValueType$_Hash_$2604",
+                      "typeIdentifier": "t_userDefinedValueType$_Hash_$3494",
                       "typeString": "Hash"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "4565:12:7"
+              "src": "4565:12:8"
             },
-            "scope": 2037,
-            "src": "4432:146:7",
+            "scope": 2927,
+            "src": "4432:146:8",
             "stateMutability": "pure",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2038,
-        "src": "246:4334:7",
+        "scope": 2928,
+        "src": "246:4334:8",
         "usedErrors": []
       }
     ],
-    "src": "32:4549:7"
+    "src": "32:4549:8"
   },
   "compiler": {
     "name": "solc",
@@ -1479,7 +1479,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-04T03:28:37.491Z",
+  "updatedAt": "2023-08-11T06:02:10.817Z",
   "devdoc": {
     "events": {
       "DisputeGameCreated(address,uint8,bytes32)": {

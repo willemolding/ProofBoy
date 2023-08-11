@@ -3,7 +3,7 @@ import styles from './PendingMints.module.css'
 import { useMetaMask } from '~/hooks/useMetaMask'
 import { ethers } from "ethers";
 import ERC1155ChallengeableMint from '../../contracts/ERC1155ChallengeableMint.json';
-import { ProofBoyData } from '~/types';
+import { NftMetadata, ProofBoyData } from '~/types';
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
@@ -12,37 +12,28 @@ import {registerNft} from '~/utils';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
+import { gql, useQuery } from '@apollo/client';
+
 export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyData>}) => {
 
   const { wallet } = useMetaMask()
 
-  const [pendingMints, setPendingMints] = useState<Array<any>>([]);
-
-  useEffect(() => {
-    const retrievePending = async () => {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const network = await provider.getNetwork();
-      // @ts-ignore
-      const contractAddress: string = ERC1155ChallengeableMint.networks[network.chainId].address;
-      let contract = new ethers.Contract(contractAddress, ERC1155ChallengeableMint.abi, provider);
-
-      let retrieved = [];
-      for (const [id, value] of indexedNfts.entries()) {
-        let [to, metadataHash, witnessHash, timestamp] = await contract.pendingMints(id);
-        retrieved.push({
-          id,
-          to: to,
-          metadata: value.data,
-          journal: value.journal,
-          timestamp: timestamp
-        });
+  const GET_PENDING_MINTS = gql`
+    query GetPendingMints {
+      pendingMints {
+        id
+        timestamp
+        to
+        token_id
+        calldata
+        txn_hash
       }
-      setPendingMints(retrieved)
     }
-    retrievePending();
-  }, [wallet, indexedNfts]);
+  `;
 
-  const claimMint = async (id: Number) => {
+  const { loading, error, data } = useQuery(GET_PENDING_MINTS)
+
+  const claimMint = async (id: Number, metadataString: string) => {
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
 
@@ -51,7 +42,7 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
     let contract = new ethers.Contract(contractAddress, ERC1155ChallengeableMint.abi, signer);
 
     try {
-      await contract.ClaimMint(id, JSON.stringify(indexedNfts.get(id)?.data))
+      await contract.ClaimMint(id, metadataString)
     } catch (error) {
       console.log(error)
     }
@@ -62,53 +53,65 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
     });
 
   }
+  if(loading) {
+    return(
+      <div>Loading...</div>
+    )
+  } else {
+    return (
+      <div className={styles.nft_preview}>
+        <Row>
+        {
+          data.pendingMints.map(({id, token_id, to, timestamp, calldata, txn_hash}: any) => {
 
-  return (
-    <div className={styles.nft_preview}>
-      <Row>
-      {
-        pendingMints.map(({id, to, metadata, timestamp}, index) => {
-          return(
-            <Card key={index} style={{ width: '20rem' }}>
-              <Card.Body>
-                <Card.Title>ID: {id}</Card.Title>
-                <Card.Img variant="top" src={metadata.image} />
-                <Card.Text>
-                  <p>Submitted By: {to}</p>
-                </Card.Text>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>Stat</th>
-                      <th>Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {
-                    metadata.attributes.map(({trait_type, value}: {trait_type: string, value: string}, index: Number) => {
-                      return(
-                        <tr>
-                          <td>{trait_type}</td>
-                          <td>{value}</td>
-                        </tr>
-                      )
-                    })
-                  }
-                  </tbody>
-                  </Table>
-                <Stack direction="horizontal" gap={3}>
-                  <Button onClick={() => claimMint(id)}>Claim</Button>
-                  <Button>Challenge</Button>
-                </Stack>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">Submitted {Math.round((Date.now() - Number(timestamp)*1000) / 1000 / 60)} minutes ago</small>
-              </Card.Footer>
-            </Card>
-          )
-        })
-      }
-      </Row>
-    </div>
-  )
+            // decode metadata from calldata
+            let iface = new ethers.Interface(ERC1155ChallengeableMint.abi);
+            let [too, metadataString, witness] = iface.decodeFunctionData("ProposeMint", calldata);
+            let metadata: NftMetadata = JSON.parse(metadataString);
+
+            const timeToClaim = 2*60*60*1000 - (Date.now() - Number(timestamp)*1000) // in milliseconds
+
+            return(
+              <Card key={id} style={{ width: '20rem' }}>
+                <Card.Body>
+                  <Card.Title>ID: {token_id}</Card.Title>
+                  <Card.Img variant="top" src={metadata.image} />
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Stat</th>
+                        <th>Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {
+                      metadata.attributes.map(({trait_type, value}: {trait_type: string, value: string}, index: Number) => {
+                        return(
+                          <tr>
+                            <td>{trait_type}</td>
+                            <td>{value}</td>
+                          </tr>
+                        )
+                      })
+                    }
+                    </tbody>
+                    </Table>
+                  <Card.Text>
+                    Recipient: {to}
+                    <br />
+                    Tx Hash: {txn_hash}
+                  </Card.Text>
+                    {timeToClaim > 0 ? <Button variant="danger">Challenge</Button> : <Button variant="success" onClick={() => claimMint(id, metadataString)}>Claim</Button>}
+                </Card.Body>
+                <Card.Footer>
+                  <small className="text-muted">{Math.round(timeToClaim / 1000 / 60)} minutes until claimable</small>
+                </Card.Footer>
+              </Card>
+            )
+          })
+        }
+        </Row>
+      </div>
+    )
+  }
 }

@@ -1,0 +1,993 @@
+{
+  "contractName": "PreimageKeyLib",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"PreimageKeyLib\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"Shared utilities for localizing local keys in the preimage oracle.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"@eth-optimism/contracts-bedrock/src/cannon/PreimageKeyLib.sol\":\"PreimageKeyLib\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@eth-optimism/contracts-bedrock/src/cannon/PreimageKeyLib.sol\":{\"keccak256\":\"0xa25bd96eab5251be6c304833103622f967a0615e8ebdeab38178d9667dd8730b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3538eeca64e842f4cf5a86b89ab8e445d86099dd201c04b3836dd59ff38eb3c2\",\"dweb:/ipfs/QmUYsFdTQxAYrvFwARj4fsZEenyi43wTjKghrZHDPyRL2H\"]}},\"version\":1}",
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220a76d6d4fba4f782889dd9195ef078ab80fbc6d7af9d0e6fe85c2b0ce841d10e064736f6c634300080f0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220a76d6d4fba4f782889dd9195ef078ab80fbc6d7af9d0e6fe85c2b0ce841d10e064736f6c634300080f0033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "162:2134:1:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "162:2134:1:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.15;\n\n/// @title PreimageKeyLib\n/// @notice Shared utilities for localizing local keys in the preimage oracle.\nlibrary PreimageKeyLib {\n    /// @notice Generates a context-specific local key for the given local data identifier.\n    /// @dev See `localize` for a description of the localization operation.\n    /// @param _ident The identifier of the local data. [0, 32) bytes in size.\n    /// @return key_ The context-specific local key.\n    function localizeIdent(uint256 _ident) internal view returns (bytes32 key_) {\n        assembly {\n            // Set the type byte in the given identifier to `1` (Local). We only care about\n            // the [1, 32) bytes in this value.\n            key_ := or(shl(248, 1), and(_ident, not(shl(248, 0xFF))))\n        }\n        key_ = localize(key_);\n    }\n\n    /// @notice Localizes a given local data key for the caller's context.\n    /// @dev The localization operation is defined as:\n    ///      localize(k) = H(k .. sender) & ~(0xFF << 248) | (0x01 << 248)\n    ///      where H is the Keccak-256 hash function.\n    /// @param _key The local data key to localize.\n    /// @return localizedKey_ The localized local data key.\n    function localize(bytes32 _key) internal view returns (bytes32 localizedKey_) {\n        assembly {\n            // Store the local data key and caller next to each other in memory for hashing.\n            mstore(0, _key)\n            mstore(0x20, caller())\n            // Localize the key with the above `localize` operation.\n            localizedKey_ := or(and(keccak256(0, 0x40), not(shl(248, 0xFF))), shl(248, 1))\n        }\n    }\n\n    /// @notice Computes and returns the key for a global keccak pre-image.\n    /// @param _preimage The pre-image.\n    /// @return key_ The pre-image key.\n    function keccak256PreimageKey(bytes memory _preimage) internal pure returns (bytes32 key_) {\n        assembly {\n            // Grab the size of the `_preimage`\n            let size := mload(_preimage)\n\n            // Compute the pre-image keccak256 hash (aka the pre-image key)\n            let h := keccak256(add(_preimage, 0x20), size)\n\n            // Mask out prefix byte, replace with type 2 byte\n            key_ := or(and(h, not(shl(248, 0xFF))), shl(248, 2))\n        }\n    }\n}\n",
+  "sourcePath": "@eth-optimism/contracts-bedrock/src/cannon/PreimageKeyLib.sol",
+  "ast": {
+    "absolutePath": "@eth-optimism/contracts-bedrock/src/cannon/PreimageKeyLib.sol",
+    "exportedSymbols": {
+      "PreimageKeyLib": [
+        2383
+      ]
+    },
+    "id": 2384,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2345,
+        "literals": [
+          "solidity",
+          "0.8",
+          ".15"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "PreimageKeyLib",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": {
+          "id": 2346,
+          "nodeType": "StructuredDocumentation",
+          "src": "57:105:1",
+          "text": "@title PreimageKeyLib\n @notice Shared utilities for localizing local keys in the preimage oracle."
+        },
+        "fullyImplemented": true,
+        "id": 2383,
+        "linearizedBaseContracts": [
+          2383
+        ],
+        "name": "PreimageKeyLib",
+        "nameLocation": "170:14:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2361,
+              "nodeType": "Block",
+              "src": "568:277:1",
+              "statements": [
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "587:221:1",
+                    "statements": [
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "741:57:1",
+                        "value": {
+                          "arguments": [
+                            {
+                              "arguments": [
+                                {
+                                  "kind": "number",
+                                  "nodeType": "YulLiteral",
+                                  "src": "756:3:1",
+                                  "type": "",
+                                  "value": "248"
+                                },
+                                {
+                                  "kind": "number",
+                                  "nodeType": "YulLiteral",
+                                  "src": "761:1:1",
+                                  "type": "",
+                                  "value": "1"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "shl",
+                                "nodeType": "YulIdentifier",
+                                "src": "752:3:1"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "752:11:1"
+                            },
+                            {
+                              "arguments": [
+                                {
+                                  "name": "_ident",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "769:6:1"
+                                },
+                                {
+                                  "arguments": [
+                                    {
+                                      "arguments": [
+                                        {
+                                          "kind": "number",
+                                          "nodeType": "YulLiteral",
+                                          "src": "785:3:1",
+                                          "type": "",
+                                          "value": "248"
+                                        },
+                                        {
+                                          "kind": "number",
+                                          "nodeType": "YulLiteral",
+                                          "src": "790:4:1",
+                                          "type": "",
+                                          "value": "0xFF"
+                                        }
+                                      ],
+                                      "functionName": {
+                                        "name": "shl",
+                                        "nodeType": "YulIdentifier",
+                                        "src": "781:3:1"
+                                      },
+                                      "nodeType": "YulFunctionCall",
+                                      "src": "781:14:1"
+                                    }
+                                  ],
+                                  "functionName": {
+                                    "name": "not",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "777:3:1"
+                                  },
+                                  "nodeType": "YulFunctionCall",
+                                  "src": "777:19:1"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "and",
+                                "nodeType": "YulIdentifier",
+                                "src": "765:3:1"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "765:32:1"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "or",
+                            "nodeType": "YulIdentifier",
+                            "src": "749:2:1"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "749:49:1"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "key_",
+                            "nodeType": "YulIdentifier",
+                            "src": "741:4:1"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "london",
+                  "externalReferences": [
+                    {
+                      "declaration": 2349,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "769:6:1",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 2352,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "741:4:1",
+                      "valueSize": 1
+                    }
+                  ],
+                  "id": 2354,
+                  "nodeType": "InlineAssembly",
+                  "src": "578:230:1"
+                },
+                {
+                  "expression": {
+                    "id": 2359,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 2355,
+                      "name": "key_",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2352,
+                      "src": "817:4:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 2357,
+                          "name": "key_",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2352,
+                          "src": "833:4:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        ],
+                        "id": 2356,
+                        "name": "localize",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2372,
+                        "src": "824:8:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_view$_t_bytes32_$returns$_t_bytes32_$",
+                          "typeString": "function (bytes32) view returns (bytes32)"
+                        }
+                      },
+                      "id": 2358,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "824:14:1",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "src": "817:21:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "id": 2360,
+                  "nodeType": "ExpressionStatement",
+                  "src": "817:21:1"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 2347,
+              "nodeType": "StructuredDocumentation",
+              "src": "191:296:1",
+              "text": "@notice Generates a context-specific local key for the given local data identifier.\n @dev See `localize` for a description of the localization operation.\n @param _ident The identifier of the local data. [0, 32) bytes in size.\n @return key_ The context-specific local key."
+            },
+            "id": 2362,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "localizeIdent",
+            "nameLocation": "501:13:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2350,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2349,
+                  "mutability": "mutable",
+                  "name": "_ident",
+                  "nameLocation": "523:6:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "515:14:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2348,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "515:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "514:16:1"
+            },
+            "returnParameters": {
+              "id": 2353,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2352,
+                  "mutability": "mutable",
+                  "name": "key_",
+                  "nameLocation": "562:4:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "554:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2351,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "554:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "553:14:1"
+            },
+            "scope": 2383,
+            "src": "492:353:1",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 2371,
+              "nodeType": "Block",
+              "src": "1300:352:1",
+              "statements": [
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "1319:327:1",
+                    "statements": [
+                      {
+                        "expression": {
+                          "arguments": [
+                            {
+                              "kind": "number",
+                              "nodeType": "YulLiteral",
+                              "src": "1433:1:1",
+                              "type": "",
+                              "value": "0"
+                            },
+                            {
+                              "name": "_key",
+                              "nodeType": "YulIdentifier",
+                              "src": "1436:4:1"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "mstore",
+                            "nodeType": "YulIdentifier",
+                            "src": "1426:6:1"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "1426:15:1"
+                        },
+                        "nodeType": "YulExpressionStatement",
+                        "src": "1426:15:1"
+                      },
+                      {
+                        "expression": {
+                          "arguments": [
+                            {
+                              "kind": "number",
+                              "nodeType": "YulLiteral",
+                              "src": "1461:4:1",
+                              "type": "",
+                              "value": "0x20"
+                            },
+                            {
+                              "arguments": [],
+                              "functionName": {
+                                "name": "caller",
+                                "nodeType": "YulIdentifier",
+                                "src": "1467:6:1"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "1467:8:1"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "mstore",
+                            "nodeType": "YulIdentifier",
+                            "src": "1454:6:1"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "1454:22:1"
+                        },
+                        "nodeType": "YulExpressionStatement",
+                        "src": "1454:22:1"
+                      },
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "1558:78:1",
+                        "value": {
+                          "arguments": [
+                            {
+                              "arguments": [
+                                {
+                                  "arguments": [
+                                    {
+                                      "kind": "number",
+                                      "nodeType": "YulLiteral",
+                                      "src": "1592:1:1",
+                                      "type": "",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "kind": "number",
+                                      "nodeType": "YulLiteral",
+                                      "src": "1595:4:1",
+                                      "type": "",
+                                      "value": "0x40"
+                                    }
+                                  ],
+                                  "functionName": {
+                                    "name": "keccak256",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "1582:9:1"
+                                  },
+                                  "nodeType": "YulFunctionCall",
+                                  "src": "1582:18:1"
+                                },
+                                {
+                                  "arguments": [
+                                    {
+                                      "arguments": [
+                                        {
+                                          "kind": "number",
+                                          "nodeType": "YulLiteral",
+                                          "src": "1610:3:1",
+                                          "type": "",
+                                          "value": "248"
+                                        },
+                                        {
+                                          "kind": "number",
+                                          "nodeType": "YulLiteral",
+                                          "src": "1615:4:1",
+                                          "type": "",
+                                          "value": "0xFF"
+                                        }
+                                      ],
+                                      "functionName": {
+                                        "name": "shl",
+                                        "nodeType": "YulIdentifier",
+                                        "src": "1606:3:1"
+                                      },
+                                      "nodeType": "YulFunctionCall",
+                                      "src": "1606:14:1"
+                                    }
+                                  ],
+                                  "functionName": {
+                                    "name": "not",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "1602:3:1"
+                                  },
+                                  "nodeType": "YulFunctionCall",
+                                  "src": "1602:19:1"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "and",
+                                "nodeType": "YulIdentifier",
+                                "src": "1578:3:1"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "1578:44:1"
+                            },
+                            {
+                              "arguments": [
+                                {
+                                  "kind": "number",
+                                  "nodeType": "YulLiteral",
+                                  "src": "1628:3:1",
+                                  "type": "",
+                                  "value": "248"
+                                },
+                                {
+                                  "kind": "number",
+                                  "nodeType": "YulLiteral",
+                                  "src": "1633:1:1",
+                                  "type": "",
+                                  "value": "1"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "shl",
+                                "nodeType": "YulIdentifier",
+                                "src": "1624:3:1"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "1624:11:1"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "or",
+                            "nodeType": "YulIdentifier",
+                            "src": "1575:2:1"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "1575:61:1"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "localizedKey_",
+                            "nodeType": "YulIdentifier",
+                            "src": "1558:13:1"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "london",
+                  "externalReferences": [
+                    {
+                      "declaration": 2365,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "1436:4:1",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 2368,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "1558:13:1",
+                      "valueSize": 1
+                    }
+                  ],
+                  "id": 2370,
+                  "nodeType": "InlineAssembly",
+                  "src": "1310:336:1"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 2363,
+              "nodeType": "StructuredDocumentation",
+              "src": "851:366:1",
+              "text": "@notice Localizes a given local data key for the caller's context.\n @dev The localization operation is defined as:\n      localize(k) = H(k .. sender) & ~(0xFF << 248) | (0x01 << 248)\n      where H is the Keccak-256 hash function.\n @param _key The local data key to localize.\n @return localizedKey_ The localized local data key."
+            },
+            "id": 2372,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "localize",
+            "nameLocation": "1231:8:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2366,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2365,
+                  "mutability": "mutable",
+                  "name": "_key",
+                  "nameLocation": "1248:4:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2372,
+                  "src": "1240:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2364,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1240:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1239:14:1"
+            },
+            "returnParameters": {
+              "id": 2369,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2368,
+                  "mutability": "mutable",
+                  "name": "localizedKey_",
+                  "nameLocation": "1285:13:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2372,
+                  "src": "1277:21:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2367,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1277:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1276:23:1"
+            },
+            "scope": 2383,
+            "src": "1222:430:1",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 2381,
+              "nodeType": "Block",
+              "src": "1905:389:1",
+              "statements": [
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "1924:364:1",
+                    "statements": [
+                      {
+                        "nodeType": "YulVariableDeclaration",
+                        "src": "1986:28:1",
+                        "value": {
+                          "arguments": [
+                            {
+                              "name": "_preimage",
+                              "nodeType": "YulIdentifier",
+                              "src": "2004:9:1"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "mload",
+                            "nodeType": "YulIdentifier",
+                            "src": "1998:5:1"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "1998:16:1"
+                        },
+                        "variables": [
+                          {
+                            "name": "size",
+                            "nodeType": "YulTypedName",
+                            "src": "1990:4:1",
+                            "type": ""
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": "YulVariableDeclaration",
+                        "src": "2104:46:1",
+                        "value": {
+                          "arguments": [
+                            {
+                              "arguments": [
+                                {
+                                  "name": "_preimage",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "2127:9:1"
+                                },
+                                {
+                                  "kind": "number",
+                                  "nodeType": "YulLiteral",
+                                  "src": "2138:4:1",
+                                  "type": "",
+                                  "value": "0x20"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "add",
+                                "nodeType": "YulIdentifier",
+                                "src": "2123:3:1"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "2123:20:1"
+                            },
+                            {
+                              "name": "size",
+                              "nodeType": "YulIdentifier",
+                              "src": "2145:4:1"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "keccak256",
+                            "nodeType": "YulIdentifier",
+                            "src": "2113:9:1"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "2113:37:1"
+                        },
+                        "variables": [
+                          {
+                            "name": "h",
+                            "nodeType": "YulTypedName",
+                            "src": "2108:1:1",
+                            "type": ""
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "2226:52:1",
+                        "value": {
+                          "arguments": [
+                            {
+                              "arguments": [
+                                {
+                                  "name": "h",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "2241:1:1"
+                                },
+                                {
+                                  "arguments": [
+                                    {
+                                      "arguments": [
+                                        {
+                                          "kind": "number",
+                                          "nodeType": "YulLiteral",
+                                          "src": "2252:3:1",
+                                          "type": "",
+                                          "value": "248"
+                                        },
+                                        {
+                                          "kind": "number",
+                                          "nodeType": "YulLiteral",
+                                          "src": "2257:4:1",
+                                          "type": "",
+                                          "value": "0xFF"
+                                        }
+                                      ],
+                                      "functionName": {
+                                        "name": "shl",
+                                        "nodeType": "YulIdentifier",
+                                        "src": "2248:3:1"
+                                      },
+                                      "nodeType": "YulFunctionCall",
+                                      "src": "2248:14:1"
+                                    }
+                                  ],
+                                  "functionName": {
+                                    "name": "not",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "2244:3:1"
+                                  },
+                                  "nodeType": "YulFunctionCall",
+                                  "src": "2244:19:1"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "and",
+                                "nodeType": "YulIdentifier",
+                                "src": "2237:3:1"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "2237:27:1"
+                            },
+                            {
+                              "arguments": [
+                                {
+                                  "kind": "number",
+                                  "nodeType": "YulLiteral",
+                                  "src": "2270:3:1",
+                                  "type": "",
+                                  "value": "248"
+                                },
+                                {
+                                  "kind": "number",
+                                  "nodeType": "YulLiteral",
+                                  "src": "2275:1:1",
+                                  "type": "",
+                                  "value": "2"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "shl",
+                                "nodeType": "YulIdentifier",
+                                "src": "2266:3:1"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "2266:11:1"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "or",
+                            "nodeType": "YulIdentifier",
+                            "src": "2234:2:1"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "2234:44:1"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "key_",
+                            "nodeType": "YulIdentifier",
+                            "src": "2226:4:1"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "london",
+                  "externalReferences": [
+                    {
+                      "declaration": 2375,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "2004:9:1",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 2375,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "2127:9:1",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 2378,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "2226:4:1",
+                      "valueSize": 1
+                    }
+                  ],
+                  "id": 2380,
+                  "nodeType": "InlineAssembly",
+                  "src": "1915:373:1"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 2373,
+              "nodeType": "StructuredDocumentation",
+              "src": "1658:151:1",
+              "text": "@notice Computes and returns the key for a global keccak pre-image.\n @param _preimage The pre-image.\n @return key_ The pre-image key."
+            },
+            "id": 2382,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "keccak256PreimageKey",
+            "nameLocation": "1823:20:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2376,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2375,
+                  "mutability": "mutable",
+                  "name": "_preimage",
+                  "nameLocation": "1857:9:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2382,
+                  "src": "1844:22:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2374,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1844:5:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1843:24:1"
+            },
+            "returnParameters": {
+              "id": 2379,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2378,
+                  "mutability": "mutable",
+                  "name": "key_",
+                  "nameLocation": "1899:4:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2382,
+                  "src": "1891:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 2377,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1891:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1890:14:1"
+            },
+            "scope": 2383,
+            "src": "1814:480:1",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 2384,
+        "src": "162:2134:1",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:2265:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.15+commit.e14f2714.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.14",
+  "updatedAt": "2023-08-11T06:02:10.814Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "title": "PreimageKeyLib",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "Shared utilities for localizing local keys in the preimage oracle.",
+    "version": 1
+  }
+}

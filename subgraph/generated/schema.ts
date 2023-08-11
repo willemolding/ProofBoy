@@ -67,6 +67,19 @@ export class PendingMint extends Entity {
     this.set("calldata", Value.fromBytes(value));
   }
 
+  get txn_hash(): Bytes {
+    let value = this.get("txn_hash");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set txn_hash(value: Bytes) {
+    this.set("txn_hash", Value.fromBytes(value));
+  }
+
   get token_id(): BigInt {
     let value = this.get("token_id");
     if (!value || value.kind == ValueKind.NULL) {

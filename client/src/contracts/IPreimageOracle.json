@@ -97,22 +97,22 @@
     "absolutePath": "@eth-optimism/contracts-bedrock/src/cannon/interfaces/IPreimageOracle.sol",
     "exportedSymbols": {
       "IPreimageOracle": [
-        498
+        2646
       ]
     },
-    "id": 499,
+    "id": 2647,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 462,
+        "id": 2610,
         "literals": [
           "solidity",
           "0.8",
           ".15"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:1"
+        "src": "32:23:3"
       },
       {
         "abstract": false,
@@ -121,48 +121,48 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 463,
+          "id": 2611,
           "nodeType": "StructuredDocumentation",
-          "src": "57:72:1",
+          "src": "57:72:3",
           "text": "@title IPreimageOracle\n @notice Interface for a preimage oracle."
         },
         "fullyImplemented": false,
-        "id": 498,
+        "id": 2646,
         "linearizedBaseContracts": [
-          498
+          2646
         ],
         "name": "IPreimageOracle",
-        "nameLocation": "139:15:1",
+        "nameLocation": "139:15:3",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "documentation": {
-              "id": 464,
+              "id": 2612,
               "nodeType": "StructuredDocumentation",
-              "src": "161:254:1",
+              "src": "161:254:3",
               "text": "@notice Reads a preimage from the oracle.\n @param _key The key of the preimage to read.\n @param _offset The offset of the preimage to read.\n @return dat_ The preimage data.\n @return datLen_ The length of the preimage data."
             },
             "functionSelector": "e03110e1",
-            "id": 475,
+            "id": 2623,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "readPreimage",
-            "nameLocation": "429:12:1",
+            "nameLocation": "429:12:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 469,
+              "id": 2617,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 466,
+                  "id": 2614,
                   "mutability": "mutable",
                   "name": "_key",
-                  "nameLocation": "450:4:1",
+                  "nameLocation": "450:4:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 475,
-                  "src": "442:12:1",
+                  "scope": 2623,
+                  "src": "442:12:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -170,10 +170,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 465,
+                    "id": 2613,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "442:7:1",
+                    "src": "442:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -183,13 +183,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 468,
+                  "id": 2616,
                   "mutability": "mutable",
                   "name": "_offset",
-                  "nameLocation": "464:7:1",
+                  "nameLocation": "464:7:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 475,
-                  "src": "456:15:1",
+                  "scope": 2623,
+                  "src": "456:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -197,10 +197,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 467,
+                    "id": 2615,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "456:7:1",
+                    "src": "456:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -209,21 +209,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "441:31:1"
+              "src": "441:31:3"
             },
             "returnParameters": {
-              "id": 474,
+              "id": 2622,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 471,
+                  "id": 2619,
                   "mutability": "mutable",
                   "name": "dat_",
-                  "nameLocation": "528:4:1",
+                  "nameLocation": "528:4:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 475,
-                  "src": "520:12:1",
+                  "scope": 2623,
+                  "src": "520:12:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -231,10 +231,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 470,
+                    "id": 2618,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "520:7:1",
+                    "src": "520:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -244,13 +244,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 473,
+                  "id": 2621,
                   "mutability": "mutable",
                   "name": "datLen_",
-                  "nameLocation": "542:7:1",
+                  "nameLocation": "542:7:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 475,
-                  "src": "534:15:1",
+                  "scope": 2623,
+                  "src": "534:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -258,10 +258,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 472,
+                    "id": 2620,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "534:7:1",
+                    "src": "534:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -270,42 +270,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "519:31:1"
+              "src": "519:31:3"
             },
-            "scope": 498,
-            "src": "420:131:1",
+            "scope": 2646,
+            "src": "420:131:3",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 476,
+              "id": 2624,
               "nodeType": "StructuredDocumentation",
-              "src": "557:1306:1",
+              "src": "557:1306:3",
               "text": "@notice Loads of local data part into the preimage oracle.\n @param _ident The identifier of the local data.\n @param _word The local data word.\n @param _size The number of bytes in `_word` to load.\n @param _partOffset The offset of the local data part to write to the oracle.\n @dev The local data parts are loaded into the preimage oracle under the context\n      of the caller - no other account can write to the caller's context\n      specific data.\n      There are 5 local data identifiers:\n      ┌────────────┬────────────────────────┐\n      │ Identifier │      Data              │\n      ├────────────┼────────────────────────┤\n      │          1 │ L1 Head Hash (bytes32) │\n      │          2 │ Output Root (bytes32)  │\n      │          3 │ Root Claim (bytes32)   │\n      │          4 │ L2 Block Number (u64)  │\n      │          5 │ Chain ID (u64)         │\n      └────────────┴────────────────────────┘"
             },
             "functionSelector": "9a1f5e7f",
-            "id": 489,
+            "id": 2637,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "loadLocalData",
-            "nameLocation": "1877:13:1",
+            "nameLocation": "1877:13:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 485,
+              "id": 2633,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 478,
+                  "id": 2626,
                   "mutability": "mutable",
                   "name": "_ident",
-                  "nameLocation": "1908:6:1",
+                  "nameLocation": "1908:6:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
-                  "src": "1900:14:1",
+                  "scope": 2637,
+                  "src": "1900:14:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -313,10 +313,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 477,
+                    "id": 2625,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1900:7:1",
+                    "src": "1900:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -326,13 +326,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 480,
+                  "id": 2628,
                   "mutability": "mutable",
                   "name": "_word",
-                  "nameLocation": "1932:5:1",
+                  "nameLocation": "1932:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
-                  "src": "1924:13:1",
+                  "scope": 2637,
+                  "src": "1924:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -340,10 +340,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 479,
+                    "id": 2627,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1924:7:1",
+                    "src": "1924:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -353,13 +353,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 482,
+                  "id": 2630,
                   "mutability": "mutable",
                   "name": "_size",
-                  "nameLocation": "1955:5:1",
+                  "nameLocation": "1955:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
-                  "src": "1947:13:1",
+                  "scope": 2637,
+                  "src": "1947:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -367,10 +367,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 481,
+                    "id": 2629,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1947:7:1",
+                    "src": "1947:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -380,13 +380,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 484,
+                  "id": 2632,
                   "mutability": "mutable",
                   "name": "_partOffset",
-                  "nameLocation": "1978:11:1",
+                  "nameLocation": "1978:11:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
-                  "src": "1970:19:1",
+                  "scope": 2637,
+                  "src": "1970:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -394,10 +394,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 483,
+                    "id": 2631,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1970:7:1",
+                    "src": "1970:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -406,21 +406,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1890:105:1"
+              "src": "1890:105:3"
             },
             "returnParameters": {
-              "id": 488,
+              "id": 2636,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 487,
+                  "id": 2635,
                   "mutability": "mutable",
                   "name": "key_",
-                  "nameLocation": "2022:4:1",
+                  "nameLocation": "2022:4:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
-                  "src": "2014:12:1",
+                  "scope": 2637,
+                  "src": "2014:12:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -428,10 +428,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 486,
+                    "id": 2634,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2014:7:1",
+                    "src": "2014:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -440,42 +440,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2013:14:1"
+              "src": "2013:14:3"
             },
-            "scope": 498,
-            "src": "1868:160:1",
+            "scope": 2646,
+            "src": "1868:160:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 490,
+              "id": 2638,
               "nodeType": "StructuredDocumentation",
-              "src": "2034:277:1",
+              "src": "2034:277:3",
               "text": "@notice Prepares a preimage to be read by keccak256 key, starting at\n         the given offset and up to 32 bytes (clipped at preimage length, if out of data).\n @param _partOffset The offset of the preimage to read.\n @param _preimage The preimage data."
             },
             "functionSelector": "e1592611",
-            "id": 497,
+            "id": 2645,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "loadKeccak256PreimagePart",
-            "nameLocation": "2325:25:1",
+            "nameLocation": "2325:25:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 495,
+              "id": 2643,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 492,
+                  "id": 2640,
                   "mutability": "mutable",
                   "name": "_partOffset",
-                  "nameLocation": "2359:11:1",
+                  "nameLocation": "2359:11:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 497,
-                  "src": "2351:19:1",
+                  "scope": 2645,
+                  "src": "2351:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -483,10 +483,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 491,
+                    "id": 2639,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2351:7:1",
+                    "src": "2351:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -496,13 +496,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 494,
+                  "id": 2642,
                   "mutability": "mutable",
                   "name": "_preimage",
-                  "nameLocation": "2387:9:1",
+                  "nameLocation": "2387:9:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 497,
-                  "src": "2372:24:1",
+                  "scope": 2645,
+                  "src": "2372:24:3",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -510,10 +510,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 493,
+                    "id": 2641,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2372:5:1",
+                    "src": "2372:5:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -522,27 +522,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2350:47:1"
+              "src": "2350:47:3"
             },
             "returnParameters": {
-              "id": 496,
+              "id": 2644,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "2406:0:1"
+              "src": "2406:0:3"
             },
-            "scope": 498,
-            "src": "2316:91:1",
+            "scope": 2646,
+            "src": "2316:91:3",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 499,
-        "src": "129:2280:1",
+        "scope": 2647,
+        "src": "129:2280:3",
         "usedErrors": []
       }
     ],
-    "src": "32:2378:1"
+    "src": "32:2378:3"
   },
   "compiler": {
     "name": "solc",
@@ -550,7 +550,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-04T03:28:37.486Z",
+  "updatedAt": "2023-08-11T06:02:10.816Z",
   "devdoc": {
     "kind": "dev",
     "methods": {
