@@ -1,0 +1,6 @@
+type PendingMint @entity {
+  id: Bytes! # txhash of mint
+  token_id: BigInt!
+  to: Bytes! # address
+  timestamp: BigInt!
+}

@@ -55,7 +55,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
     mapping(uint256 => PendingMint) public pendingMints;
 
 
-    event MintProposed(uint256 indexed id, uint256 timestamp);
+    event MintProposed(uint256 indexed id, address to, uint256 timestamp);
     event MintChallenged(uint256 indexed id, address challenger);
     event Minted(uint256 indexed id, address indexed to);
 
@@ -90,7 +90,7 @@ contract ERC1155ChallengeableMint is ERC1155URIStorage {
             witnessHash: keccak256(witness),
             timestamp: block.timestamp
         });
-        emit MintProposed(id,  block.timestamp);
+        emit MintProposed(id, to, block.timestamp);
     }
 
     /**
