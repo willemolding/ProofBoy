@@ -37,11 +37,9 @@ async fn main() -> Result<()> {
     let result_metadata =
         PartyLeaderExtractor::extract(&gb.sys).expect("Failed to extract metadata");
 
-    if expected_metadata == result_metadata {
-        println!("Verified successfully!");
-    } else {
-        println!("Metadata does not match!");
-    }
+    assert_eq!(expected_metadata, result_metadata, "Metadata does not match!");
+
+    println!("Verified successfully!");
 
     Ok(())
 }

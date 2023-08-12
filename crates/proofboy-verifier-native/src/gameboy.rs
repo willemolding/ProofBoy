@@ -13,7 +13,7 @@ pub struct Gameboy {
 
 impl Gameboy {
     pub fn step(&mut self) {
-        self.sys.poll(false);
+        self.sys.poll(true);
         self.cycle_count += 1;
     }
 
