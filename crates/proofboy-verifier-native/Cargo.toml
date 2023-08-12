@@ -1,0 +1,21 @@
+[package]
+name = "proofboy-verifier-native"
+version = "0.1.0"
+authors = ["Willem Olding <willemoldindg@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+rgy = { workspace = true }
+
+journal = { workspace = true }
+extractor = { workspace = true }
+
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+clap = { version = "4.3.15", features = ["derive", "env"] }
+anyhow = "1.0.71"
+tokio = { version = "1.29.1", features = ["rt", "macros", "fs", "io-util", "signal", "sync", "time"] }
+ethers = "2.0"
+url = "2.4.0"
+hex = "0.4.3"
