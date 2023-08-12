@@ -17,7 +17,7 @@ pub struct Gameboy {
 
 impl Gameboy {
     pub fn step(&mut self) {
-        self.sys.poll(false);
+        self.sys.poll(true);
         self.cycle_count += 1;
     }
 
@@ -55,7 +55,7 @@ impl Hardware {
 }
 
 impl rgy::Hardware for Hardware {
-    fn vram_update(&mut self, line: usize, buffer: &[u32]) {}
+    fn vram_update(&mut self, _line: usize, _buffer: &[u32]) {}
 
     fn joypad_pressed(&mut self, key: GBKey) -> bool {
         match key {

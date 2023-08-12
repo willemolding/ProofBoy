@@ -51,8 +51,23 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
       // register with MetaMask SDK so it will appear in the wallet right away :)
       registerNft(window.ethereum, contractAddress, tokenId.toString())
     });
-
   }
+
+  const challengeMint = async (id: Number) => {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+
+    // @ts-ignore
+    const contractAddress: string = ERC1155ChallengeableMint.networks[wallet.chainId].address;
+    let contract = new ethers.Contract(contractAddress, ERC1155ChallengeableMint.abi, signer);
+
+    try {
+      await contract.ChallengeMint(id)
+    } catch (error) {
+      console.log(error)
+    }
+  } 
+
   if(loading) {
     return(
       <div>Loading...</div>
@@ -103,7 +118,9 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
                     <br />
                     Tx Hash: {txn_hash}
                   </Card.Text>
-                    {timeToClaim > 0 ? <Button variant="danger">Challenge</Button> : <Button variant="success" onClick={() => claimMint(token_id, metadataString)}>Claim</Button>}
+                    {timeToClaim > 0 ? 
+                      <Button variant="danger" onClick={() => challengeMint(token_id)}>Challenge</Button> :
+                      <Button variant="success" onClick={() => claimMint(token_id, metadataString)}>Claim</Button>}
                 </Card.Body>
                 <Card.Footer>
                   <small className="text-muted">{Math.round(timeToClaim / 1000 / 60)} minutes until claimable</small>

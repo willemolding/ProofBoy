@@ -25,8 +25,8 @@ mod gameboy;
 #[no_mangle]
 pub extern "C" fn _start() {
     init_heap!(HEAP_SIZE);
-    let rom = [0u8; 0x8000];
-    // let rom = include_bytes!("../../../roms/pokemon-blue.gb");
+    // this directory will exist in the docker builder image
+    let rom = include_bytes!("/roms/pokemon-blue.gb");
 
     let mut oracle_reader = oracle_reader();
 
@@ -44,7 +44,7 @@ pub extern "C" fn _start() {
     let journal = Journal::from_bytes(&journal_bytes);
 
     // apply the journal to our emulator and get the final memory state
-    let mut gb: Gameboy = Gameboy::new(&rom);
+    let mut gb: Gameboy = Gameboy::new(rom);
     journal.into_iter().for_each(|keys| {
         gb.kbd.0.replace(KeyState::from_byte(keys));
         gb.step();

@@ -19,3 +19,4 @@ tokio = { version = "1.29.1", features = ["rt", "macros", "fs", "io-util", "sign
 ethers = "2.0"
 url = "2.4.0"
 hex = "0.4.3"
+log = "0.4.19"

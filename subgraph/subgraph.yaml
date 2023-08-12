@@ -23,4 +23,6 @@ dataSources:
           handler: handleMintProposed
         - event: Minted(indexed uint256,indexed address)
           handler: handleMinted
+        - event: MintChallenged(indexed uint256,address)
+          handler: handleMintChallenged
       file: ./src/erc-1155-challengeable-mint.ts

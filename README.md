@@ -77,8 +77,8 @@ Under the assumption that at least one honest watcher is checking any given mint
 | -------- | -------- | -------- |
 | Contracts     | Contains the ERC1155ChallengeableMint contract along with forks of the Optimism dispute game and VM contracts | [![documentation](https://img.shields.io/badge/readme-blue)](./contracts)  |
 | Proofboy Recorder  | A Rust Gameboy emulator which records every key press in a journal. Can be built for desktop or web via WASM. Uses Bevy game engine for Rust | [![documentation](https://img.shields.io/badge/readme-blue)](./crates/proofboy-recorder/)  |
-| Proofboy Verifier Cannon  | A headless Gameboy emulator which recreates state given a journal. Builds to a Cannon compatible MIPS binary which reads inputs via a pre-image oracle | [![documentation](https://img.shields.io/badge/readme-blue)](./crates/proofboy-verifier-cannon/)  |
-| Preimage Server | A Cannon compatible pre-image server which fetches the required input data to verify a proof from calldata on the given chain using Infura | [![documentation](https://img.shields.io/badge/readme-blue)](./crates/preimage-server/)  |
+| Proofboy Verifier Native  | A headless Gameboy emulator which recreates state given a journal. This can be used to check peoples claims are valid. Prefer this over the MIPS version as it is much faster. This can also serve input preimages to the Cannon emulator | [![documentation](https://img.shields.io/badge/readme-blue)](./crates/proofboy-verifier-cannon/)  |
+| Proofboy Verifier Cannon  | Cannon MIPS version of verifier. Builds to a Cannon compatible MIPS binary which reads inputs via a pre-image oracle server (See above) | [![documentation](https://img.shields.io/badge/readme-blue)](./crates/proofboy-verifier-cannon/)  |
 | Client | React web client for ProofBoy. Allows playing games and submitting NFT claims directly from within the browser | [![documentation](https://img.shields.io/badge/readme-blue)](./client/)  |
 | Subgraph | Graph protocol indexer. Allows client to view pending mints along with their metadata | [![documentation](https://img.shields.io/badge/readme-blue)](./subgraph/)  |
 ## Technologies Used
@@ -86,7 +86,7 @@ Under the assumption that at least one honest watcher is checking any given mint
 ProofBoy uses the following Consensys products:
 
 - [MetaMask SDK](https://metamask.io/sdk/) to obtain account information and allow the player to submit proposals and claims from the browser. It also uses the ['wallet_WatchAsset'](https://docs.metamask.io/wallet/how-to/display/tokens/) feature to allow the minted NFTs to display in the players wallet right away.
-- [Infura](https://www.infura.io/) to allow the Rust preimage-server to retrieve the journal and metadata from a proposal transactions to provide to the verifier
+- [Infura](https://www.infura.io/) to allow the Rust verifier to retrieve the journal and metadata from a proposal transactions. This makes verifying a claim as simple as proving the transaction hash to the verifier tool.
 - [Truffle](https://trufflesuite.com/) as the smart contract development suite
 - [Ganache](https://trufflesuite.com/docs/ganache/) for local testing
 

@@ -5,4 +5,5 @@ type PendingMint @entity {
   token_id: BigInt!
   to: Bytes! # address
   timestamp: BigInt!
+  disputed: Boolean
 }

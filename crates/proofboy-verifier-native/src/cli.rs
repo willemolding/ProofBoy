@@ -12,6 +12,9 @@ pub struct Cli {
     #[arg(long, env = "TXN_HASH")]
     #[arg(value_parser = parse_txn_hash)]
     pub txn_hash: TxHash,
+
+    #[arg(long, env = "SERVE_PREIMAGES")]
+    pub serve_preimages: bool
 }
 
 fn parse_txn_hash(arg: &str) -> Result<TxHash, anyhow::Error> {

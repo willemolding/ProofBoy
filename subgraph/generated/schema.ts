@@ -116,4 +116,17 @@ export class PendingMint extends Entity {
   set timestamp(value: BigInt) {
     this.set("timestamp", Value.fromBigInt(value));
   }
+
+  get disputed(): boolean {
+    let value = this.get("disputed");
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
+  }
+
+  set disputed(value: boolean) {
+    this.set("disputed", Value.fromBoolean(value));
+  }
 }
