@@ -129,6 +129,8 @@ Also a special thanks to:
 
 <!-- GETTING STARTED -->
 ## Getting Started
+
+Before you can prove or verify you will need to legally obtain a copy of the Pokemon blue Gameboy ROM. Put it in the roms directory
 ### Prerequisites
 
 #### Rustup
