@@ -6,7 +6,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-*You caught a shiny pokemon? Prove it!*
+> *You caught a shiny pokemon? Prove it!*
 
 ProofBoy allows for proving state of Gameboy games on-chain using fraud proofs.
 
