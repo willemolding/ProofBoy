@@ -12,6 +12,8 @@ ProofBoy allows for proving state of Gameboy games on-chain using fraud proofs.
 
 Created as an entry to the 2023 Consensys NAV Hackathon.
 
+> ERC1155ChallengeableMint contract deployed on Linea Testnet at: [0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c]https://explorer.goerli.linea.build/address/0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c/contracts#address-tabs
+
 <img src="./docs/navh-banner.jpg"/>
 
 <!-- ABOUT THE PROJECT -->
@@ -20,6 +22,7 @@ Created as an entry to the 2023 Consensys NAV Hackathon.
 Many blockchain games produce assets such as NFTs to reward players for certain in-game achievements. The common way to verify that players actually did the achievements they claim is to have a game server performing these checks and minting the assets.
 
 This projects takes a step toward enabling fully on-chain gaming by allowing complex game state to be proven on-chain. ProofBoy shows how something as complex as a Gameboy emulator can be verified on-chain using fault proofs.
+
 
 ### How it works
 

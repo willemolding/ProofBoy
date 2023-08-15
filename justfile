@@ -23,7 +23,7 @@ emulate txhash:
         cargo run --manifest-path ./crates/proofboy-verifier-native/Cargo.toml
 
 verify txhash:
-    TXN_HASH={{txhash}} cargo run --release --manifest-path ./crates/proofboy-verifier-native/Cargo.toml
+    TXN_HASH={{txhash}} cargo run --release --quiet --manifest-path ./crates/proofboy-verifier-native/Cargo.toml
 
 recorder:
     cargo run --manifest-path ./crates/proofboy-recorder/Cargo.toml -- -o journal.bin -m nft_metadata.json

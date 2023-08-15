@@ -6,9 +6,9 @@ dataSources:
     name: ERC1155ChallengeableMint
     network: mainnet
     source:
-      address: "0xEA84a5c33349732964DAD24C6aE5e8C8e86A0f97"
+      address: "0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c"
       abi: ERC1155ChallengeableMint
-      startBlock: 0
+      startBlock: 1321942
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

@@ -1,0 +1,77 @@
+Starting migrations...
+======================
+> Network name:    'dashboard'
+> Network id:      59140
+> Block gas limit: 61000000 (0x3a2c940)
+
+
+1_deploy_contracts.js
+=====================
+
+   Deploying 'VM'
+   --------------
+   > transaction hash:    0xd8b5db11c4d3eb25400e6e9a7ea952fd27e1c512a2dd8c6f81f6301d92a7c2a7sage.
+   > Blocks: 1            Seconds: 24
+   > contract address:    0x5F914533b4FFddc5CD23e222F0A830c4DB2d1e33
+   > block number:        1321934
+   > block timestamp:     1691815223
+   > account:             0xc0017405E287476443Ab1B342B86f2ea92Ef9F73
+   > balance:             0.505959629960686964
+   > gas used:            2808074 (0x2ad90a)
+   > gas price:           2.500000007 gwei
+   > value sent:          0 ETH
+   > total cost:          0.007020185019656518 ETH
+
+
+   Deploying 'FaultDisputeGame'
+   ----------------------------
+   > transaction hash:    0x08a8c45474d52f858806aad38dd8f7806703be2e798c1622335a382271cf3857sage.
+   > Blocks: 1            Seconds: 20
+   > contract address:    0x22201CAAE75e921B611C720b148763A02E476BB6
+   > block number:        1321936
+   > block timestamp:     1691815247
+   > account:             0xc0017405E287476443Ab1B342B86f2ea92Ef9F73
+   > balance:             0.498975742441132079
+   > gas used:            2793555 (0x2aa053)
+   > gas price:           2.500000007 gwei
+   > value sent:          0 ETH
+   > total cost:          0.006983887519554885 ETH
+
+
+   Deploying 'DisputeGameFactory'
+   ------------------------------
+   > transaction hash:    0x986b19f4d644eddcdef5feb539f1f1b3ec12a1821c841d3734f1d94467efea94sage.
+   > Blocks: 1            Seconds: 20
+   > contract address:    0xE9968481e19f93BffDda1A5e15DCc8d95cF4cD9F
+   > block number:        1321938
+   > block timestamp:     1691815271
+   > account:             0xc0017405E287476443Ab1B342B86f2ea92Ef9F73
+   > balance:             0.494817152429488027
+   > gas used:            1663436 (0x1961cc)
+   > gas price:           2.500000014 gwei
+   > value sent:          0 ETH
+   > total cost:          0.004158590023288104 ETH
+
+
+   Replacing 'ERC1155ChallengeableMint'
+   ------------------------------------
+   > transaction hash:    0x1b2fd378e4c911e982ec7a61948dea54cf4bfd12adc0a9d185e39cb6c954aafbsage.
+   > Blocks: 1            Seconds: 20
+   > contract address:    0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c
+   > block number:        1321942
+   > block timestamp:     1691815319
+   > account:             0xc0017405E287476443Ab1B342B86f2ea92Ef9F73
+   > balance:             0.485367594903029266
+   > gas used:            3731475 (0x38f013)
+   > gas price:           2.500000007 gwei
+   > value sent:          0 ETH
+   > total cost:          0.009328687526120325 ETH
+
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.027491350088619832 ETH
+
+Summary
+=======
+> Total deployments:   4
+> Final cost:          0.027491350088619832 ETH

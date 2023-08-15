@@ -8,6 +8,9 @@ module.exports = {
       network_id: "5777",
       websockets: true,
     },
+    linea_testnet: {
+      network_id: "59140",
+    },
     dashboard: {
       port: 24012
     }
@@ -20,5 +23,8 @@ module.exports = {
   },
   db: {
     enabled: false
-  }
+  },
+  plugins: [
+    'truffle-plugin-stdjsonin'
+  ]
 };

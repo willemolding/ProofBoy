@@ -1,8 +1,8 @@
 {
-  "mainnet": {
+  "linea_testnet": {
     "ERC1155ChallengeableMint": {
-      "address": "0x76be3b62873462d2142405439777e971754e8e77",
-      "startBlock": 0
+      "address": "0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c",
+      "startBlock": 1321942
     }
   }
 }

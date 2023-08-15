@@ -63,7 +63,7 @@ async fn main() -> Result<()> {
     
         assert_eq!(expected_metadata, result_metadata, "Metadata does not match!");
     
-        println!("Verified successfully!");
+        println!("✅ Metadata obtained matches claim ✅");
     }
 
 

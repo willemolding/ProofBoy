@@ -12,26 +12,13 @@ import {registerNft} from '~/utils';
 import Stack from 'react-bootstrap/Stack';
 import Table from 'react-bootstrap/Table';
 
-import { gql, useQuery } from '@apollo/client';
+import { DocumentNode, useQuery } from '@apollo/client';
 
-export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyData>}) => {
+export const PendingMints = ({query, challenge, claim}: {query: DocumentNode, challenge?: boolean, claim?: boolean}) => {
 
   const { wallet } = useMetaMask()
 
-  const GET_PENDING_MINTS = gql`
-    query GetPendingMints {
-      pendingMints {
-        id
-        timestamp
-        to
-        token_id
-        calldata
-        txn_hash
-      }
-    }
-  `;
-
-  const { loading, error, data } = useQuery(GET_PENDING_MINTS)
+  const { loading, error, data, refetch } = useQuery(query, { variables: { to: wallet.accounts[0] } })
 
   const claimMint = async (id: Number, metadataString: string) => {
     const provider = new ethers.BrowserProvider(window.ethereum);
@@ -50,6 +37,11 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
     contract.on("Minted", (tokenId, to) => {
       // register with MetaMask SDK so it will appear in the wallet right away :)
       registerNft(window.ethereum, contractAddress, tokenId.toString())
+      refetch({ variables: { to: wallet.accounts[0] }})
+    });
+
+    contract.on("ProposeMint", () => {
+      refetch({ variables: { to: wallet.accounts[0] }})
     });
   }
 
@@ -71,6 +63,10 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
   if(loading) {
     return(
       <div>Loading...</div>
+    )
+  } else if (error)  {
+    return(
+      <div>Error: {error.message}</div>
     )
   } else {
     return (
@@ -114,13 +110,14 @@ export const PendingMints = ({indexedNfts}: {indexedNfts: Map<Number, ProofBoyDa
                     </tbody>
                     </Table>
                   <Card.Text>
-                    Recipient: {to}
-                    <br />
-                    Tx Hash: {txn_hash}
+                  <small className="text-muted">To: {to}</small>
+                  <br/>
+                  <small className="text-muted">Tx: {txn_hash}</small>
                   </Card.Text>
-                    {timeToClaim > 0 ? 
-                      <Button variant="danger" onClick={() => challengeMint(token_id)}>Challenge</Button> :
-                      <Button variant="success" onClick={() => claimMint(token_id, metadataString)}>Claim</Button>}
+                    <Stack>
+                      {challenge ? <Button variant="danger" onClick={() => challengeMint(token_id)}>Challenge</Button> : null}
+                      {claim ? <Button variant="success" onClick={() => claimMint(token_id, metadataString)}>Claim</Button> : null}
+                      </Stack>
                 </Card.Body>
                 <Card.Footer>
                   <small className="text-muted">{Math.round(timeToClaim / 1000 / 60)} minutes until claimable</small>
