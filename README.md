@@ -12,8 +12,6 @@ ProofBoy allows for proving state of Gameboy games on-chain using fraud proofs.
 
 Created as an entry to the 2023 Consensys NAV Hackathon.
 
-> ERC1155ChallengeableMint contract deployed on Linea Testnet at: [0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c](https://explorer.goerli.linea.build/address/0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c/contracts#address-tabs)git
-
 <img src="./docs/navh-banner.jpg"/>
 
 <!-- ABOUT THE PROJECT -->
@@ -92,6 +90,8 @@ ProofBoy uses the following Consensys products:
 - [Infura](https://www.infura.io/) to allow the Rust verifier to retrieve the journal and metadata from a proposal transactions. This makes verifying a claim as simple as proving the transaction hash to the verifier tool.
 - [Truffle](https://trufflesuite.com/) as the smart contract development suite
 - [Ganache](https://trufflesuite.com/docs/ganache/) for local testing
+
+> ERC1155ChallengeableMint contract deployed on Linea Testnet at: [0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c](https://explorer.goerli.linea.build/address/0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c/contracts#address-tabs)
 
 Also a special thanks to:
 
