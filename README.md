@@ -12,7 +12,7 @@ ProofBoy allows for proving state of Gameboy games on-chain using fraud proofs.
 
 Created as an entry to the 2023 Consensys NAV Hackathon.
 
-> ERC1155ChallengeableMint contract deployed on Linea Testnet at: [0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c]https://explorer.goerli.linea.build/address/0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c/contracts#address-tabs
+> ERC1155ChallengeableMint contract deployed on Linea Testnet at: [0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c](https://explorer.goerli.linea.build/address/0x4AaF30D9628Eb89c7a1Feb43aB71eCA2427d1c5c/contracts#address-tabs)git
 
 <img src="./docs/navh-banner.jpg"/>
 
@@ -26,7 +26,7 @@ This projects takes a step toward enabling fully on-chain gaming by allowing com
 
 ### How it works
 
-#### Recording
+#### 1. Recording
 
 Players play a game inside a special emulator called the **ProofBoy Recorder**. This works just like a regular emulator but it keeps track of every key press made by the player and the exact CPU cycle at which it occurred. This record of inputs we call a Journal.
 
@@ -38,7 +38,7 @@ This journal can be taken by anyone else and replayed into their own emulator to
 
 Both of these operations are deterministic. Anyone can take a fresh copy of a game and a journal obtain the pokemon the player is holding.
 
-#### Verifying
+#### 2. Verifying
 
 To verify this on-chain there is a second piece called the **Proofboy Verifier**. This is the same emulator but it operates in headless mode and takes a journal as input. It is built to compile to the MIPS instruction set in a way that is compatible with the [Optimism Cannon fault proving system](https://github.com/ethereum-optimism/optimism/tree/develop/cannon). Cannon was built to verify the Optimism rollup state transition but it can actually be used for any MIPS program including our emulator!
 

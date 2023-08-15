@@ -16,6 +16,7 @@ export const ProofBoyPlayer = ({ onNewData }: { onNewData: (data: string, journa
   return (
     <div className={styles.proofBoyPlayer}>
       <canvas id="proof-boy-canvas"></canvas>
+      <p>Press "space bar" to extract Pokemon</p>
     </div>
   )
 }
