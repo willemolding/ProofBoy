@@ -1,6 +1,7 @@
 {
   "name": "proofboy-client",
   "version": "1.0.0",
+  "homepage" : "https://willemolding.github.io/ProofBoy",
   "type": "module",
   "scripts": {
     "dev": "vite",
