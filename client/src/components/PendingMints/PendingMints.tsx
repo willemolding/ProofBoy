@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
 import styles from './PendingMints.module.css'
 import { useMetaMask } from '~/hooks/useMetaMask'
 import { ethers } from "ethers";
 import ERC1155ChallengeableMint from '../../contracts/ERC1155ChallengeableMint.json';
-import { NftMetadata, ProofBoyData } from '~/types';
+import { NftMetadata } from '~/types';
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import {registerNft} from '~/utils';
 import Stack from 'react-bootstrap/Stack';
@@ -80,9 +78,7 @@ export const PendingMints = ({query, challenge, claim}: {query: DocumentNode, ch
             let [too, metadataString, witness] = iface.decodeFunctionData("ProposeMint", calldata);
             let metadata: NftMetadata = JSON.parse(metadataString);
 
-            const timeToClaim = 60*1000 - (Date.now() - Number(timestamp)*1000) // in milliseconds
-
-            // const timeToClaim = 2*60*60*1000 - (Date.now() - Number(timestamp)*1000) // in milliseconds
+            const timeToClaim = 60*1000 - (Date.now() - Number(timestamp)*1000) // one minute for testing
 
             return(
               <Card key={id} style={{ width: '20rem' }}>

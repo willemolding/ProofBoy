@@ -16,6 +16,7 @@ export const ProofBoyPlayer = ({ onNewData }: { onNewData: (data: string, journa
   return (
     <div className={styles.proofBoyPlayer}>
       <canvas id="proof-boy-canvas"></canvas>
+      <p>Click screen to start emulation</p>
       <p>Press "space bar" to extract game state</p>
     </div>
   )
