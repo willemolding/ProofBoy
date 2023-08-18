@@ -35,7 +35,7 @@ export const NftPreview = ({ proofBoyData, addIndexedNft }: { proofBoyData: Proo
 
   return (
     <div className={styles.nft_preview}>
-      <Image src={metadata.image} alt={metadata.name} thumbnail />
+      <Image src={metadata.image} alt={metadata.name} width={"100px"} thumbnail />
       <h3>{metadata.name}</h3>
       <Table striped bordered hover>
       <thead>

@@ -84,7 +84,7 @@ export const PendingMints = ({query, challenge, claim}: {query: DocumentNode, ch
               <Card key={id} style={{ width: '20rem' }}>
                 <Card.Body>
                   <Card.Title>ID: {token_id}</Card.Title>
-                  <Card.Img variant="top" src={metadata.image} />
+                  <Card.Img variant="top" src={metadata.image} width={"100px"} />
                   <Table striped bordered hover>
                     <thead>
                       <tr>
