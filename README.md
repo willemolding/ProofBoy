@@ -37,9 +37,9 @@ Players play a game inside a special emulator called the **ProofBoy Recorder**. 
 <img src="./docs/recorder.excalidraw.svg" width="900"/>
 </p>
 
-This journal can be taken by anyone else and replayed into their own emulator to recreate the exact same Gameboy memory state. ProofBoy also defines something called an Extractor which takes a memory state and maps it into something meaningful. In our example we have an extractor which extracts the stats of the players pokemon.
+This journal can be taken by anyone else and replayed into their own emulator to recreate the exact same Gameboy memory state. ProofBoy also defines something called an Extractor which takes a memory state and maps it into something meaningful. In our example we have an extractor which extracts the players score in FlappyBoy.
 
-Both of these operations are deterministic. Anyone can take a fresh copy of a game and a journal obtain the pokemon the player is holding.
+Both of these operations are deterministic. Anyone can take a fresh copy of a game and a journal obtain the score the player is reached.
 
 #### 2. Verifying
 
@@ -49,21 +49,21 @@ To verify this on-chain there is a second piece called the **Proofboy Verifier**
 <img src="./docs/verifier.excalidraw.svg" width="900"/>
 </p>
 
-Anyone can execute the **Proofboy verifier** off-chain inside the Cannon emulator (emulators within emulators!). If they identify a fraudulent claim (e.g. you claim your journal produces a Pokemon that it doesn't) they can challenge it on-chain.
+Anyone can execute the **Proofboy verifier** off-chain inside the Cannon emulator (emulators within emulators!). If they identify a fraudulent claim (e.g. you claim your journal produces a score that it doesn't) they can challenge it on-chain.
 
 The program itself never fully executed on-chain but if there is a fault in a claim then an honest observer can always show that you are committing fraud. If no one can show your claim is fraudulent for sufficiently long it is assumed to be correct.
 
 #### On-Chain
 
-For the hackathon we implemented a system that allows players to mint an NFT for their favorite Pokemon which, thanks to ProofBoy, other people can consider to correspond to a real game state. The flow works as follows:
+For the hackathon we implemented a system that allows players to mint an NFT for their high score in the homebrew gameboy game [FlappyBoy](https://github.com/bitnenfer/FlappyBoy). Thanks to ProofBoy, other people can consider this to correspond to a real game state. The flow works as follows:
 
-- They play the game inside the Proofboy Recorder until the pokemon they wish to mint is first in their party
-- They freeze the state which outputs a journal of all their actions and a JSON metadata object describing the pokemon NFT
+- Players play the game inside the Proofboy Recorder until the reaching a high score
+- They freeze the state which outputs a journal of all their actions and a JSON metadata object describing the score achievement
 - The journal and Metadata are submitted along with a bond to a special ERC1155 contract **ERC1155ChallengeableMint**. This allows players to call `ProposeMint` to propose a mint which must remain unchallenged for 2 hours before it can be claimed
 
 From this point two things can occur:
 
-1. The player was honest so no one can challenge their claim. After 2 hours the mint settles they can call `ClaimMint` to receive their Pokemon NFT and their bond back. This uses the MetaMask SDK to automatically register the minted NFT in the players wallet.
+1. The player was honest so no one can challenge their claim. After 2 hours the mint settles they can call `ClaimMint` to receive their NFT and their bond back. This uses the MetaMask SDK to automatically register the minted NFT in the players wallet.
 
 <p align="center">
 <img src="./docs/flow-no-challenge.excalidraw.svg" width="900"/>
@@ -137,8 +137,6 @@ Also a special thanks to:
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-Before you can prove or verify you will need to legally obtain a copy of the Pokemon blue Gameboy ROM. Put it in the roms directory
 ### Prerequisites
 
 #### Rustup
