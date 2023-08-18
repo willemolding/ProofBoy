@@ -3,7 +3,7 @@ use clap::Parser;
 use ethers::abi::AbiDecode;
 use ethers::prelude::*;
 use extractor::{
-    extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor, Metadata,
+    extractors::flappy_boy_score::FlappyBoyScoreExtractor, Extractor, Metadata,
 };
 use gameboy::Gameboy;
 use journal::{Journal, KeyState};
@@ -49,7 +49,7 @@ async fn main() -> Result<()> {
 
     } else { // verify natively
         // apply the journal to our emulator and get the final memory state
-        let rom = include_bytes!("../../../roms/pokemon-blue.gb");
+        let rom = include_bytes!("../../../roms/flappyboy.gb");
         let mut gb: Gameboy = Gameboy::new(rom);
     
         journal.into_iter().for_each(|keys| {
@@ -59,7 +59,7 @@ async fn main() -> Result<()> {
     
         // extract using the given extractor and compare with the expected output
         let result_metadata =
-            PartyLeaderExtractor::extract(&gb.sys).expect("Failed to extract metadata");
+            FlappyBoyScoreExtractor::extract(&gb.sys).expect("Failed to extract metadata");
     
         assert_eq!(expected_metadata, result_metadata, "Metadata does not match!");
     

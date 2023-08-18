@@ -12,7 +12,7 @@ const HEAP_SIZE: usize = 0x4000000;
 use cannon_heap::init_heap;
 use cannon_io::prelude::*;
 use extractor::{
-    extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor, Metadata,
+    extractors::flappy_boy_score::FlappyBoyScoreExtractor, Extractor, Metadata,
 };
 use gameboy::Gameboy;
 use journal::{Journal, KeyState};
@@ -26,7 +26,7 @@ mod gameboy;
 pub extern "C" fn _start() {
     init_heap!(HEAP_SIZE);
     // this directory will exist in the docker builder image
-    let rom = include_bytes!("/roms/pokemon-blue.gb");
+    let rom = include_bytes!("/roms/flappyboy.gb");
 
     let mut oracle_reader = oracle_reader();
 
@@ -52,7 +52,7 @@ pub extern "C" fn _start() {
 
     // extract using the given extractor and compare with the expected output
     let result_metadata =
-        PartyLeaderExtractor::extract(&gb.sys).expect("Failed to extract metadata");
+        FlappyBoyScoreExtractor::extract(&gb.sys).expect("Failed to extract metadata");
 
     if expected_metadata == result_metadata {
         print("Verified successfully!");

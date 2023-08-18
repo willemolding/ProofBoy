@@ -6,7 +6,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-> *You caught a shiny pokemon? Prove it!*
+> *You got a hight score? Prove it!*
 
 ProofBoy allows for proving state of Gameboy games on-chain using fraud proofs.
 
@@ -21,6 +21,11 @@ Many blockchain games produce assets such as NFTs to reward players for certain 
 
 This projects takes a step toward enabling fully on-chain gaming by allowing complex game state to be proven on-chain. ProofBoy shows how something as complex as a Gameboy emulator can be verified on-chain using fault proofs.
 
+## On ROMs and Legality
+
+Downloading and playing copyrighted ROMs is piracy. The author of this project does not condone this activity or distribute any copyrighted material as part of the project. All included ROMs are homebrew and distributed freely under license from the original creators.
+
+Please do not use ProofBoy to play pirated ROMs.
 
 ### How it works
 

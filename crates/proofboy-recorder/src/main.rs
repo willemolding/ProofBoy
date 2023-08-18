@@ -8,7 +8,7 @@ use bevy::{
     window::*,
 };
 
-use extractor::{extractors::pokemon_red_blue_party_leader::PartyLeaderExtractor, Extractor};
+use extractor::{extractors::flappy_boy_score::FlappyBoyScoreExtractor, Extractor};
 
 const CYCLES_PER_FRAME: usize = 70224/5;
 
@@ -59,7 +59,7 @@ fn main() {
         //     FrameTimeDiagnosticsPlugin::default(),
         // ))
         .add_plugins(app::ProofBoyPlugin {
-            rom: include_bytes!("../../../roms/pokemon-blue.gb").to_vec(),
+            rom: include_bytes!("../../../roms/flappyboy.gb").to_vec(),
             startup_journal: None,
             cycles_per_frame: CYCLES_PER_FRAME,
         })
@@ -76,7 +76,7 @@ fn check_for_dump(
 ) {
     if keys.just_pressed(KeyCode::Space) {
         journal.0.close();
-        let metadata = PartyLeaderExtractor::extract(&gb.sys).expect("failed to extract metadata");
+        let metadata = FlappyBoyScoreExtractor::extract(&gb.sys).expect("failed to extract metadata");
         log::info!("{:?}", &metadata);
         log::info!("{:?}", journal);
         let journal_bytes = journal.0.clone().to_bytes();
