@@ -12,6 +12,8 @@ ProofBoy allows for proving state of Gameboy games on-chain using fraud proofs.
 
 Created as an entry to the 2023 Consensys NAV Hackathon.
 
+[Demo hosted here!](https://willemolding.github.io/ProofBoy/). See [Running The Demo](#running-the-demo) below for usage instructions.
+
 <img src="./docs/navh-banner.jpg"/>
 
 <!-- ABOUT THE PROJECT -->
@@ -23,7 +25,7 @@ This projects takes a step toward enabling fully on-chain gaming by allowing com
 
 ## On ROMs and Legality
 
-Downloading and playing copyrighted ROMs is piracy. The author of this project does not condone this activity or distribute any copyrighted material as part of the project. All included ROMs are homebrew and distributed freely under license from the original creators.
+Downloading and playing copyrighted ROMs is piracy. The author of this project does not condone this activity or distribute any copyrighted material as part of the project. All ROMs used in the delp are homebrew and distributed freely under license from the original creators.
 
 Please do not use ProofBoy to play pirated ROMs.
 
@@ -55,7 +57,13 @@ The program itself never fully executed on-chain but if there is a fault in a cl
 
 #### On-Chain
 
-For the hackathon we implemented a system that allows players to mint an NFT for their high score in the homebrew gameboy game [FlappyBoy](https://github.com/bitnenfer/FlappyBoy). Thanks to ProofBoy, other people can consider this to correspond to a real game state. The flow works as follows:
+For the hackathon we implemented a system that allows players to mint an NFT for their high score in the homebrew gameboy game [FlappyBoy](https://github.com/bitnenfer/FlappyBoy). Thanks to ProofBoy, other people can consider this to correspond to a real game state.
+
+<p align="center">
+<img src="./docs/system-arch.excalidraw.svg" width="900"/>
+</p>
+
+The flow works as follows:
 
 - Players play the game inside the Proofboy Recorder until the reaching a high score
 - They freeze the state which outputs a journal of all their actions and a JSON metadata object describing the score achievement
@@ -145,7 +153,7 @@ Ensure you have [Rustup](https://rustup.rs/) installed so the specific version o
 
 #### Docker
 
-If you plan to build the Proofboy Verifier MIPS binary this will require [Docker](https://www.docker.com/) is installed and running
+If you plan to run the graph indexer or build the Proofboy Verifier MIPS binary this will require [Docker](https://www.docker.com/) is installed and running
 
 #### Just
 
@@ -168,22 +176,63 @@ A recent version of Node and NPM is required for building the contracts and clie
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-The following steps can be used to set up a local environment similar to the demo
+### Running the demo
 
-### 1. Build the ProofBoy Recorder WASM module
+To run the demo you will need a locally running instance of Graph Node. (at least until a public graph indexer for Linea Testnet is available)
+
+1. In one terminal run the following to start a local fresh instance of Graph Node
+
+```shell
+cd subgraph
+./run-local.sh
+```
+
+2. In a separate terminal run the following to build and deploy the subgraph to this node
+
+```shell
+cd subgraph
+npm install
+npm run build
+npm run create-local
+npm run deploy-local
+```
+
+This will add the ProofBoy subgraph to the local running node which is indexing Linea Testnet.
+
+3. Open the demo application
+
+Browse to [https://willemolding.github.io/ProofBoy/](https://willemolding.github.io/ProofBoy/)
+
+This will connect to the local subgraph instance and allow you to see the pending mint proposals.
+
+3. Locally verify a pending mint
+
+- Obtain the transaction hash of a call to `ProposeMint`
+- Write a .env file with a RPC_URL value. This can be your infura RPC endpoint for Linea Testnet. See `.env.example`
+- run:
+
+```shell
+just verify {txn_hash}
+```
+
+### Optional Build instructions
+
+#### Build the ProofBoy Recorder WASM module
 
 ```shell
 just build_web
 ```
 
-### 2. Build the contracts
+#### Build the contracts
 
 ```shell
 npm install
 npm run build_contracts
 ```
 
-### 3. Build and run the client
+#### Build and run the client
+
+Must have built the recorder wasm module first.
 
 ```shell
 cd client
@@ -196,8 +245,8 @@ npm run preview
 
 There are some limits to what ProofBoy can do that should be kept in mind if you plan to use it for your own project.
 
-- Journals need to be submitted in calldata. This is to ensure data availability so anyone can recreate your state. This can get expensive for large journals (for example if you have been playing a game for a long time). This will reduce significantly if ERC4844 or similar can be used to provided data availability instead.
-- Journals are public data. This means another player can easily copy your game state although there is still a public record of who did it first.
+- Journals need to be submitted in calldata. This is to ensure data availability so anyone can recreate your state. This can get expensive for large journals (for example if you have been playing a game for a long time). Fortunately Linea makes this much cheaper than mainnet. This will reduce significantly if ERC4844 or similar can be used to provided data availability instead.
+- Journals are public data. This means another player can easily copy your game state, modify it, and replay it. This means the game reduces to [Tool Assisted Superplay](https://en.wikipedia.org/wiki/Tool-assisted_speedrun) which is still a competitive activity.
 - Verifying time is a function of journal size. Again for very long plays the time required to prove may grow too large to complete in the settlement window. Journals longer than a given length should be considered invalid to prevent unbounded execution.
 - Optimism's FaultProofGame implementation is still under active development. This forms a core part of the project so any progress in that should be upstreamed.
 
