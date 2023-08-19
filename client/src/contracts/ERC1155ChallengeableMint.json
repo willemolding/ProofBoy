@@ -264,8 +264,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -278,8 +277,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -303,8 +301,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -328,8 +325,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -342,8 +338,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -367,8 +362,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -381,8 +375,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -416,8 +409,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -520,8 +512,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -540,8 +531,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -614,8 +604,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"disputeGameFactoryAddr\",\"type\":\"address\"},{\"internalType\":\"Claim\",\"name\":\"rootClaim\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"CannotChallengeProposalHasSettled\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"MetadataHashMismatch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"MintProposalNotSettled\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"ProposalClaimDisproven\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"ProposalHasOpenChallenge\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"challenger\",\"type\":\"address\"}],\"name\":\"MintChallenged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"MintProposed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"Minted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"TransferBatch\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"TransferSingle\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"ChallengeMint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"metadataJson\",\"type\":\"string\"}],\"name\":\"ClaimMint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"metadataJson\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"witness\",\"type\":\"bytes\"}],\"name\":\"ProposeMint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ROOT_CLAIM\",\"outputs\":[{\"internalType\":\"Claim\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"SETTLEMENT_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"}],\"name\":\"balanceOfBatch\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"disputeGameFactory\",\"outputs\":[{\"internalType\":\"contract IDisputeGameFactory\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"gameAddress\",\"outputs\":[{\"internalType\":\"contract IDisputeGame\",\"name\":\"game\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"pendingMints\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"metadataHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"witnessHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeBatchTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"uri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"This contract allows for the creation of ERC1155 tokens through a two stage minting process      The first stage is a proposal stage where a user can propose a new token to be minted      during a challenge period anyone who disputes the validity of the token can challenge it by      initiating a dispute game. If the challenger wins the dispute game      the token is not minted and its proposal cancelled.      The second stage is a claim where the original proposer can receive an actual NFT      if it remains unchallenged for sufficiently long.       ---      This contract uses on-chain metadata since the metadata itself is required to check the      validity of the token. This may be expensive for large metadata.\",\"kind\":\"dev\",\"methods\":{\"ChallengeMint(uint256)\":{\"details\":\"Challenge a pending mint.    This will lead to the creation of a challenge game on this mint.    The winner of the game receives 1/2 the bond from the opponent.    The rest goes into the dev fund :)\",\"params\":{\"id\":\"The ID of the pending mint to challenge\"}},\"ClaimMint(uint256,string)\":{\"details\":\"Mint a new token with the given metadata.\",\"params\":{\"id\":\"The ID of the pending mint (will also be the ID of the token)\",\"metadataJson\":\"The string of metadata.json to associate with the token.                     Must match the hash stored in pending\"}},\"ProposeMint(address,string,bytes)\":{\"details\":\"Propose a new mint.\",\"params\":{\"metadataJson\":\"The string of metadata.json to associate with the token.\",\"witness\":\"The witness given as input to the provable program                 to produce this metadata output.                This must be provided in calldata so watchers can replicate the computation\"}},\"balanceOf(address,uint256)\":{\"details\":\"See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address.\"},\"balanceOfBatch(address[],uint256[])\":{\"details\":\"See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length.\"},\"constructor\":{\"details\":\"Construct a new NFTCollection contract.\"},\"gameAddress(uint256)\":{\"details\":\"Get the address of the dispute game for the given pending mint\"},\"isApprovedForAll(address,address)\":{\"details\":\"See {IERC1155-isApprovedForAll}.\"},\"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)\":{\"details\":\"See {IERC1155-safeBatchTransferFrom}.\"},\"safeTransferFrom(address,address,uint256,uint256,bytes)\":{\"details\":\"See {IERC1155-safeTransferFrom}.\"},\"setApprovalForAll(address,bool)\":{\"details\":\"See {IERC1155-setApprovalForAll}.\"},\"supportsInterface(bytes4)\":{\"details\":\"See {IERC165-supportsInterface}.\"},\"uri(uint256)\":{\"details\":\"See {IERC1155MetadataURI-uri}. This implementation returns the concatenation of the `_baseURI` and the token-specific uri if the latter is set This enables the following behaviors: - if `_tokenURIs[tokenId]` is set, then the result is the concatenation   of `_baseURI` and `_tokenURIs[tokenId]` (keep in mind that `_baseURI`   is empty per default); - if `_tokenURIs[tokenId]` is NOT set then we fallback to `super.uri()`   which in most cases will contain `ERC1155._uri`; - if `_tokenURIs[tokenId]` is NOT set, and if the parents do not have a   uri value set, then the result is empty.\"}},\"stateVariables\":{\"ROOT_CLAIM\":{\"details\":\"The hash of the code to be run in the provable execution\"},\"SETTLEMENT_PERIOD\":{\"details\":\"The amount of time that must pass before a pending mint can be minted\"},\"disputeGameFactory\":{\"details\":\"The dispute game factory used to create and track open disputes\"},\"nonce\":{\"details\":\"Used to generate a fresh token ID for each token\"},\"pendingMints\":{\"details\":\"Mapping from token nonce to mintable status\"}},\"title\":\"ERC1155ChallengeableMint\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/ERC1155ChallengeableMint.sol\":\"ERC1155ChallengeableMint\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@eth-optimism/contracts-bedrock/src/dispute/interfaces/IBondManager.sol\":{\"keccak256\":\"0x431c4c0fff71b1f94a9c649415cf398466e0a3f2ce64468df5af96bab261e7ba\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9a9dcb5246077b9cccb1916b637b9605e85d9c0f8bd7f87a086be3b4051bfaba\",\"dweb:/ipfs/QmcsnoAjvUiBGndBrs6xvWDxtDLeoQUBjZU5RUUtTf8rFF\"]},\"@eth-optimism/contracts-bedrock/src/dispute/interfaces/IDisputeGame.sol\":{\"keccak256\":\"0xc40099967c0bd485d5204b60479f0d789a9e053b8d11a97a267d3f9e674d002b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7a190213b5a63ea418f030ba914599b8a342c062358b8aa8e63f29b821454294\",\"dweb:/ipfs/QmfT4nfmLwg2QyubbFv5X1ghVPgqag87gGVMYpXoBYp3mQ\"]},\"@eth-optimism/contracts-bedrock/src/dispute/interfaces/IDisputeGameFactory.sol\":{\"keccak256\":\"0x5bbd87b0af63aab392081d4700e4657d9cbeb86d8f69c60b0e202bce070d68f7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0a5151d88a3dfee3ebe850756721151f3bbcd20c4802ca30dc0c7ec8ce3247ca\",\"dweb:/ipfs/QmeyWYeoaWLoZkWwwrjQsdAp8KgLVttmBARsaLF82FEPq3\"]},\"@eth-optimism/contracts-bedrock/src/dispute/interfaces/IInitializable.sol\":{\"keccak256\":\"0xf021b03c9e887e227102b037595e0917b76546e796bec7aa4fdced61090267ce\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bcfbad382815e37355b7cc318fa333b9b5b08223d4315951fd0881430ab8d3df\",\"dweb:/ipfs/QmRng31WWpYeApQUcXJXhSdqL797drdtBwvUD6D9giCyy2\"]},\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibClock.sol\":{\"keccak256\":\"0xa5e0ab5658506760ac26d6b73755af9c03e43184dee996e40113dbaa71199551\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1305bffdb301d190ce749d67274f6caac24002846e506f28d950f8cbc230e8c0\",\"dweb:/ipfs/QmdG6DAX2nznmwyp4VmTNxHy7orx6sdGzUKwgJ9kB69Epm\"]},\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibHashing.sol\":{\"keccak256\":\"0xc0174b32e6585e7192d385b405c3825528150f9fc941a4f14448edaa662e042c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cae57fb5cb98d7b4b96cd60779920122e800d0d7db9415f16808e19175e45f89\",\"dweb:/ipfs/QmRZfqzW7Aa5FtfL5d16UdjD53q95w1VeVDkeGsnTJusrE\"]},\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibPosition.sol\":{\"keccak256\":\"0x1836d08aaf755a6afea8a4d6bc92b8b96061c7df681a7308a536114ec3cd9276\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cd7a4e1cfdf656f32f5959e78a79872be90c9d5f089f1b0c56595b929d030ecc\",\"dweb:/ipfs/QmZsLmahruxKVRxpMXbnqeVonLwcaiuqHEXK1dXfx2YCZk\"]},\"@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol\":{\"keccak256\":\"0x11ba4465bbe25641801a34aef36fc6fd754afcf8811f1a5c2275d1a3f4567a9c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://eeb9fb8f3e78ca4a02952a15b8163d298298c315bf61ade3e3198068c25351b9\",\"dweb:/ipfs/QmRBBtVzEXY66UcSjonGiP1RZ32KmugDjgXexu5sswe7sh\"]},\"@openzeppelin/contracts/token/ERC1155/ERC1155.sol\":{\"keccak256\":\"0x74216d303b87202736b6d571fc3e9b530aa98ff017a41516170f1c555e518669\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c0228d82cef8911972f4cbf7e33dfb9ceebb813d15771335949e06fc0f4a3f1b\",\"dweb:/ipfs/QmYCgp6PABoEe9iDmZTeUc31wp7ekraVavgKF1vVSnd438\"]},\"@openzeppelin/contracts/token/ERC1155/IERC1155.sol\":{\"keccak256\":\"0x8e93de94c9062ebc94fb7e2e3929b0781ac6a2b7772e2f7a59045861c93e5be9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f920a631bf986c610fe573d3c70a2bb6f224f86f4a8550016470c7ee476c9ab5\",\"dweb:/ipfs/QmYzsyVMfnaREKHcHv5RPS8Xg5r1Q38E2SDsGBTnXeFWzb\"]},\"@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol\":{\"keccak256\":\"0xeb373f1fdc7b755c6a750123a9b9e3a8a02c1470042fd6505d875000a80bde0b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0e28648f994abf1d6bc345644a361cc0b7efa544f8bc0c8ec26011fed85a91ec\",\"dweb:/ipfs/QmVVE7AiRjKaQYYji7TkjmTeVzGpNmms5eoxqTCfvvpj6D\"]},\"@openzeppelin/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol\":{\"keccak256\":\"0x4e7bcc6aa9b150e125df8afbfbca5dfb7c92fa4fb01985f2f595ce0c96153cff\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://75aa1a94e176c23d37e117daf8386cd6301119b1ca5cf521fe22de9ccc13dade\",\"dweb:/ipfs/QmfTfUFGRZ3iNavQgLmj2zNR7Pz2djKV5UPRTmDWnapbGg\"]},\"@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol\":{\"keccak256\":\"0xa66d18b9a85458d28fc3304717964502ae36f7f8a2ff35bc83f6f85d74b03574\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e46c80ea068989111d6103e5521223f9ef337e93de76deed8b03f75c6f7b2797\",\"dweb:/ipfs/QmNoSE6knNfFncdDDLTb3fGR6oSQty1srG96Vsx3E9wQdw\"]},\"@openzeppelin/contracts/utils/Address.sol\":{\"keccak256\":\"0x2ccf9d2313a313d41a791505f2b5abfdc62191b5d4334f7f7a82691c088a1c87\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b3a57d0854b2fdce6ebff933a48dca2445643d1eccfc27f00292e937f26c6a58\",\"dweb:/ipfs/QmW45rZooS9TqR4YXUbjRbtf2Bpb5ouSarBvfW1LdGprvV\"]},\"@openzeppelin/contracts/utils/Base64.sol\":{\"keccak256\":\"0x5efa2a2ed44af15fd5bec8c43b45cb26fe6cb68671fea151e6afcfed66ed2672\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e67c6ff6f3f86f892a6dee529390c387a5b46ed43e0c3032c748662de2c8f195\",\"dweb:/ipfs/QmWrcn5NQhCkS7Mr6A24TvxrjvVRdEshyBE9WBmY1fG7eH\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"@openzeppelin/contracts/utils/Strings.sol\":{\"keccak256\":\"0x32c202bd28995dd20c4347b7c6467a6d3241c74c8ad3edcbb610cd9205916c45\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8179c356adb19e70d6b31a1eedc8c5c7f0c00e669e2540f4099e3844c6074d30\",\"dweb:/ipfs/QmWFbivarEobbqhS1go64ootVuHfVohBseerYy9FTEd1W2\"]},\"@openzeppelin/contracts/utils/introspection/ERC165.sol\":{\"keccak256\":\"0xd10975de010d89fd1c78dc5e8a9a7e7f496198085c151648f20cba166b32582b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fb0048dee081f6fffa5f74afc3fb328483c2a30504e94a0ddd2a5114d731ec4d\",\"dweb:/ipfs/QmZptt1nmYoA5SgjwnSgWqgUSDgm4q52Yos3xhnMv3MV43\"]},\"@openzeppelin/contracts/utils/introspection/IERC165.sol\":{\"keccak256\":\"0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f\",\"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy\"]},\"project:/contracts/ERC1155ChallengeableMint.sol\":{\"keccak256\":\"0xdd70cf444a4823311f983505b74e4b832411b127a58d7068ad7c8bc942d7d0a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3acc7118418dba36432faa44cd05d0d3ad643f375df560fb541be4aa4efa77ef\",\"dweb:/ipfs/QmXbzMb3XpQVdQ876jYBdobN3MamomxvuHba86sDWsEiP9\"]}},\"version\":1}",
@@ -35812,8 +35801,7 @@
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-12T04:42:00.957Z",
-  "networkType": "ethereum",
+  "updatedAt": "2023-08-18T23:48:55.961Z",
   "devdoc": {
     "details": "This contract allows for the creation of ERC1155 tokens through a two stage minting process      The first stage is a proposal stage where a user can propose a new token to be minted      during a challenge period anyone who disputes the validity of the token can challenge it by      initiating a dispute game. If the challenger wins the dispute game      the token is not minted and its proposal cancelled.      The second stage is a claim where the original proposer can receive an actual NFT      if it remains unchallenged for sufficiently long.       ---      This contract uses on-chain metadata since the metadata itself is required to check the      validity of the token. This may be expensive for large metadata.",
     "kind": "dev",

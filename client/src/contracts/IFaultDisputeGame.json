@@ -1521,7 +1521,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-12T03:58:53.028Z",
+  "updatedAt": "2023-08-18T23:48:55.933Z",
   "devdoc": {
     "events": {
       "Move(uint256,bytes32,address)": {

@@ -121,8 +121,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -135,8 +134,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -149,8 +147,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -163,8 +160,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -177,8 +173,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -217,8 +212,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -231,8 +225,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -245,8 +238,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -298,8 +290,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -312,8 +303,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -326,8 +316,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -378,8 +367,7 @@
       "name": "move",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function",
-      "payable": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -397,8 +385,7 @@
       "name": "attack",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function",
-      "payable": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -416,8 +403,7 @@
       "name": "defend",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function",
-      "payable": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -448,8 +434,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -462,8 +447,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -476,8 +460,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -490,8 +473,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -517,8 +499,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -531,8 +512,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -555,8 +535,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -576,8 +555,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"Claim\",\"name\":\"_absolutePrestate\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"_maxGameDepth\",\"type\":\"uint256\"},{\"internalType\":\"Duration\",\"name\":\"_gameDuration\",\"type\":\"uint64\"},{\"internalType\":\"contract IBigStepper\",\"name\":\"_vm\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"CannotDefendRootClaim\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ClaimAlreadyExists\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ClockNotExpired\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ClockTimeExceeded\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"GameDepthExceeded\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"GameNotInProgress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidParent\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidPrestate\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ValidStep\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"parentIndex\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"Claim\",\"name\":\"claim\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"claimant\",\"type\":\"address\"}],\"name\":\"Move\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"enum GameStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"Resolved\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"ABSOLUTE_PRESTATE\",\"outputs\":[{\"internalType\":\"Claim\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"GAME_DURATION\",\"outputs\":[{\"internalType\":\"Duration\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_GAME_DEPTH\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"VM\",\"outputs\":[{\"internalType\":\"contract IBigStepper\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_ident\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_partOffset\",\"type\":\"uint256\"}],\"name\":\"addLocalData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_parentIndex\",\"type\":\"uint256\"},{\"internalType\":\"Claim\",\"name\":\"_claim\",\"type\":\"bytes32\"}],\"name\":\"attack\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"bondManager\",\"outputs\":[{\"internalType\":\"contract IBondManager\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"claimData\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"parentIndex\",\"type\":\"uint32\"},{\"internalType\":\"bool\",\"name\":\"countered\",\"type\":\"bool\"},{\"internalType\":\"Claim\",\"name\":\"claim\",\"type\":\"bytes32\"},{\"internalType\":\"Position\",\"name\":\"position\",\"type\":\"uint128\"},{\"internalType\":\"Clock\",\"name\":\"clock\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claimDataLen\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"len_\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"createdAt\",\"outputs\":[{\"internalType\":\"Timestamp\",\"name\":\"createdAt_\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_parentIndex\",\"type\":\"uint256\"},{\"internalType\":\"Claim\",\"name\":\"_claim\",\"type\":\"bytes32\"}],\"name\":\"defend\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"extraData\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"extraData_\",\"type\":\"bytes\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"gameData\",\"outputs\":[{\"internalType\":\"GameType\",\"name\":\"gameType_\",\"type\":\"uint8\"},{\"internalType\":\"Claim\",\"name\":\"rootClaim_\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"extraData_\",\"type\":\"bytes\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"gameStart\",\"outputs\":[{\"internalType\":\"Timestamp\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"gameType\",\"outputs\":[{\"internalType\":\"GameType\",\"name\":\"gameType_\",\"type\":\"uint8\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"l1BlockNumber\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"l1BlockNumber_\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"l1Head\",\"outputs\":[{\"internalType\":\"Hash\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"l2BlockNumber\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"l2BlockNumber_\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_challengeIndex\",\"type\":\"uint256\"},{\"internalType\":\"Claim\",\"name\":\"_claim\",\"type\":\"bytes32\"},{\"internalType\":\"bool\",\"name\":\"_isAttack\",\"type\":\"bool\"}],\"name\":\"move\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proposals\",\"outputs\":[{\"components\":[{\"internalType\":\"uint128\",\"name\":\"index\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"l2BlockNumber\",\"type\":\"uint128\"},{\"internalType\":\"Hash\",\"name\":\"outputRoot\",\"type\":\"bytes32\"}],\"internalType\":\"struct IFaultDisputeGame.OutputProposal\",\"name\":\"starting\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"uint128\",\"name\":\"index\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"l2BlockNumber\",\"type\":\"uint128\"},{\"internalType\":\"Hash\",\"name\":\"outputRoot\",\"type\":\"bytes32\"}],\"internalType\":\"struct IFaultDisputeGame.OutputProposal\",\"name\":\"disputed\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"resolve\",\"outputs\":[{\"internalType\":\"enum GameStatus\",\"name\":\"status_\",\"type\":\"uint8\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rootClaim\",\"outputs\":[{\"internalType\":\"Claim\",\"name\":\"rootClaim_\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"status\",\"outputs\":[{\"internalType\":\"enum GameStatus\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_claimIndex\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"_isAttack\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"_stateData\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"}],\"name\":\"step\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"addLocalData(uint256,uint256)\":{\"params\":{\"_ident\":\"The local identifier of the data to post.\",\"_partOffset\":\"The offset of the data to post.\"}},\"attack(uint256,bytes32)\":{\"params\":{\"_claim\":\"The `Claim` at the relative attack position.\",\"_parentIndex\":\"Index of the `Claim` to attack in `claimData`.\"}},\"constructor\":{\"custom:semver\":\"0.0.6\",\"params\":{\"_absolutePrestate\":\"The absolute prestate of the instruction trace.\",\"_gameDuration\":\"The duration of the game.\",\"_maxGameDepth\":\"The maximum depth of bisection.\",\"_vm\":\"An onchain VM that performs single instruction steps on a fault proof program            trace.\"}},\"createdAt()\":{\"returns\":{\"createdAt_\":\"The timestamp that the DisputeGame contract was created at.\"}},\"defend(uint256,bytes32)\":{\"params\":{\"_claim\":\"The `Claim` at the relative defense position.\",\"_parentIndex\":\"Index of the claim to defend in `claimData`.\"}},\"extraData()\":{\"details\":\"`clones-with-immutable-args` argument #2\",\"returns\":{\"extraData_\":\"Any extra data supplied to the dispute game contract by the creator.\"}},\"gameData()\":{\"returns\":{\"extraData_\":\"Any extra data supplied to the dispute game contract by the creator.\",\"gameType_\":\"The type of proof system being used.\",\"rootClaim_\":\"The root claim of the DisputeGame.\"}},\"gameType()\":{\"details\":\"The reference impl should be entirely different depending on the type (fault, validity)      i.e. The game type should indicate the security model.\",\"returns\":{\"gameType_\":\"The type of proof system being used.\"}},\"initialize()\":{\"details\":\"This function may only be called once.\"},\"move(uint256,bytes32,bool)\":{\"params\":{\"_challengeIndex\":\"The index of the claim being moved against.\",\"_claim\":\"The claim at the next logical position in the game.\",\"_isAttack\":\"Whether or not the move is an attack or defense.\"}},\"resolve()\":{\"details\":\"May only be called if the `status` is `IN_PROGRESS`.\",\"returns\":{\"status_\":\"The status of the game after resolution.\"}},\"rootClaim()\":{\"details\":\"`clones-with-immutable-args` argument #1\",\"returns\":{\"rootClaim_\":\"The root claim of the DisputeGame.\"}},\"step(uint256,bool,bytes,bytes)\":{\"details\":\"This function should point to a fault proof processor in order to execute      a step in the fault proof program on-chain. The interface of the fault proof      processor contract should be generic enough such that we can use different      fault proof VMs (MIPS, RiscV5, etc.)\",\"params\":{\"_claimIndex\":\"The index of the challenged claim within `claimData`.\",\"_isAttack\":\"Whether or not the step is an attack or a defense.\",\"_proof\":\"Proof to access memory leaf nodes in the VM.\",\"_stateData\":\"The stateData of the step is the preimage of the claim at the given        prestate, which is at `_stateIndex` if the move is an attack and `_claimIndex` if        the move is a defense. If the step is an attack on the first instruction, it is        the absolute prestate of the fault proof VM.\"}},\"version()\":{\"returns\":{\"_0\":\"Semver contract version as a string.\"}}},\"stateVariables\":{\"bondManager\":{\"return\":\"The address of the `BondManager` used.\",\"returns\":{\"_0\":\"The address of the `BondManager` used.\"}},\"status\":{\"return\":\"The current status of the game.\",\"returns\":{\"_0\":\"The current status of the game.\"}}},\"title\":\"FaultDisputeGame\",\"version\":1},\"userdoc\":{\"errors\":{\"CannotDefendRootClaim()\":[{\"notice\":\"Thrown when a defense against the root claim is attempted.\"}],\"ClaimAlreadyExists()\":[{\"notice\":\"Thrown when a claim is attempting to be made that already exists.\"}],\"ClockNotExpired()\":[{\"notice\":\"Thrown when the game is attempted to be resolved too early.\"}],\"ClockTimeExceeded()\":[{\"notice\":\"Thrown when a move is attempted to be made after the clock has timed out.\"}],\"GameDepthExceeded()\":[{\"notice\":\"Thrown when a move is attempted to be made at or greater than the max depth of the game.\"}],\"GameNotInProgress()\":[{\"notice\":\"Thrown when an action that requires the game to be `IN_PROGRESS` is invoked when         the game is not in progress.\"}],\"InvalidParent()\":[{\"notice\":\"Thrown when a step is attempted above the maximum game depth.\"}],\"InvalidPrestate()\":[{\"notice\":\"Thrown when an invalid prestate is supplied to `step`.\"}],\"ValidStep()\":[{\"notice\":\"Thrown when a step is made that computes the expected post state correctly.\"}]},\"events\":{\"Move(uint256,bytes32,address)\":{\"notice\":\"Emitted when a new claim is added to the DAG by `claimant`\"},\"Resolved(uint8)\":{\"notice\":\"Emitted when the game is resolved.\"}},\"kind\":\"user\",\"methods\":{\"ABSOLUTE_PRESTATE()\":{\"notice\":\"The absolute prestate of the instruction trace. This is a constant that is defined         by the program that is being used to execute the trace.\"},\"GAME_DURATION()\":{\"notice\":\"The duration of the game.\"},\"MAX_GAME_DEPTH()\":{\"notice\":\"The max depth of the game.\"},\"VM()\":{\"notice\":\"An onchain VM that performs single instruction steps on a fault proof program trace.\"},\"addLocalData(uint256,uint256)\":{\"notice\":\"Posts the requested local data to the VM's `PreimageOralce`.\"},\"attack(uint256,bytes32)\":{\"notice\":\"Attack a disagreed upon `Claim`.\"},\"bondManager()\":{\"notice\":\"Returns the address of the `BondManager` used.\"},\"claimData(uint256)\":{\"notice\":\"An append-only array of all claims made during the dispute game.\"},\"claimDataLen()\":{\"notice\":\"Returns the length of the `claimData` array.\"},\"createdAt()\":{\"notice\":\"Returns the timestamp that the DisputeGame contract was created at.\"},\"defend(uint256,bytes32)\":{\"notice\":\"Defend an agreed upon `Claim`.\"},\"extraData()\":{\"notice\":\"Getter for the extra data.\"},\"gameData()\":{\"notice\":\"A compliant implementation of this interface should return the components of the         game UUID's preimage provided in the cwia payload. The preimage of the UUID is         constructed as `keccak256(gameType . rootClaim . extraData)` where `.` denotes         concatenation.\"},\"gameStart()\":{\"notice\":\"The starting timestamp of the game\"},\"gameType()\":{\"notice\":\"Getter for the game type.\"},\"initialize()\":{\"notice\":\"Initializes the contract.\"},\"l1BlockNumber()\":{\"notice\":\"The l1BlockNumber that Cannon was ran from to generate the root claim.\"},\"l1Head()\":{\"notice\":\"Returns the L1 block hash at the time of the game's creation.\"},\"l2BlockNumber()\":{\"notice\":\"The l2BlockNumber that the `rootClaim` commits to. The trace being bisected within         the game is from `l2BlockNumber - 1` -> `l2BlockNumber`.\"},\"move(uint256,bytes32,bool)\":{\"notice\":\"Internal move function, used by both `attack` and `defend`.\"},\"proposals()\":{\"notice\":\"The starting and disputed output proposal for the game. Includes information about         the output indexes in the `L2OutputOracle` and the output roots at the time of         game creation.\"},\"resolve()\":{\"notice\":\"If all necessary information has been gathered, this function should mark the game         status as either `CHALLENGER_WINS` or `DEFENDER_WINS` and return the status of         the resolved game. It is at this stage that the bonds should be awarded to the         necessary parties.\"},\"rootClaim()\":{\"notice\":\"Getter for the root claim.\"},\"status()\":{\"notice\":\"Returns the current status of the game.\"},\"step(uint256,bool,bytes,bytes)\":{\"notice\":\"Perform the final step via an on-chain fault proof processor\"},\"version()\":{\"notice\":\"Returns the full semver contract version.\"}},\"notice\":\"An implementation of the `IFaultDisputeGame` interface.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/FaultDisputeGame.sol\":\"FaultDisputeGame\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@eth-optimism/contracts-bedrock/src/cannon/interfaces/IPreimageOracle.sol\":{\"keccak256\":\"0xf402592fd623e76c6f7de79bff1d41df2c12e749788e5eb02292c5d9e9cc843d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4d7477121a3c17d4b2226024d874c8a65ca8342fc5c513b5c50981bd5428931b\",\"dweb:/ipfs/Qmagrbyf4NhgmZH8HNyxKdbLFRUHwpY1UhdW5bDezotbGW\"]},\"@eth-optimism/contracts-bedrock/src/dispute/interfaces/IBigStepper.sol\":{\"keccak256\":\"0x7a9472630f7dac58d3e6c98d2789cb7fe47cb7bf9e89fa4d4947627b43ee8072\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e7839a478cd2988438f61fd26193d958a186dca2b6590d227016b08a5d3c196a\",\"dweb:/ipfs/QmRr18qgHakPFs1w8qnzkcg7gRKCHLgMipkKwaVANmjPCS\"]},\"@eth-optimism/contracts-bedrock/src/dispute/interfaces/IBondManager.sol\":{\"keccak256\":\"0x431c4c0fff71b1f94a9c649415cf398466e0a3f2ce64468df5af96bab261e7ba\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9a9dcb5246077b9cccb1916b637b9605e85d9c0f8bd7f87a086be3b4051bfaba\",\"dweb:/ipfs/QmcsnoAjvUiBGndBrs6xvWDxtDLeoQUBjZU5RUUtTf8rFF\"]},\"@eth-optimism/contracts-bedrock/src/dispute/interfaces/IDisputeGame.sol\":{\"keccak256\":\"0xc40099967c0bd485d5204b60479f0d789a9e053b8d11a97a267d3f9e674d002b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7a190213b5a63ea418f030ba914599b8a342c062358b8aa8e63f29b821454294\",\"dweb:/ipfs/QmfT4nfmLwg2QyubbFv5X1ghVPgqag87gGVMYpXoBYp3mQ\"]},\"@eth-optimism/contracts-bedrock/src/dispute/interfaces/IFaultDisputeGame.sol\":{\"keccak256\":\"0x25e9098108ed4ba1aeac3b5fcbcab9983e6669739bfa7a69e1cef065348b1be2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b0005d5db3c6993dd63e317b3f44d44de039a311d116a25adff310266213c406\",\"dweb:/ipfs/QmemdgR4X5v63WasKsBZBPQVajQr6PVdfL2ZThF8gC1Gbx\"]},\"@eth-optimism/contracts-bedrock/src/dispute/interfaces/IInitializable.sol\":{\"keccak256\":\"0xf021b03c9e887e227102b037595e0917b76546e796bec7aa4fdced61090267ce\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bcfbad382815e37355b7cc318fa333b9b5b08223d4315951fd0881430ab8d3df\",\"dweb:/ipfs/QmRng31WWpYeApQUcXJXhSdqL797drdtBwvUD6D9giCyy2\"]},\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibClock.sol\":{\"keccak256\":\"0xa5e0ab5658506760ac26d6b73755af9c03e43184dee996e40113dbaa71199551\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1305bffdb301d190ce749d67274f6caac24002846e506f28d950f8cbc230e8c0\",\"dweb:/ipfs/QmdG6DAX2nznmwyp4VmTNxHy7orx6sdGzUKwgJ9kB69Epm\"]},\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibHashing.sol\":{\"keccak256\":\"0xc0174b32e6585e7192d385b405c3825528150f9fc941a4f14448edaa662e042c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cae57fb5cb98d7b4b96cd60779920122e800d0d7db9415f16808e19175e45f89\",\"dweb:/ipfs/QmRZfqzW7Aa5FtfL5d16UdjD53q95w1VeVDkeGsnTJusrE\"]},\"@eth-optimism/contracts-bedrock/src/dispute/lib/LibPosition.sol\":{\"keccak256\":\"0x1836d08aaf755a6afea8a4d6bc92b8b96061c7df681a7308a536114ec3cd9276\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cd7a4e1cfdf656f32f5959e78a79872be90c9d5f089f1b0c56595b929d030ecc\",\"dweb:/ipfs/QmZsLmahruxKVRxpMXbnqeVonLwcaiuqHEXK1dXfx2YCZk\"]},\"@eth-optimism/contracts-bedrock/src/libraries/Clone.sol\":{\"keccak256\":\"0x15814c20711007bcbf231f2dd4acbe7fb8646d89130a6a8e7791b7766c0bf02d\",\"license\":\"BSD\",\"urls\":[\"bzz-raw://e50be7e56599ca1be810fa7f194be57a6575be646a1d63e30eea671c8f6e1ab4\",\"dweb:/ipfs/QmVrZnr6C41vMQZYxWvJo9TW3v7AqLttnCSUWRrUBm2msf\"]},\"@eth-optimism/contracts-bedrock/src/libraries/DisputeErrors.sol\":{\"keccak256\":\"0xb45fe4110562d8fd01d8a3e0374809d49df29a75697fda5bcfa0b0eb1a87fe55\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2ab6cf37053ac22511d9be29f77ba45909a3387e80fd09303ef2e960ebaa3423\",\"dweb:/ipfs/QmNiVTHDSqLS5Gs7dHjuDLqyA23vgva5zbkzvfH2mAva5g\"]},\"@eth-optimism/contracts-bedrock/src/libraries/DisputeTypes.sol\":{\"keccak256\":\"0x11ba4465bbe25641801a34aef36fc6fd754afcf8811f1a5c2275d1a3f4567a9c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://eeb9fb8f3e78ca4a02952a15b8163d298298c315bf61ade3e3198068c25351b9\",\"dweb:/ipfs/QmRBBtVzEXY66UcSjonGiP1RZ32KmugDjgXexu5sswe7sh\"]},\"@eth-optimism/contracts-bedrock/src/libraries/Types.sol\":{\"keccak256\":\"0x75900d651301940d24c00d14f0b3b6cbd6dcf379173ceaa31d9bf5be934a9aa4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://99c2632c5bf4fa3982391c32110eec9fa07917b483b2442cbaf18bdde5bdb24e\",\"dweb:/ipfs/QmSUs6Amkeootf5gKGbKi4mJpvhN2U8i1ED6ef2dskV5xc\"]},\"@eth-optimism/contracts-bedrock/src/universal/Semver.sol\":{\"keccak256\":\"0xc455c84bb1f17e994dea0451fd363f81f83965bfa86e81ac6c8b3a327b9a0ff0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fab499f3c0d7df8eb763b50621848d5d2147fb9c42a8eb9b65a11093090bb482\",\"dweb:/ipfs/QmUKsG4ztwtUZFjuRYAxgUFTgH5YxWSGF1BFFaB7vdM2K3\"]},\"@openzeppelin/contracts/utils/Strings.sol\":{\"keccak256\":\"0x32c202bd28995dd20c4347b7c6467a6d3241c74c8ad3edcbb610cd9205916c45\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8179c356adb19e70d6b31a1eedc8c5c7f0c00e669e2540f4099e3844c6074d30\",\"dweb:/ipfs/QmWFbivarEobbqhS1go64ootVuHfVohBseerYy9FTEd1W2\"]},\"project:/contracts/FaultDisputeGame.sol\":{\"keccak256\":\"0xa8c48864c59fb40db15e977616da8f5aa067ded0e8b89664fa5c3c6b8dae4ed5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://042f5f11001a647267d5ea5dd1132d028ea2b2b4ff136c7abc99e8bdae6cce82\",\"dweb:/ipfs/QmeKw9oHfjJPEBBT1UY9dj3NNHbgRXusn8ZdSYfyXbgTxE\"]}},\"version\":1}",
@@ -28823,8 +28801,7 @@
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-12T04:42:00.967Z",
-  "networkType": "ethereum",
+  "updatedAt": "2023-08-18T23:48:55.967Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

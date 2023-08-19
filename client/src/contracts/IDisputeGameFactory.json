@@ -1479,7 +1479,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-12T03:58:53.027Z",
+  "updatedAt": "2023-08-18T23:48:55.932Z",
   "devdoc": {
     "events": {
       "DisputeGameCreated(address,uint8,bytes32)": {

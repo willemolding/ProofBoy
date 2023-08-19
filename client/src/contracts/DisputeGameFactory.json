@@ -126,8 +126,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -140,8 +139,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -174,8 +172,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -201,8 +198,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -236,8 +232,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -261,8 +256,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -320,8 +314,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -17403,8 +17396,7 @@
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-08-12T04:42:00.973Z",
-  "networkType": "ethereum",
+  "updatedAt": "2023-08-18T23:48:55.955Z",
   "devdoc": {
     "errors": {
       "GameAlreadyExists(bytes32)": [
