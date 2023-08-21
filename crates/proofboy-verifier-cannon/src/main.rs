@@ -11,9 +11,7 @@ const HEAP_SIZE: usize = 0x4000000;
 
 use cannon_heap::init_heap;
 use cannon_io::prelude::*;
-use extractor::{
-    extractors::flappy_boy_score::FlappyBoyScoreExtractor, Extractor, Metadata,
-};
+use extractor::{extractors::flappy_boy_score::FlappyBoyScoreExtractor, Extractor, Metadata};
 use gameboy::Gameboy;
 use journal::{Journal, KeyState};
 

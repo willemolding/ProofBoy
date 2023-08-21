@@ -14,7 +14,7 @@ pub struct Cli {
     pub txn_hash: TxHash,
 
     #[arg(long, env = "SERVE_PREIMAGES")]
-    pub serve_preimages: bool
+    pub serve_preimages: bool,
 }
 
 fn parse_txn_hash(arg: &str) -> Result<TxHash, anyhow::Error> {

@@ -10,7 +10,7 @@ use wasm_bindgen::prelude::*;
 
 mod app;
 
-const CYCLES_PER_FRAME: usize = 70224/5;
+const CYCLES_PER_FRAME: usize = 70224 / 5;
 
 #[wasm_bindgen]
 pub fn run(canvas_selector: &str, output_callback: js_sys::Function) {
@@ -56,14 +56,13 @@ fn check_for_dump(
 ) {
     if keys.just_pressed(KeyCode::Space) {
         journal.0.close();
-        let metadata = FlappyBoyScoreExtractor::extract(&gb.sys).expect("failed to extract metadata");
+        let metadata =
+            FlappyBoyScoreExtractor::extract(&gb.sys).expect("failed to extract metadata");
         log::info!("{:?}", &metadata);
         callback
             .call2(
                 &JsValue::null(),
-                &JsValue::from(
-                    serde_json::to_string(&metadata).unwrap(),
-                ),
+                &JsValue::from(serde_json::to_string(&metadata).unwrap()),
                 &JsValue::from(serde_json::to_string(&journal.0.clone().to_bytes()).unwrap()),
             )
             .unwrap();

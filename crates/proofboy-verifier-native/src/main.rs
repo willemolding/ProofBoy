@@ -2,16 +2,14 @@ use anyhow::Result;
 use clap::Parser;
 use ethers::abi::AbiDecode;
 use ethers::prelude::*;
-use extractor::{
-    extractors::flappy_boy_score::FlappyBoyScoreExtractor, Extractor, Metadata,
-};
+use extractor::{extractors::flappy_boy_score::FlappyBoyScoreExtractor, Extractor, Metadata};
 use gameboy::Gameboy;
 use journal::{Journal, KeyState};
+use preimage_provider::{PreimageKey, PreimageProvider};
+use std::collections::HashMap;
+use std::os::fd::FromRawFd;
 use tokio::fs::File;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
-use std::collections::HashMap;
-use preimage_provider::{PreimageKey, PreimageProvider};
-use std::os::fd::FromRawFd;
 
 mod cli;
 mod gameboy;
@@ -34,38 +32,42 @@ async fn main() -> Result<()> {
     let expected_metadata = metadata_from_calldata(&tx.input)?;
     let journal = witness_from_calldata(&tx.input)?;
 
-    if args.serve_preimages { //serve data so MIPS emulator can verify
-        let mut preimages =
-            HashMap::<[u8; 32], Vec<u8>>::new();
+    if args.serve_preimages {
+        //serve data so MIPS emulator can verify
+        let mut preimages = HashMap::<[u8; 32], Vec<u8>>::new();
 
-            preimages.insert(PreimageKey::new_local(&[0x0]).into(), serde_json::to_string(&expected_metadata)?.into_bytes());
-            preimages.insert(PreimageKey::new_local(&[0x1]).into(), journal.to_bytes());
-        
+        preimages.insert(
+            PreimageKey::new_local(&[0x0]).into(),
+            serde_json::to_string(&expected_metadata)?.into_bytes(),
+        );
+        preimages.insert(PreimageKey::new_local(&[0x1]).into(), journal.to_bytes());
 
         let reader = unsafe { File::from_raw_fd(PCLIENT_RFD) };
         let writer = unsafe { File::from_raw_fd(PCLIENT_WFD) };
 
         wait_for_requests(reader, writer, preimages).await?;
-
-    } else { // verify natively
+    } else {
+        // verify natively
         // apply the journal to our emulator and get the final memory state
         let rom = include_bytes!("../../../roms/flappyboy.gb");
         let mut gb: Gameboy = Gameboy::new(rom);
-    
+
         journal.into_iter().for_each(|keys| {
             gb.kbd.0.replace(KeyState::from_byte(keys));
             gb.step();
         });
-    
+
         // extract using the given extractor and compare with the expected output
         let result_metadata =
             FlappyBoyScoreExtractor::extract(&gb.sys).expect("Failed to extract metadata");
-    
-        assert_eq!(expected_metadata, result_metadata, "Metadata does not match!");
-    
+
+        assert_eq!(
+            expected_metadata, result_metadata,
+            "Metadata does not match!"
+        );
+
         println!("✅ Metadata obtained matches claim ✅");
     }
-
 
     Ok(())
 }
@@ -94,7 +96,6 @@ async fn wait_for_requests(
         }
     }
 }
-
 
 fn metadata_from_calldata(calldata: &Bytes) -> Result<Metadata> {
     let decoded = ProposeMintCall::decode(calldata)?;

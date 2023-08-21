@@ -4,8 +4,8 @@
 //!
 
 use crate::metadata::{Attribute, Metadata};
-use alloc::string::ToString;
 use alloc::format;
+use alloc::string::ToString;
 use alloc::vec;
 
 pub struct FlappyBoyScoreExtractor;
@@ -20,14 +20,13 @@ impl crate::Extractor for FlappyBoyScoreExtractor {
         Ok(Metadata {
             name: format!("FlappyBoy score: {}", score).to_string(),
             description: format!("FlappyBoy score: {} - produced by ProofBoy", score).to_string(),
-            image: "https://img.itch.zone/aW1hZ2UvNDIwMTE4LzIwOTI2MjkucG5n/794x1000/SBZwlo.png".to_string(),
-            attributes: vec![
-                Attribute {
-                    trait_type: "Score".to_string(),
-                    value: score as u32,
-                    display_type: None,
-                }
-            ],
+            image: "https://img.itch.zone/aW1hZ2UvNDIwMTE4LzIwOTI2MjkucG5n/794x1000/SBZwlo.png"
+                .to_string(),
+            attributes: vec![Attribute {
+                trait_type: "Score".to_string(),
+                value: score as u32,
+                display_type: None,
+            }],
         })
     }
 }

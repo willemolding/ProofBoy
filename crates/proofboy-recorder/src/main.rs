@@ -10,7 +10,7 @@ use bevy::{
 
 use extractor::{extractors::flappy_boy_score::FlappyBoyScoreExtractor, Extractor};
 
-const CYCLES_PER_FRAME: usize = 70224/5;
+const CYCLES_PER_FRAME: usize = 70224 / 5;
 
 mod app;
 
@@ -30,7 +30,6 @@ struct Args {
     #[arg(short = 'r', long)]
     ram_out: Option<PathBuf>,
 }
-
 
 fn main() {
     let args = Args::parse();
@@ -76,7 +75,8 @@ fn check_for_dump(
 ) {
     if keys.just_pressed(KeyCode::Space) {
         journal.0.close();
-        let metadata = FlappyBoyScoreExtractor::extract(&gb.sys).expect("failed to extract metadata");
+        let metadata =
+            FlappyBoyScoreExtractor::extract(&gb.sys).expect("failed to extract metadata");
         log::info!("{:?}", &metadata);
         log::info!("{:?}", journal);
         let journal_bytes = journal.0.clone().to_bytes();
@@ -91,11 +91,7 @@ fn check_for_dump(
             .expect("failed to write journal to file");
         }
         if let Some(ram_out) = args.ram_out.clone() {
-            std::fs::write(
-                ram_out,
-                gb.sys.mmu_dump(),
-            )
-            .expect("failed to write journal to file");
+            std::fs::write(ram_out, gb.sys.mmu_dump()).expect("failed to write journal to file");
         }
     }
 }
