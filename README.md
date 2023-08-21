@@ -6,7 +6,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-> *You got a hight score? Prove it!*
+> *You got a hight score?, Caught a shiny Pokemon? Prove it!*
 
 ProofBoy allows for proving state of Gameboy games on-chain using fraud proofs.
 
@@ -16,16 +16,32 @@ Created as an entry to the 2023 Consensys NAV Hackathon.
 
 <img src="./docs/navh-banner.jpg"/>
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+### Team
+
+Willem Olding (Wollum) - [@willemolding1](https://twitter.com/willemolding1) - willemolding@gmail.com
+
+### Submitted for Bounties
+
+- To Infura and Beyond
+- Mobile Fun with MetaMask SDK
+- IYKYK Linea edition
+- Make a Dapp That Slaps, No Cap
+
+### Problem Addressed
 
 Many blockchain games produce assets such as NFTs to reward players for certain in-game achievements. The common way to verify that players actually did the achievements they claim is to have a game server performing these checks and minting the assets.
 
 This projects takes a step toward enabling fully on-chain gaming by allowing complex game state to be proven on-chain. ProofBoy shows how something as complex as a Gameboy emulator can be verified on-chain using fault proofs.
 
-## On ROMs and Legality
+### Future plans
 
-Downloading and playing copyrighted ROMs is piracy. The author of this project does not condone this activity or distribute any copyrighted material as part of the project. All ROMs used in the delp are homebrew and distributed freely under license from the original creators.
+Gameboy games are only one example of what can be proven using this technique. In theory any deterministic game can be proven. In the future I would love to see proposals for different types of games and on-chain outcomes that are fun and engaging for players.
+
+Looking further into the future it would be amazing to replace the fraud proofs with validity proofs using ZK. This was originally investigated for this project but it was found that the technology is not yet able to prove such complex things in a reasonable time.
+
+### On ROMs and Legality
+
+Downloading and playing copyrighted ROMs is piracy. The author of this project does not condone this activity or distribute any copyrighted material as part of the project. All ROMs used in the demo are homebrew and distributed freely under license from the original creators.
 
 Please do not use ProofBoy to play pirated ROMs.
 
@@ -57,7 +73,7 @@ The program itself never fully executed on-chain but if there is a fault in a cl
 
 #### On-Chain
 
-For the hackathon we implemented a system that allows players to mint an NFT for their high score in the homebrew gameboy game [FlappyBoy](https://github.com/bitnenfer/FlappyBoy). Thanks to ProofBoy, other people can consider this to correspond to a real game state.
+For the hackathon we implemented two systems. One that allows players to mint an NFT for their high score in the homebrew gameboy game [FlappyBoy](https://github.com/bitnenfer/FlappyBoy) (live demo), and another that allows turning caught Pokemon into NFTs (video demo only, game cannot be distributed due to copyright). Thanks to ProofBoy, other people can consider these to correspond to real game states.
 
 <p align="center">
 <img src="./docs/system-arch.excalidraw.svg" width="900"/>
@@ -65,7 +81,7 @@ For the hackathon we implemented a system that allows players to mint an NFT for
 
 The flow works as follows:
 
-- Players play the game inside the Proofboy Recorder until the reaching a high score
+- Players play the game inside the Proofboy Recorder until the reaching a high score.
 - They freeze the state which outputs a journal of all their actions and a JSON metadata object describing the score achievement
 - The journal and Metadata are submitted along with a bond to a special ERC1155 contract **ERC1155ChallengeableMint**. This allows players to call `ProposeMint` to propose a mint which must remain unchallenged for 2 hours before it can be claimed
 
@@ -256,11 +272,6 @@ The ideal solution to all of the above is to use validity proofs (e.g. Snarks or
 ## License
 
 Distributed under the MIT License. See [LICENSE](./LICENSE) for more information.
-
-<!-- CONTACT -->
-## Contact
-
-Willem Olding - [@willemolding1](https://twitter.com/willemolding1) - willemolding@gmail.com
 
 Project Link: [https://github.com/willemolding/ProofBoy](https://github.com/willemolding/ProofBoy)
 
